@@ -2,4 +2,9 @@
 <resources>
 
     <style name="Theme.YandexFinance" parent="android:Theme.Material.Light.NoActionBar" />
+    
+    <style name="Theme.YandexFinance.Starting" parent="Theme.YandexFinance">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="postSplashScreenTheme">@style/Theme.YandexFinance</item>
+    </style>
 </resources>
