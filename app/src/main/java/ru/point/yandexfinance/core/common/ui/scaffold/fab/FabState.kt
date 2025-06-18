@@ -1,7 +1,9 @@
 package ru.point.yandexfinance.core.common.ui.scaffold.fab
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.vector.ImageVector
 
+@Immutable
 sealed interface FabState {
     data object Hidden : FabState
 

@@ -45,7 +45,7 @@ fun IncomesScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun IncomesList(modifier: Modifier = Modifier) {
+private fun IncomesList(modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         item {
             TotalToday(

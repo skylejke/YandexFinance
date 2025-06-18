@@ -45,7 +45,7 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun SettingsList(modifier: Modifier = Modifier) {
+private fun SettingsList(modifier: Modifier = Modifier) {
     var isDarkTheme by remember { mutableStateOf(false) }
 
     val settingsCardModifier = Modifier
@@ -77,7 +77,7 @@ internal fun SettingsList(modifier: Modifier = Modifier) {
 
         items(items = settingsTitles, key = { it.settingTitleResId }) {
             BaseListItem(
-                modifier = Modifier
+                modifier = settingsCardModifier
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = ripple(),

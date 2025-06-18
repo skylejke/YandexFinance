@@ -113,7 +113,7 @@ fun ExpensesScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun ExpensesList(modifier: Modifier = Modifier) {
+private fun ExpensesList(modifier: Modifier = Modifier) {
     LazyColumn(modifier = modifier) {
         item {
             TotalToday(

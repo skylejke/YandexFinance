@@ -1,13 +1,12 @@
 package ru.point.yandexfinance.core.common.extensions
 
-fun String.startsWithEmoji(): Boolean =
-    this.firstOrNull()?.isEmoji() == true
+fun String.startsWithEmoji(): Boolean = this.firstOrNull()?.isEmoji() == true
 
-fun String.initials(): String {
+fun String.initials(count: Int = 2): String {
     return this
         .split("\\s+".toRegex())
         .filter { it.isNotBlank() }
-        .take(2)
+        .take(count)
         .mapNotNull { it.firstOrNull()?.uppercaseChar() }
         .joinToString("")
 }

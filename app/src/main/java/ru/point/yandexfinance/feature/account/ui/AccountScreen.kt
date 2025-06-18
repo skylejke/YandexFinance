@@ -39,7 +39,7 @@ fun AccountScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun AccountScreenList(modifier: Modifier = Modifier) {
+private fun AccountScreenList(modifier: Modifier = Modifier) {
 
     val accountCardModifier = Modifier
         .fillMaxWidth()
@@ -104,7 +104,7 @@ internal fun AccountScreenList(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun AccountCardTrailingElement(trailingText: String, modifier: Modifier = Modifier) {
+private fun AccountCardTrailingElement(trailingText: String, modifier: Modifier = Modifier) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,

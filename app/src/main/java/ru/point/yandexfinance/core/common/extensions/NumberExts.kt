@@ -12,5 +12,5 @@ val currencyFormatter: DecimalFormat by lazy {
     )
 }
 
-fun Int.toFormattedCurrency(currency: String): String =
+fun Int.toFormattedCurrency(currency: String) =
     "${currencyFormatter.format(this)} $currency"

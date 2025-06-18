@@ -16,6 +16,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
@@ -45,16 +49,25 @@ private val categories = listOf(
 
 @Composable
 fun CategoriesScreen(modifier: Modifier = Modifier) {
-    CategoriesList(modifier = modifier)
+    var searchQuery by remember { mutableStateOf("") }
+    CategoriesList(
+        query = searchQuery,
+        onQueryChange = { searchQuery = it },
+        modifier = modifier
+    )
 }
 
 @Composable
-internal fun CategoriesList(modifier: Modifier = Modifier) {
+private fun CategoriesList(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    modifier: Modifier = Modifier
+) {
     LazyColumn(modifier = modifier) {
         item(key = R.string.search_category) {
             SearchTextField(
-                value = "",
-                onValueChange = {},
+                query = query,
+                onQueryChange = onQueryChange,
                 placeHolderResId = R.string.search_category,
                 modifier = Modifier
                     .fillMaxWidth()
@@ -94,15 +107,15 @@ internal fun CategoriesList(modifier: Modifier = Modifier) {
 }
 
 @Composable
-internal fun SearchTextField(
-    value: String,
-    onValueChange: (String) -> Unit,
+private fun SearchTextField(
+    query: String,
+    onQueryChange: (String) -> Unit,
     @StringRes placeHolderResId: Int,
     modifier: Modifier = Modifier
 ) {
     OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
+        value = query,
+        onValueChange = onQueryChange,
         placeholder = {
             Text(
                 text = stringResource(placeHolderResId),
@@ -128,8 +141,8 @@ internal fun SearchTextField(
 @Composable
 private fun SearchTextFieldPreview() {
     SearchTextField(
-        value = "",
-        onValueChange = {},
+        query = "",
+        onQueryChange = {},
         placeHolderResId = R.string.search_category,
         modifier = Modifier
             .fillMaxWidth()
