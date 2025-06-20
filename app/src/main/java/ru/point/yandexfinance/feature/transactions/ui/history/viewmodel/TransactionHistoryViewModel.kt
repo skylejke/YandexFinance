@@ -53,7 +53,6 @@ class TransactionHistoryViewModel(private val isIncome: Boolean) : ViewModel() {
             _actions.emit(TransactionHistoryAction.LoadRequested)
 
             RetrofitInstance.transactionsApi.getTransactionsForPeriod(
-                accountId = 24,
                 start = LocalDate.now().withDayOfMonth(1).format(DateTimeFormatter.ISO_DATE),
                 end = LocalDate.now().format(DateTimeFormatter.ISO_DATE)
             ).fold(

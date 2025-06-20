@@ -52,7 +52,6 @@ class ExpensesViewModel : ViewModel() {
             _actions.emit(ExpensesAction.LoadRequested)
 
             RetrofitInstance.transactionsApi.getTransactionsForPeriod(
-                accountId = 24,
                 start = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
                 end = LocalDate.now().format(DateTimeFormatter.ISO_DATE)
             ).fold(
