@@ -1,7 +1,16 @@
 package ru.point.yandexfinance.feature.categories.model
 
-internal data class Category(
+import ru.point.yandexfinance.core.data.model.CategoryDto
+
+data class Category(
     val id: Int,
-    val title: String,
-    val emojiIcon: String?,
+    val name: String,
+    val emoji: String?,
 )
+
+val CategoryDto.toDomain
+    get() = Category(
+        id = id,
+        name = name,
+        emoji = emoji
+    )

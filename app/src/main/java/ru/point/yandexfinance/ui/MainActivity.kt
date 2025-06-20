@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -19,11 +18,11 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import ru.point.yandexfinance.R
-import ru.point.yandexfinance.navigation.Route
 import ru.point.yandexfinance.core.common.ui.scaffold.fab.FabState
 import ru.point.yandexfinance.core.common.ui.scaffold.fab.YandexFinanceFab
 import ru.point.yandexfinance.core.common.ui.scaffold.topappbar.TopAppBarState
 import ru.point.yandexfinance.core.common.ui.scaffold.topappbar.YandexFinanceTopAppBar
+import ru.point.yandexfinance.navigation.Route
 import ru.point.yandexfinance.navigation.YandexFinanceNavHost
 import ru.point.yandexfinance.navigation.bottombar.BottomBarItem
 import ru.point.yandexfinance.navigation.bottombar.YandexFinanceNavBar
@@ -62,7 +61,6 @@ class MainActivity : ComponentActivity() {
                             },
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .navigationBarsPadding()
                         )
                     },
                     floatingActionButton = {
