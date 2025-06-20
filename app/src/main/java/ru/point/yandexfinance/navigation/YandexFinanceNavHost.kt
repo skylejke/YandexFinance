@@ -9,9 +9,8 @@ import ru.point.yandexfinance.core.common.ui.scaffold.fab.FabState
 import ru.point.yandexfinance.core.common.ui.scaffold.topappbar.TopAppBarState
 import ru.point.yandexfinance.navigation.featurenav.accountFeature
 import ru.point.yandexfinance.navigation.featurenav.categoriesFeature
-import ru.point.yandexfinance.navigation.featurenav.expensesFeature
-import ru.point.yandexfinance.navigation.featurenav.incomesFeature
 import ru.point.yandexfinance.navigation.featurenav.settingsFeature
+import ru.point.yandexfinance.navigation.featurenav.transactionsFeature
 
 @Composable
 fun YandexFinanceNavHost(
@@ -26,12 +25,8 @@ fun YandexFinanceNavHost(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        expensesFeature(
-            topAppBarState = topAppBarState,
-            fabState = fabState
-        )
-
-        incomesFeature(
+        transactionsFeature(
+            navController = navHostController,
             topAppBarState = topAppBarState,
             fabState = fabState
         )

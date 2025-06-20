@@ -17,4 +17,7 @@ sealed interface Route {
 
     @Serializable
     data object Settings : Route
+
+    @Serializable
+    data class TransactionHistory(val isIncome: Boolean): Route
 }

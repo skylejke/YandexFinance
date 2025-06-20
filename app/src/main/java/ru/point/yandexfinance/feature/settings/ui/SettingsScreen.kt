@@ -24,8 +24,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ru.point.yandexfinance.R
-import ru.point.yandexfinance.core.common.ui.BaseListItem
-import ru.point.yandexfinance.core.common.ui.GreyHorizontalDivider
+import ru.point.yandexfinance.core.common.ui.composables.BaseListItem
+import ru.point.yandexfinance.core.common.ui.composables.GreyHorizontalDivider
 import ru.point.yandexfinance.feature.settings.model.Setting
 import ru.point.yandexfinance.ui.theme.MintGreen
 

@@ -6,6 +6,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -15,31 +16,79 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.yandexfinance.R
-import ru.point.yandexfinance.core.common.ui.BaseListItem
-import ru.point.yandexfinance.core.common.ui.GreyHorizontalDivider
-import ru.point.yandexfinance.feature.account.model.AccountBrief
+import ru.point.yandexfinance.core.common.extensions.toCurrencySymbol
+import ru.point.yandexfinance.core.common.extensions.toFormattedCurrency
+import ru.point.yandexfinance.core.common.ui.composables.BaseListItem
+import ru.point.yandexfinance.core.common.ui.composables.GreyHorizontalDivider
+import ru.point.yandexfinance.core.common.ui.composables.NoInternetBanner
+import ru.point.yandexfinance.core.common.utils.InternetHolder
+import ru.point.yandexfinance.feature.account.ui.viewmodel.AccountAction
+import ru.point.yandexfinance.feature.account.ui.viewmodel.AccountState
+import ru.point.yandexfinance.feature.account.ui.viewmodel.AccountViewModel
 import ru.point.yandexfinance.ui.theme.GhostGray
 import ru.point.yandexfinance.ui.theme.Graphite
 import ru.point.yandexfinance.ui.theme.Mint
 
-val accountBrief = AccountBrief(id = 1, balance = "-670 000 ₽", currency = "₽")
 
 @Composable
 fun AccountScreen(modifier: Modifier = Modifier) {
-    AccountScreenList(modifier = modifier)
+
+    val viewModel = viewModel<AccountViewModel>()
+
+    val state by viewModel.state.collectAsState()
+
+    val tracker = remember { InternetHolder.tracker }
+
+    val isOnline by tracker.online.collectAsState()
+
+    if (!isOnline) {
+        NoInternetBanner(
+            modifier = Modifier.fillMaxSize(),
+            internetTracker = tracker
+        )
+        return
+    }
+
+    when {
+        state.isLoading -> {
+            Text("Загрузка...", modifier = Modifier.padding(16.dp))
+        }
+
+        state.error != null -> {
+            Text(
+                text = state.error!!,
+                color = MaterialTheme.colorScheme.error,
+                modifier = Modifier.padding(16.dp)
+            )
+        }
+
+        state.account != null -> {
+            AccountScreenList(
+                state = state,
+                onAction = viewModel::onAction,
+                modifier = modifier
+            )
+        }
+    }
 }
 
 @Composable
-private fun AccountScreenList(modifier: Modifier = Modifier) {
+private fun AccountScreenList(
+    state: AccountState,
+    onAction: (AccountAction) -> Unit,
+    modifier: Modifier = Modifier
+) {
 
     val accountCardModifier = Modifier
         .fillMaxWidth()
@@ -47,7 +96,7 @@ private fun AccountScreenList(modifier: Modifier = Modifier) {
         .background(Mint)
 
     LazyColumn(modifier = modifier) {
-        item(key = accountBrief.id) {
+        item(key = state.account?.id) {
 
             BaseListItem(
                 modifier = accountCardModifier
@@ -74,7 +123,10 @@ private fun AccountScreenList(modifier: Modifier = Modifier) {
                     }
                 },
                 trail = {
-                    AccountCardTrailingElement(trailingText = accountBrief.balance)
+                    AccountCardTrailingElement(
+                        trailingText = state.account?.balance.toString()
+                            .toFormattedCurrency(state.account?.currency.toString().toCurrencySymbol())
+                    )
                 }
             )
 
@@ -96,7 +148,7 @@ private fun AccountScreenList(modifier: Modifier = Modifier) {
                     )
                 },
                 trail = {
-                    AccountCardTrailingElement(trailingText = accountBrief.currency)
+                    AccountCardTrailingElement(trailingText = state.account?.currency.toString().toCurrencySymbol())
                 }
             )
         }
@@ -121,10 +173,4 @@ private fun AccountCardTrailingElement(trailingText: String, modifier: Modifier 
             tint = GhostGray
         )
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun AccountScreenListPreview() {
-    AccountScreenList()
 }
