@@ -24,10 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.yandexfinance.R
+import ru.point.yandexfinance.core.common.model.toUserMessage
 import ru.point.yandexfinance.core.common.ui.composables.BaseListItem
 import ru.point.yandexfinance.core.common.ui.composables.CategoryIcon
 import ru.point.yandexfinance.core.common.ui.composables.GreyHorizontalDivider
@@ -46,7 +46,7 @@ fun CategoriesScreen(modifier: Modifier = Modifier) {
 
     val viewModel = viewModel<CategoriesViewModel>()
 
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.composableState
 
     val tracker = remember { InternetHolder.tracker }
 
@@ -70,7 +70,7 @@ fun CategoriesScreen(modifier: Modifier = Modifier) {
 
         state.error != null -> {
             Text(
-                text = state.error!!,
+                text = state.error!!.toUserMessage(),
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(16.dp)
             )
@@ -97,7 +97,7 @@ private fun CategoriesList(
             SearchTextField(
                 query = state.query,
                 onQueryChange = {
-                    onAction(CategoriesAction.QueryChanged(it))
+                    onAction(CategoriesAction.SearchQueryChanged(it))
                 },
                 placeHolderResId = R.string.search_category,
                 modifier = Modifier
@@ -167,19 +167,5 @@ private fun SearchTextField(
         shape = RectangleShape,
         textStyle = MaterialTheme.typography.bodyLarge,
         modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun SearchTextFieldPreview() {
-    SearchTextField(
-        query = "",
-        onQueryChange = {},
-        placeHolderResId = R.string.search_category,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(56.dp)
-            .background(LavenderMist)
     )
 }

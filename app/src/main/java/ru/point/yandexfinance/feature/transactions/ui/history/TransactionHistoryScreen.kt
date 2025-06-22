@@ -35,13 +35,13 @@ import ru.point.yandexfinance.R
 import ru.point.yandexfinance.core.common.extensions.toAmountInt
 import ru.point.yandexfinance.core.common.extensions.toFormattedCurrency
 import ru.point.yandexfinance.core.common.extensions.toTimeHHmm
+import ru.point.yandexfinance.core.common.model.toUserMessage
 import ru.point.yandexfinance.core.common.ui.composables.BaseListItem
 import ru.point.yandexfinance.core.common.ui.composables.CategoryIcon
 import ru.point.yandexfinance.core.common.ui.composables.GreyHorizontalDivider
 import ru.point.yandexfinance.core.common.ui.composables.NoInternetBanner
 import ru.point.yandexfinance.core.common.ui.composables.TransactionHistoryBrief
 import ru.point.yandexfinance.core.common.utils.InternetHolder
-import ru.point.yandexfinance.feature.transactions.ui.history.viewmodel.TransactionHistoryAction
 import ru.point.yandexfinance.feature.transactions.ui.history.viewmodel.TransactionHistoryState
 import ru.point.yandexfinance.feature.transactions.ui.history.viewmodel.TransactionHistoryViewModel
 import ru.point.yandexfinance.ui.theme.CharcoalGrey
@@ -65,7 +65,7 @@ fun TransactionHistoryScreen(
         }
     })
 
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.composableState
 
     val tracker = remember { InternetHolder.tracker }
 
@@ -86,7 +86,7 @@ fun TransactionHistoryScreen(
 
         state.error != null -> {
             Text(
-                text = state.error!!,
+                text = state.error!!.toUserMessage(),
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(16.dp)
             )
@@ -95,7 +95,6 @@ fun TransactionHistoryScreen(
         else -> {
             TransactionHistoryList(
                 state = state,
-                onAction = viewModel::onAction,
                 modifier = modifier
             )
         }
@@ -105,7 +104,6 @@ fun TransactionHistoryScreen(
 @Composable
 fun TransactionHistoryList(
     state: TransactionHistoryState,
-    onAction: (TransactionHistoryAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val monthFormatter = remember {

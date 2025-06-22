@@ -29,24 +29,23 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.yandexfinance.R
 import ru.point.yandexfinance.core.common.extensions.toCurrencySymbol
 import ru.point.yandexfinance.core.common.extensions.toFormattedCurrency
+import ru.point.yandexfinance.core.common.model.toUserMessage
 import ru.point.yandexfinance.core.common.ui.composables.BaseListItem
 import ru.point.yandexfinance.core.common.ui.composables.GreyHorizontalDivider
 import ru.point.yandexfinance.core.common.ui.composables.NoInternetBanner
 import ru.point.yandexfinance.core.common.utils.InternetHolder
-import ru.point.yandexfinance.feature.account.ui.viewmodel.AccountAction
 import ru.point.yandexfinance.feature.account.ui.viewmodel.AccountState
 import ru.point.yandexfinance.feature.account.ui.viewmodel.AccountViewModel
 import ru.point.yandexfinance.ui.theme.GhostGray
 import ru.point.yandexfinance.ui.theme.Graphite
 import ru.point.yandexfinance.ui.theme.Mint
 
-
 @Composable
 fun AccountScreen(modifier: Modifier = Modifier) {
 
     val viewModel = viewModel<AccountViewModel>()
 
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.composableState
 
     val tracker = remember { InternetHolder.tracker }
 
@@ -67,7 +66,7 @@ fun AccountScreen(modifier: Modifier = Modifier) {
 
         state.error != null -> {
             Text(
-                text = state.error!!,
+                text = state.error!!.toUserMessage(),
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(16.dp)
             )
@@ -76,7 +75,6 @@ fun AccountScreen(modifier: Modifier = Modifier) {
         state.account != null -> {
             AccountScreenList(
                 state = state,
-                onAction = viewModel::onAction,
                 modifier = modifier
             )
         }
@@ -86,7 +84,6 @@ fun AccountScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun AccountScreenList(
     state: AccountState,
-    onAction: (AccountAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
 

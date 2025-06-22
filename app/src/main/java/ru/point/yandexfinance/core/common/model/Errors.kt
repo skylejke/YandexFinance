@@ -1,14 +1,9 @@
 package ru.point.yandexfinance.core.common.model
 
 import retrofit2.HttpException
-import java.io.IOException
-import java.net.UnknownHostException
-
-class NoInternetException : IOException("No internet")
 
 sealed interface AppError {
     data class Http(val code: Int, val body: String?) : AppError
-    data object NoInternet : AppError
     data object UnknownHost : AppError
     data object Unauthorized : AppError
     data object NotFound : AppError
@@ -18,9 +13,6 @@ sealed interface AppError {
 }
 
 fun Throwable.toAppError() = when (this) {
-    is UnknownHostException, is NoInternetException ->
-        AppError.NoInternet
-
     is HttpException -> {
         val body = response()?.errorBody()?.string().orEmpty()
         when (code()) {
@@ -36,7 +28,6 @@ fun Throwable.toAppError() = when (this) {
 }
 
 fun AppError.toUserMessage() = when (this) {
-    AppError.NoInternet -> "Проверьте интернет-соединение"
     AppError.BadRequest -> "Неправильный запрос к серверу"
     AppError.Unauthorized -> "Требуется авторизация"
     AppError.NotFound -> "Данных не найдено"

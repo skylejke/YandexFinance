@@ -32,13 +32,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.yandexfinance.R
 import ru.point.yandexfinance.core.common.extensions.toAmountInt
 import ru.point.yandexfinance.core.common.extensions.toFormattedCurrency
+import ru.point.yandexfinance.core.common.model.toUserMessage
 import ru.point.yandexfinance.core.common.ui.composables.BaseListItem
 import ru.point.yandexfinance.core.common.ui.composables.CategoryIcon
 import ru.point.yandexfinance.core.common.ui.composables.GreyHorizontalDivider
 import ru.point.yandexfinance.core.common.ui.composables.NoInternetBanner
 import ru.point.yandexfinance.core.common.ui.composables.TotalToday
 import ru.point.yandexfinance.core.common.utils.InternetHolder
-import ru.point.yandexfinance.feature.transactions.ui.expenses.viewmodel.ExpensesAction
 import ru.point.yandexfinance.feature.transactions.ui.expenses.viewmodel.ExpensesState
 import ru.point.yandexfinance.feature.transactions.ui.expenses.viewmodel.ExpensesViewModel
 import ru.point.yandexfinance.ui.theme.CharcoalGrey
@@ -46,13 +46,12 @@ import ru.point.yandexfinance.ui.theme.GhostGray
 import ru.point.yandexfinance.ui.theme.Graphite
 import ru.point.yandexfinance.ui.theme.Mint
 
-
 @Composable
 fun ExpensesScreen(modifier: Modifier = Modifier) {
 
     val viewModel = viewModel<ExpensesViewModel>()
 
-    val state by viewModel.state.collectAsState()
+    val state by viewModel.composableState
 
     val tracker = remember { InternetHolder.tracker }
 
@@ -73,7 +72,7 @@ fun ExpensesScreen(modifier: Modifier = Modifier) {
 
         state.error != null -> {
             Text(
-                text = state.error!!,
+                text = state.error!!.toUserMessage(),
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(16.dp)
             )
@@ -82,7 +81,6 @@ fun ExpensesScreen(modifier: Modifier = Modifier) {
         else -> {
             ExpensesList(
                 state = state,
-                onAction = viewModel::onAction,
                 modifier = modifier
             )
         }
@@ -92,7 +90,6 @@ fun ExpensesScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun ExpensesList(
     state: ExpensesState,
-    onAction: (ExpensesAction) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(modifier = modifier) {
