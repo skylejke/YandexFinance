@@ -47,6 +47,15 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:utils"))
+
+    implementation(project(":feature:account"))
+    implementation(project(":feature:categories"))
+    implementation(project(":feature:settings"))
+    implementation(project(":feature:transactions"))
+
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.converter.gson)
     implementation(libs.retrofit)

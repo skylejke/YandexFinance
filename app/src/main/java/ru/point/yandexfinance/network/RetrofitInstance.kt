@@ -15,8 +15,8 @@ import ru.point.yandexfinance.core.data.service.TransactionsService
 
 object RetrofitInstance {
 
-    val json = Json { ignoreUnknownKeys = true }
-    val contentType = "application/json".toMediaType()
+    private val json = Json { ignoreUnknownKeys = true }
+    private val contentType = "application/json".toMediaType()
 
     private val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(ApiKeyInterceptor())
