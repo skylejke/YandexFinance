@@ -13,12 +13,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import ru.point.yandexfinance.R
 import ru.point.yandexfinance.navigation.Route
-import ru.point.yandexfinance.core.common.ui.scaffold.fab.FabState
-import ru.point.yandexfinance.core.common.ui.scaffold.topappbar.TopAppBarAction
-import ru.point.yandexfinance.core.common.ui.scaffold.topappbar.TopAppBarState
-import ru.point.yandexfinance.feature.transactions.ui.expenses.ExpensesScreen
-import ru.point.yandexfinance.feature.transactions.ui.history.TransactionHistoryScreen
-import ru.point.yandexfinance.feature.transactions.ui.incomes.IncomesScreen
+import ru.point.ui.scaffold.fab.FabState
+import ru.point.ui.scaffold.topappbar.TopAppBarAction
+import ru.point.ui.scaffold.topappbar.TopAppBarState
+import ru.point.transactions.expenses.ui.content.ExpensesScreen
+import ru.point.transactions.history.ui.content.TransactionHistoryScreen
+import ru.point.transactions.incomes.ui.content.IncomesScreen
 
 fun NavGraphBuilder.transactionsFeature(
     navController: NavController,

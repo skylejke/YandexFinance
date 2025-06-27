@@ -7,9 +7,9 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import ru.point.yandexfinance.R
 import ru.point.yandexfinance.navigation.Route
-import ru.point.yandexfinance.core.common.ui.scaffold.fab.FabState
-import ru.point.yandexfinance.core.common.ui.scaffold.topappbar.TopAppBarState
-import ru.point.yandexfinance.feature.categories.ui.CategoriesScreen
+import ru.point.ui.scaffold.fab.FabState
+import ru.point.ui.scaffold.topappbar.TopAppBarState
+import ru.point.categories.ui.content.CategoriesScreen
 
 fun NavGraphBuilder.categoriesFeature(
     topAppBarState: MutableState<TopAppBarState>,

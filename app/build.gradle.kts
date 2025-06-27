@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -56,6 +57,9 @@ dependencies {
     implementation(project(":feature:settings"))
     implementation(project(":feature:transactions"))
 
+    implementation(libs.bundles.dagger)
+    ksp(libs.dagger.compiler)
+    ksp(libs.dagger.android.processor)
     implementation(libs.retrofit2.kotlinx.serialization.converter)
     implementation(libs.converter.gson)
     implementation(libs.retrofit)

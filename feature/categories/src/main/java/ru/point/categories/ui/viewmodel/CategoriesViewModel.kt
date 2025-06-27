@@ -1,0 +1,62 @@
+package ru.point.categories.ui.viewmodel
+
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import ru.point.categories.domain.usecase.GetCategoriesUseCase
+import ru.point.ui.MviViewModel
+import ru.point.utils.model.toAppError
+import javax.inject.Inject
+
+/**
+ * ViewModel, управляющая состоянием списка категорий и поискового запроса.
+ *
+ * Отвечает за загрузку данных через [GetCategoriesUseCase], обработку ошибок
+ * и обновление состояния экрана в соответствии с действиями пользователя в рамках MVI-паттерна.
+ */
+class CategoriesViewModel @Inject constructor(private val getCategoriesUseCase: GetCategoriesUseCase) :
+    MviViewModel<CategoriesState, CategoriesAction, Any>(initialState = CategoriesState()) {
+
+    init {
+        getCategories()
+    }
+
+    override fun reduce(action: CategoriesAction, state: CategoriesState): CategoriesState {
+        return when (action) {
+
+            is CategoriesAction.LoadRequested -> state.copy(
+                isLoading = true,
+                error = null
+            )
+
+            is CategoriesAction.LoadSuccess -> state.copy(
+                isLoading = false,
+                categories = action.categories,
+                error = null
+            )
+
+            is CategoriesAction.SearchQueryChanged -> state.copy(
+                query = action.query
+            )
+
+            is CategoriesAction.LoadError -> state.copy(
+                isLoading = false,
+                error = action.error
+            )
+        }
+    }
+
+    private fun getCategories() {
+        viewModelScope.launch {
+            onAction(CategoriesAction.LoadRequested)
+
+            getCategoriesUseCase().fold(
+                onSuccess = { categories ->
+                    onAction(CategoriesAction.LoadSuccess(categories))
+                },
+                onFailure = { error ->
+                    onAction(CategoriesAction.LoadError(error.toAppError()))
+                }
+            )
+        }
+    }
+}

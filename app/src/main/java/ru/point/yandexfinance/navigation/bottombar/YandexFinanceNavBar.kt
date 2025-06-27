@@ -11,11 +11,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import ru.point.yandexfinance.ui.theme.Graphite
-import ru.point.yandexfinance.ui.theme.LavenderWhite
-import ru.point.yandexfinance.ui.theme.Mint
-import ru.point.yandexfinance.ui.theme.MintGreen
+import ru.point.ui.colors.Graphite
+import ru.point.ui.colors.LavenderWhite
+import ru.point.ui.colors.Mint
+import ru.point.ui.colors.MintGreen
 
+/**
+ * Нижняя навигационная панель приложения YandexFinance.
+ *
+ * Отображает список пунктов [entryPoints], выделяет активный пункт по [selectedItemIndex]
+ * и уведомляет об изменении выбора через [onItemSelected].
+ *
+ * Использует стилизацию согласно дизайн-системе приложения и Material 3.
+ */
 @Composable
 fun YandexFinanceNavBar(
     entryPoints: List<BottomBarItem>,
