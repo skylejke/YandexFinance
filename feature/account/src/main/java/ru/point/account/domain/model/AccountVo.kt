@@ -1,6 +1,6 @@
 package ru.point.account.domain.model
 
-import ru.point.data.model.dto.AccountDto
+import ru.point.api.model.AccountDto
 import ru.point.utils.extensions.toCurrencySymbol
 import ru.point.utils.extensions.toFormattedCurrency
 

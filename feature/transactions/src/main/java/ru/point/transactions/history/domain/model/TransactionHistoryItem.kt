@@ -1,6 +1,6 @@
 package ru.point.transactions.history.domain.model
 
-import ru.point.data.model.dto.TransactionResponse
+import ru.point.api.model.TransactionDto
 
 data class TransactionHistoryItem(
     val id: Int,
@@ -12,7 +12,7 @@ data class TransactionHistoryItem(
     val transactionDate: String
 )
 
-val TransactionResponse.asTransactionHistoryItem
+val TransactionDto.asTransactionHistoryItem
     get() = TransactionHistoryItem(
         id = id,
         title = category.name,

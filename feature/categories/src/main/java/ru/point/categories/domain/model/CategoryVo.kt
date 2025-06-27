@@ -1,6 +1,6 @@
 package ru.point.categories.domain.model
 
-import ru.point.data.model.dto.CategoryDto
+import ru.point.api.model.CategoryDto
 
 data class CategoryVo(
     val id: Int,

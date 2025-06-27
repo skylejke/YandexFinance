@@ -10,12 +10,12 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.create
-import ru.point.data.BuildConfig
-import ru.point.data.network.ApiKeyInterceptor
-import ru.point.data.network.RetryInterceptor
-import ru.point.data.service.AccountService
-import ru.point.data.service.CategoriesService
-import ru.point.data.service.TransactionsService
+import ru.point.impl.BuildConfig
+import ru.point.impl.service.AccountService
+import ru.point.impl.service.CategoriesService
+import ru.point.impl.service.TransactionsService
+import ru.point.utils.network.ApiKeyInterceptor
+import ru.point.utils.network.RetryInterceptor
 import javax.inject.Singleton
 
 @Module

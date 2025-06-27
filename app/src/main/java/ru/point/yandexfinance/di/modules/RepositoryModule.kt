@@ -2,12 +2,12 @@ package ru.point.yandexfinance.di.modules
 
 import dagger.Binds
 import dagger.Module
-import ru.point.data.repository.account.AccountRepository
-import ru.point.data.repository.account.AccountRepositoryImpl
-import ru.point.data.repository.categories.CategoriesRepository
-import ru.point.data.repository.categories.CategoriesRepositoryImpl
-import ru.point.data.repository.transactions.TransactionsRepository
-import ru.point.data.repository.transactions.TransactionsRepositoryImpl
+import ru.point.api.repository.AccountRepository
+import ru.point.api.repository.CategoriesRepository
+import ru.point.api.repository.TransactionsRepository
+import ru.point.impl.repository.AccountRepositoryImpl
+import ru.point.impl.repository.CategoriesRepositoryImpl
+import ru.point.impl.repository.TransactionsRepositoryImpl
 import javax.inject.Singleton
 
 @Module
