@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_incomes_today">Нет доходов сегодня</string>
+    <string name="no_expenses_today">Нет расходов сегодня</string>
+    <string name="no_transactions">У вас нет транзакций</string>
+</resources>

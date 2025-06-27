@@ -1,0 +1,28 @@
+package ru.point.transactions.incomes.ui.content
+
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import ru.point.ui.composables.TransactionCardContent
+import ru.point.ui.composables.TransactionsCardTrail
+import ru.point.ui.composables.BaseListItem
+
+@Composable
+internal fun IncomesCard(
+    title: String,
+    amount: String,
+    currency: String,
+    modifier: Modifier = Modifier
+) {
+    BaseListItem(
+        content = {
+            TransactionCardContent(title = title)
+        },
+        trail = {
+            TransactionsCardTrail(
+                amount = amount,
+                currency = currency
+            )
+        },
+        modifier = modifier
+    )
+}

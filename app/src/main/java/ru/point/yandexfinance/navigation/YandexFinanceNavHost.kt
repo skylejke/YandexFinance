@@ -5,13 +5,21 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import ru.point.yandexfinance.core.common.ui.scaffold.fab.FabState
-import ru.point.yandexfinance.core.common.ui.scaffold.topappbar.TopAppBarState
+import ru.point.ui.scaffold.fab.FabState
+import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.yandexfinance.navigation.featurenav.accountFeature
 import ru.point.yandexfinance.navigation.featurenav.categoriesFeature
 import ru.point.yandexfinance.navigation.featurenav.settingsFeature
 import ru.point.yandexfinance.navigation.featurenav.transactionsFeature
 
+/**
+ * Главный NavHost приложения.
+ *
+ * Отвечает за инициализацию и конфигурацию графа навигации, включая экраны транзакций, аккаунта,
+ * категорий и настроек. Делегирует управление [TopAppBarState] и [FabState] в зависимости от активного экрана.
+ *
+ * Использует переданный [NavHostController] и стартовый маршрут [startDestination] для навигации.
+ */
 @Composable
 fun YandexFinanceNavHost(
     navHostController: NavHostController,
