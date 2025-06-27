@@ -6,7 +6,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
-internal class GetIncomesUseCase @Inject constructor(private val transactionsRepository: TransactionsRepository) {
+class GetIncomesUseCase @Inject constructor(private val transactionsRepository: TransactionsRepository) {
 
     suspend operator fun invoke() = transactionsRepository.getTransactionsForPeriod(
         startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 import ru.point.api.model.TransactionDto
 
 @Serializable
-data class Transaction(
+internal data class Transaction(
     @SerialName("id") val id: Int,
     @SerialName("account") val account: Account,
     @SerialName("category") val category: Category,
@@ -16,7 +16,7 @@ data class Transaction(
     @SerialName("updatedAt") val updatedAt: String
 )
 
-val Transaction.asTransactionDto
+internal val Transaction.asTransactionDto
     get() = TransactionDto(
         id = id,
         account = account.asAccountDto,

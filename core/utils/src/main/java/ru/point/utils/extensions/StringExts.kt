@@ -15,14 +15,15 @@ fun String.initials(count: Int = 2): String {
 }
 
 fun String.toFormattedCurrency(currency: String): String {
-    val number = this.filter { it.isDigit() }.toIntOrNull() ?: 0
+    val number = this.substringBefore('.').toIntOrNull() ?: 0
     return number.toFormattedCurrency(currency)
 }
 
-fun String.toAmountInt(): Int {
-    val digitsOnly = replace("""\D""".toRegex(), "")
-    return digitsOnly.toIntOrNull() ?: 0
-}
+fun String.toAmountInt(): Int =
+    this
+        .substringBefore('.')
+        .toIntOrNull()
+        ?: 0
 
 fun String.toCurrencySymbol(): String =
     CurrencyParse.from(this)?.symbol ?: this

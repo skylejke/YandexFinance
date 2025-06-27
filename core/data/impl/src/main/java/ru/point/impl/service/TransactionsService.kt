@@ -6,7 +6,7 @@ import retrofit2.http.Query
 import ru.point.impl.BuildConfig
 import ru.point.impl.model.Transaction
 
-interface TransactionsService {
+internal interface TransactionsService {
 
     @GET("api/v1/transactions/account/{accountId}/period")
     suspend fun getTransactionsForPeriod(

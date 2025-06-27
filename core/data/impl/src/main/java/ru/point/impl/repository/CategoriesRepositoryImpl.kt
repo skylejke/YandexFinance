@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Репозиторий, отвечающий за получение категорий из удалённого источника.
  * Делегирует вызов [CategoriesService] и обеспечивает выполнение в IO-контексте.
  */
-class CategoriesRepositoryImpl @Inject constructor(
+internal class CategoriesRepositoryImpl @Inject constructor(
     private val categoriesService: CategoriesService
 ) : CategoriesRepository {
 

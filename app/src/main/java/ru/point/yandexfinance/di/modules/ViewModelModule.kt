@@ -10,6 +10,7 @@ import ru.point.categories.ui.viewmodel.CategoriesViewModel
 import ru.point.transactions.expenses.ui.viewmodel.ExpensesViewModel
 import ru.point.transactions.history.ui.viewmodel.TransactionHistoryViewModel
 import ru.point.transactions.incomes.ui.viewmodel.IncomesViewModel
+import ru.point.yandexfinance.di.utils.DaggerViewModelFactory
 import ru.point.yandexfinance.di.utils.ViewModelKey
 
 @Module

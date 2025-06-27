@@ -3,7 +3,7 @@ package ru.point.impl.service
 import retrofit2.http.GET
 import ru.point.impl.model.Account
 
-interface AccountService {
+internal interface AccountService {
 
     @GET("api/v1/accounts")
     suspend fun getAccounts(): Result<List<Account>>

@@ -1,4 +1,4 @@
-package ru.point.yandexfinance.di.modules
+package ru.point.impl.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.skydoves.retrofit.adapters.result.ResultCallAdapterFactory
@@ -23,7 +23,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
+    internal fun provideRetrofit(): Retrofit {
         val json = Json { ignoreUnknownKeys = true }
         val contentType = "application/json".toMediaType()
 
@@ -43,16 +43,16 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAccountService(retrofit: Retrofit) =
+    internal fun provideAccountService(retrofit: Retrofit) =
         retrofit.create<AccountService>()
 
     @Provides
     @Singleton
-    fun provideCategoriesService(retrofit: Retrofit) =
+    internal fun provideCategoriesService(retrofit: Retrofit) =
         retrofit.create<CategoriesService>()
 
     @Provides
     @Singleton
-    fun provideTransactionsService(retrofit: Retrofit) =
+    internal fun provideTransactionsService(retrofit: Retrofit) =
         retrofit.create<TransactionsService>()
 }

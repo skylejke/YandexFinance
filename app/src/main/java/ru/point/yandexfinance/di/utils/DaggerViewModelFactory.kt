@@ -1,4 +1,4 @@
-package ru.point.yandexfinance.di.modules
+package ru.point.yandexfinance.di.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,7 +9,7 @@ import javax.inject.Provider
  * Фабрика ViewModel'ей для использования с Dagger 2.
  *
  * Позволяет создавать экземпляры ViewModel с поддержкой внедрения зависимостей.
- * Ищет подходящий [Provider] в карте [creators] по классу ViewModel или его суперклассу.
+ * Ищет подходящий [javax.inject.Provider] в карте [creators] по классу ViewModel или его суперклассу.
  *
  * Используется в связке с multibindings для регистрации всех ViewModel в графе зависимостей.
  */

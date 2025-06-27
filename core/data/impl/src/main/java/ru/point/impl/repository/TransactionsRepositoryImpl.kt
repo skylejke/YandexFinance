@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Репозиторий, отвечающий за получение транзакций за указанный период из сетевого источника.
  * Делегирует обращение к [TransactionsService] и выполняет запрос в IO-контексте.
  */
-class TransactionsRepositoryImpl @Inject constructor(
+internal class TransactionsRepositoryImpl @Inject constructor(
     private val transactionsService: TransactionsService
 ) : TransactionsRepository {
 
