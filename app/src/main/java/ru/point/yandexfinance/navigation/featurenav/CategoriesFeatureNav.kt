@@ -9,7 +9,7 @@ import ru.point.yandexfinance.R
 import ru.point.yandexfinance.navigation.Route
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
-import ru.point.categories.ui.content.CategoriesScreen
+import ru.point.categories.ui.screen.CategoriesScreen
 
 fun NavGraphBuilder.categoriesFeature(
     topAppBarState: MutableState<TopAppBarState>,

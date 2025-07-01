@@ -39,17 +39,26 @@ internal fun CategoriesScreenContent(
             GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
         }
 
-        items(items = state.categories, key = { it.id }) {
-            CategoryCard(
-                contentText = it.name,
-                emojiIcon = it.emoji ?: it.name.initials(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(70.dp)
-                    .padding(horizontal = 16.dp)
-            )
+        if (state.categories.isEmpty()) {
+            item(key = R.string.nothing_found) {
+                NothingFound(
+                    modifier = modifier.padding(top = 16.dp)
+                )
+            }
+        } else {
+            items(items = state.categories, key = { it.id }) {
 
-            GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
+                CategoryCard(
+                    contentText = it.name,
+                    emojiIcon = it.emoji ?: it.name.initials(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(70.dp)
+                        .padding(horizontal = 16.dp)
+                )
+
+                GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
+            }
         }
     }
 }

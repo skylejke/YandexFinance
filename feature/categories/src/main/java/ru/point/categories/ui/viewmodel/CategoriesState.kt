@@ -6,6 +6,6 @@ import ru.point.categories.domain.model.CategoryVo
 data class CategoriesState(
     val query: String = "",
     val isLoading: Boolean = true,
-    val categories: List<CategoryVo> = emptyList<CategoryVo>(),
+    val categories: List<CategoryVo> = emptyList(),
     val error: AppError? = null
 )

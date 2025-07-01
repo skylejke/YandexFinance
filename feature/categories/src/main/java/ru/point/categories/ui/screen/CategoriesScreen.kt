@@ -1,4 +1,4 @@
-package ru.point.categories.ui.content
+package ru.point.categories.ui.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -6,6 +6,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.point.categories.ui.content.CategoriesScreenContent
 import ru.point.categories.ui.viewmodel.CategoriesViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator

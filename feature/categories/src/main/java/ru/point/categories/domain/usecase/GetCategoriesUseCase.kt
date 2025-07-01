@@ -8,7 +8,7 @@ class GetCategoriesUseCase @Inject constructor(
     private val categoryRepository: CategoriesRepository
 ) {
 
-    suspend operator fun invoke() = categoryRepository.getCategories().map { categoryDtos ->
-        categoryDtos.map { it.asCategoryVo }
+    suspend operator fun invoke(query: String = "") = categoryRepository.getCategories(query).map { stateItemDtos ->
+        stateItemDtos.map { it.asCategoryVo }
     }
 }
