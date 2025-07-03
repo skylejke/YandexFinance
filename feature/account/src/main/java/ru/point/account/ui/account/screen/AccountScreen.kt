@@ -1,12 +1,15 @@
-package ru.point.account.ui.content
+package ru.point.account.ui.account.screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ru.point.account.ui.viewmodel.AccountViewModel
+import ru.point.account.ui.account.content.AccountScreenContent
+import ru.point.account.ui.account.viewmodel.AccountAction
+import ru.point.account.ui.account.viewmodel.AccountViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner
@@ -28,6 +31,10 @@ fun AccountScreen(modifier: Modifier = Modifier) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(AccountAction.LoadRequested)
+    }
 
     if (!isOnline) {
         NoInternetBanner(modifier = modifier)

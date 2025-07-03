@@ -40,6 +40,7 @@ fun YandexFinanceNavHost(
         )
 
         accountFeature(
+            navController = navHostController,
             topAppBarState = topAppBarState,
             fabState = fabState
         )

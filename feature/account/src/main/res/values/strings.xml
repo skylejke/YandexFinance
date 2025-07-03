@@ -2,4 +2,14 @@
 <resources>
     <string name="balance">Баланс</string>
     <string name="currency">Валюта</string>
+    <string name="name">Название</string>
+    <string name="update_balance">Изменить баланс</string>
+    <string name="update_name">Изменить название</string>
+    <string name="ruble">Российский рубль ₽</string>
+    <string name="dollar">Американский доллар $</string>
+    <string name="euro">Евро</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
+    <string name="successfully_update_account">Счет успешно обновлен</string>
+    <string name="something_went_wrong">Ошибка! Что-то пошло не так</string>
 </resources>

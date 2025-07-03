@@ -1,4 +1,4 @@
-package ru.point.account.ui.viewmodel
+package ru.point.account.ui.account.viewmodel
 
 import ru.point.utils.model.AppError
 import ru.point.account.domain.model.AccountVo

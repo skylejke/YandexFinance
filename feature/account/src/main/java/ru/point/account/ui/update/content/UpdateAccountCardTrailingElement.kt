@@ -1,4 +1,4 @@
-package ru.point.account.ui.content
+package ru.point.account.ui.update.content
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -16,7 +16,7 @@ import ru.point.ui.colors.GhostGray
 import ru.point.ui.colors.Graphite
 
 @Composable
-internal fun AccountCardTrailingElement(trailingText: String, modifier: Modifier = Modifier) {
+internal fun UpdateAccountCardTrailingElement(trailingText: String, modifier: Modifier = Modifier) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.CenterVertically,

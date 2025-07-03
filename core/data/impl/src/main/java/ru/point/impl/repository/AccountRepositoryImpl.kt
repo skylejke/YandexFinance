@@ -2,8 +2,10 @@ package ru.point.impl.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import ru.point.api.model.AccountDto
 import ru.point.api.repository.AccountRepository
 import ru.point.impl.model.asAccountDto
+import ru.point.impl.model.asAccountUpdateRequest
 import ru.point.impl.service.AccountService
 import javax.inject.Inject
 
@@ -19,5 +21,11 @@ internal class AccountRepositoryImpl @Inject constructor(
         accountService.getAccounts().map { accounts ->
             accounts.map { it.asAccountDto }
         }
+    }
+
+    override suspend fun updateAccount(accountDto: AccountDto) = withContext(Dispatchers.IO) {
+        accountService.updateAccount(
+            accountUpdateRequest = accountDto.asAccountUpdateRequest
+        ).map { }
     }
 }

@@ -5,16 +5,14 @@ import kotlinx.serialization.Serializable
 import ru.point.api.model.AccountDto
 
 @Serializable
-internal data class Account(
+internal data class AccountState(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("balance") val balance: String,
     @SerialName("currency") val currency: String,
-    @SerialName("createdAt") val createdAt: String,
-    @SerialName("updatedAt") val updatedAt: String,
 )
 
-internal val Account.asAccountDto
+internal val AccountState.asAccountDto
     get() = AccountDto(
         name = name,
         balance = balance,
