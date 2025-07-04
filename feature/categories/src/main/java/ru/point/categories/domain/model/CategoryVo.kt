@@ -1,6 +1,6 @@
 package ru.point.categories.domain.model
 
-import ru.point.api.model.CategoryDto
+import ru.point.api.model.StateItemDto
 
 data class CategoryVo(
     val id: Int,
@@ -8,9 +8,9 @@ data class CategoryVo(
     val emoji: String?,
 )
 
-val CategoryDto.asCategoryVo
+val StateItemDto.asCategoryVo
     get() = CategoryVo(
-        id = id,
-        name = name,
+        id = categoryId,
+        name = categoryName,
         emoji = emoji
     )

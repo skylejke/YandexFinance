@@ -1,7 +1,5 @@
-package ru.point.account.ui.viewmodel
+package ru.point.account.ui.account.viewmodel
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.point.account.domain.usecase.GetAccountUseCase
 import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
@@ -17,7 +15,7 @@ class AccountViewModel @Inject constructor(private val getAccountUseCase: GetAcc
     MviViewModel<AccountState, AccountAction, Any>(AccountState()) {
 
     init {
-        loadAccount()
+        onHandleLoad()
     }
 
     override fun reduce(action: AccountAction, state: AccountState): AccountState {
@@ -28,10 +26,8 @@ class AccountViewModel @Inject constructor(private val getAccountUseCase: GetAcc
         }
     }
 
-    private fun loadAccount() {
-        viewModelScope.launch {
-            onAction(AccountAction.LoadRequested)
-
+    private fun onHandleLoad() {
+        handleAction<AccountAction.LoadRequested> {
             getAccountUseCase().fold(
                 onSuccess = { account ->
                     onAction(AccountAction.LoadSuccess(account))

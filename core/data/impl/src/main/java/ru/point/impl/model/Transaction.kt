@@ -7,7 +7,7 @@ import ru.point.api.model.TransactionDto
 @Serializable
 internal data class Transaction(
     @SerialName("id") val id: Int,
-    @SerialName("account") val account: Account,
+    @SerialName("account") val account: AccountState,
     @SerialName("category") val category: Category,
     @SerialName("amount") val amount: String,
     @SerialName("transactionDate") val transactionDate: String,

@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.filterIsInstance
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
@@ -14,7 +15,7 @@ import kotlinx.coroutines.launch
  * Базовый ViewModel-класс для реализации паттерна MVI.
  *
  * Отвечает за:
- * - управление UI-состоянием через [StateFlow],
+ * - управление UI-состоянием через [kotlinx.coroutines.flow.StateFlow],
  * - обработку действий пользователя ([Action]) и их редукцию в новое состояние,
  * - эмит событий ([Event]) для одноразовых побочных эффектов (например, навигации).
  *
@@ -54,4 +55,13 @@ abstract class MviViewModel<UIState, Action, Event>(initialState: UIState) : Vie
     }
 
     protected open fun reduce(action: Action, state: UIState) = state
+
+    inline fun <reified T : Action> handleAction(crossinline block: suspend (T) -> Unit) {
+        viewModelScope.launch {
+            actions.filterIsInstance<T>()
+                .collect {
+                    block(it)
+                }
+        }
+    }
 }

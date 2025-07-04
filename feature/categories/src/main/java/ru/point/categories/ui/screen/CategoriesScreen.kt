@@ -1,4 +1,4 @@
-package ru.point.account.ui.content
+package ru.point.categories.ui.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -6,7 +6,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ru.point.account.ui.viewmodel.AccountViewModel
+import ru.point.categories.ui.content.CategoriesScreenContent
+import ru.point.categories.ui.viewmodel.CategoriesViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner
@@ -15,15 +16,15 @@ import ru.point.ui.di.LocalViewModelFactory
 import ru.point.utils.model.toUserMessage
 
 /**
- * Экран отображения информации об аккаунте пользователя.
+ * Экран выбора категорий транзакций.
  *
- * Подключает [AccountViewModel], отслеживает состояние загрузки, ошибок и подключения к интернету,
- * и отображает соответствующий UI: данные аккаунта, индикатор загрузки, сообщение об ошибке или баннер отсутствия интернета.
+ * Подключает [CategoriesViewModel], отслеживает состояние подключения, загрузки и ошибок,
+ * и отображает соответствующий UI: список категорий, лоадер, ошибку или баннер об отсутствии интернета.
  */
 @Composable
-fun AccountScreen(modifier: Modifier = Modifier) {
+fun CategoriesScreen(modifier: Modifier = Modifier) {
 
-    val viewModel = viewModel<AccountViewModel>(factory = LocalViewModelFactory.current)
+    val viewModel = viewModel<CategoriesViewModel>(factory = LocalViewModelFactory.current)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -44,9 +45,10 @@ fun AccountScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-            state.account != null -> {
-                AccountScreenContent(
+            else -> {
+                CategoriesScreenContent(
                     state = state,
+                    onAction = viewModel::onAction,
                     modifier = modifier
                 )
             }

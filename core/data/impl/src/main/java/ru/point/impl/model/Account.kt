@@ -10,12 +10,13 @@ internal data class Account(
     @SerialName("name") val name: String,
     @SerialName("balance") val balance: String,
     @SerialName("currency") val currency: String,
+    @SerialName("createdAt") val createdAt: String,
+    @SerialName("updatedAt") val updatedAt: String,
 )
 
 internal val Account.asAccountDto
     get() = AccountDto(
-        id = id,
         name = name,
         balance = balance,
-        currency = currency
+        currency = currency,
     )

@@ -12,14 +12,17 @@ import okhttp3.Response
 class RetryInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        lateinit var res: Response
         var tries = 0
-        while (tries++ < MAX_RETRIES) {
-            res = chain.proceed(chain.request())
-            if (res.code() != 500) break
+        var response = chain.proceed(chain.request())
+
+        while (response.code() == 500 && tries < MAX_RETRIES) {
+            tries++
+            response.close()
             Thread.sleep(DELAY_MS)
+            response = chain.proceed(chain.request())
         }
-        return res
+
+        return response
     }
 
     companion object {

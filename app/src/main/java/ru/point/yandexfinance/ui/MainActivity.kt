@@ -20,6 +20,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import ru.point.ui.di.LocalInternetTracker
 import ru.point.ui.di.LocalViewModelFactory
+import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.fab.YandexFinanceFab
 import ru.point.ui.scaffold.topappbar.TopAppBarState
@@ -51,6 +52,7 @@ class MainActivity : ComponentActivity() {
             val selectedItemIndex = rememberSaveable { mutableIntStateOf(0) }
             val topAppBarState = remember { mutableStateOf(TopAppBarState(R.string.app_name)) }
             val fabState = remember { mutableStateOf<FabState>(FabState.Hidden) }
+            val bottomBarState = remember { mutableStateOf<BottomBarState>(BottomBarState.Hidden) }
 
             CompositionLocalProvider(
                 LocalViewModelFactory provides appComponent.viewModelFactoryProvider(),
@@ -66,18 +68,23 @@ class MainActivity : ComponentActivity() {
                             )
                         },
                         bottomBar = {
-                            YandexFinanceNavBar(
-                                entryPoints = BottomBarItem.entryPoints,
-                                selectedItemIndex = selectedItemIndex.intValue,
-                                onItemSelected = { index ->
-                                    if (selectedItemIndex.intValue != index) {
-                                        selectedItemIndex.intValue = index
-                                        navController.navigate(BottomBarItem.entryPoints[index].route)
-                                    }
-                                },
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                            )
+                            when (bottomBarState.value) {
+                                BottomBarState.Hidden -> {}
+                                BottomBarState.Showed -> {
+                                    YandexFinanceNavBar(
+                                        entryPoints = BottomBarItem.entryPoints,
+                                        selectedItemIndex = selectedItemIndex.intValue,
+                                        onItemSelected = { index ->
+                                            if (selectedItemIndex.intValue != index) {
+                                                selectedItemIndex.intValue = index
+                                                navController.navigate(BottomBarItem.entryPoints[index].route)
+                                            }
+                                        },
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                    )
+                                }
+                            }
                         },
                         floatingActionButton = {
                             when (fabState.value) {
@@ -97,6 +104,7 @@ class MainActivity : ComponentActivity() {
                             startDestination = Route.Expenses,
                             topAppBarState = topAppBarState,
                             fabState = fabState,
+                            bottomBarState = bottomBarState,
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(innerPadding)

@@ -1,10 +1,14 @@
 package ru.point.impl.service
 
 import retrofit2.http.GET
-import ru.point.impl.model.Category
+import retrofit2.http.Path
+import ru.point.impl.BuildConfig
+import ru.point.impl.model.AccountResponse
 
 internal interface CategoriesService {
 
-    @GET("api/v1/categories") // Знаю, что тут ручка не та, потом поправлю
-    suspend fun getCategories(): Result<List<Category>>
+    @GET("api/v1/accounts/{accountId}")
+    suspend fun getCategories(
+        @Path("accountId") accountId: Int = BuildConfig.ACCOUNT_ID.toInt(),
+    ): Result<AccountResponse>
 }

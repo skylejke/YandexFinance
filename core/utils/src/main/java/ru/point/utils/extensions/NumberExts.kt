@@ -1,16 +1,20 @@
 package ru.point.utils.extensions
 
 import java.text.DecimalFormat
-import java.text.DecimalFormatSymbols
 
 val currencyFormatter: DecimalFormat by lazy {
-    DecimalFormat(
-        "#,###",
-        DecimalFormatSymbols.getInstance().apply {
-            groupingSeparator = '\u00A0'
+    DecimalFormat("#,###.##").apply {
+        decimalFormatSymbols = decimalFormatSymbols.apply {
+            groupingSeparator = ' '
+            decimalSeparator = '.'
         }
-    )
+        minimumFractionDigits = 0
+        maximumFractionDigits = 2
+        isGroupingUsed = true
+    }
 }
 
-fun Int.toFormattedCurrency(currency: String) =
-    "${currencyFormatter.format(this)} ${currency.toCurrencySymbol()}"
+
+fun Number.toFormattedCurrency(currency: String): String {
+    return "${currencyFormatter.format(this)} ${currency.toCurrencySymbol()}"
+}
