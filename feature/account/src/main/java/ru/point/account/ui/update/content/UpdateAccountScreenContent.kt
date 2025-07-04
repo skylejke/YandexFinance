@@ -100,7 +100,8 @@ internal fun UpdateAccountScreenContent(
                 onAction(UpdateAccountAction.OnAccountNameEntered(it.ifEmpty { DEFAULT_ACCOUNT_NAME }))
                 showNameDialog = false
             },
-            maxLength = 20
+            maxLength = 20,
+            showTextCounter = true
         )
     }
 

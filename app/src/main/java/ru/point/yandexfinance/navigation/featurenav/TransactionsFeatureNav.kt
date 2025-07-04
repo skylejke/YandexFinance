@@ -19,11 +19,13 @@ import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.transactions.expenses.ui.content.ExpensesScreen
 import ru.point.transactions.history.ui.content.TransactionHistoryScreen
 import ru.point.transactions.incomes.ui.content.IncomesScreen
+import ru.point.ui.scaffold.bottombar.BottomBarState
 
 fun NavGraphBuilder.transactionsFeature(
     navController: NavController,
     topAppBarState: MutableState<TopAppBarState>,
-    fabState: MutableState<FabState>
+    fabState: MutableState<FabState>,
+    bottomBarState: MutableState<BottomBarState>,
 ) {
     composable<Route.Incomes> {
         topAppBarState.value = TopAppBarState(
@@ -44,6 +46,8 @@ fun NavGraphBuilder.transactionsFeature(
 
             }
         )
+
+        bottomBarState.value = BottomBarState.Showed
 
         IncomesScreen(modifier = Modifier.fillMaxSize())
     }
@@ -66,6 +70,8 @@ fun NavGraphBuilder.transactionsFeature(
             action = {}
         )
 
+        bottomBarState.value = BottomBarState.Showed
+
         ExpensesScreen(modifier = Modifier.fillMaxSize())
     }
 
@@ -87,6 +93,8 @@ fun NavGraphBuilder.transactionsFeature(
         )
 
         fabState.value = FabState.Hidden
+
+        bottomBarState.value = BottomBarState.Hidden
 
         TransactionHistoryScreen(isIncome = isIncome, modifier = Modifier.fillMaxSize())
     }

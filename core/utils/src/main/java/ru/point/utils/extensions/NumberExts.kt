@@ -5,8 +5,8 @@ import java.text.DecimalFormat
 val currencyFormatter: DecimalFormat by lazy {
     DecimalFormat("#,###.##").apply {
         decimalFormatSymbols = decimalFormatSymbols.apply {
-            groupingSeparator = ' ' // пробел как разделитель тысяч
-            decimalSeparator = '.' // точка как десятичный
+            groupingSeparator = ' '
+            decimalSeparator = '.'
         }
         minimumFractionDigits = 0
         maximumFractionDigits = 2

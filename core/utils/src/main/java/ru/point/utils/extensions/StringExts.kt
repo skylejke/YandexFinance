@@ -36,3 +36,48 @@ fun String.toTimeHHmm(): String {
 }
 
 fun String.extractNumericBalance() = filter { it.isDigit() || it == '.' }
+
+fun String.sanitizeDecimalInput(): String {
+    if (isEmpty()) return ""
+
+    val normalized = replace(',', '.')
+    val cleaned = normalized.extractDecimalDigits()
+    return cleaned.normalizeLeadingZeros()
+}
+
+private fun String.extractDecimalDigits(): String {
+    val sb = StringBuilder()
+    var dotFound = false
+    var decimals = 0
+
+    for (ch in this) {
+        when {
+            ch.isDigit() -> {
+                if (!dotFound) sb.append(ch)
+                else if (decimals < 2) {
+                    sb.append(ch)
+                    decimals++
+                }
+            }
+
+            ch == '.' && !dotFound -> {
+                dotFound = true
+                if (sb.isEmpty()) sb.append('0')
+                sb.append('.')
+            }
+        }
+    }
+
+    return sb.toString()
+}
+
+private fun String.normalizeLeadingZeros(): String {
+    val parts = split('.', limit = 2)
+    val intPart = parts[0].trimStart('0').ifEmpty { "0" }
+
+    return if (parts.size == 2) {
+        "$intPart.${parts[1]}"
+    } else {
+        intPart
+    }
+}

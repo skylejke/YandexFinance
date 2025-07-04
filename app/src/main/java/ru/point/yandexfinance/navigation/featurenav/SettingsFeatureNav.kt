@@ -10,10 +10,12 @@ import ru.point.yandexfinance.navigation.Route
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.settings.ui.content.SettingsScreen
+import ru.point.ui.scaffold.bottombar.BottomBarState
 
 fun NavGraphBuilder.settingsFeature(
     topAppBarState: MutableState<TopAppBarState>,
-    fabState: MutableState<FabState>
+    fabState: MutableState<FabState>,
+    bottomBarState: MutableState<BottomBarState>,
 ) {
     composable<Route.Settings> {
         topAppBarState.value = TopAppBarState(
@@ -21,6 +23,8 @@ fun NavGraphBuilder.settingsFeature(
         )
 
         fabState.value = FabState.Hidden
+
+        bottomBarState.value = BottomBarState.Showed
 
         SettingsScreen(modifier = Modifier.fillMaxSize())
     }

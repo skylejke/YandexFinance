@@ -10,8 +10,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.TextSelectionColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -27,6 +30,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import ru.point.account.R
+import ru.point.ui.colors.ForestGreen
+import ru.point.ui.colors.Graphite
+import ru.point.ui.colors.White
+import ru.point.utils.extensions.sanitizeDecimalInput
 
 @Composable
 internal fun EditTextDialog(
@@ -36,6 +43,7 @@ internal fun EditTextDialog(
     maxLength: Int,
     onDismiss: () -> Unit,
     onConfirm: (String) -> Unit,
+    showTextCounter: Boolean = false,
 ) {
 
     var text by remember { mutableStateOf(initialValue) }
@@ -44,7 +52,8 @@ internal fun EditTextDialog(
 
         Surface(
             shape = RoundedCornerShape(12.dp),
-            tonalElevation = 8.dp
+            tonalElevation = 8.dp,
+            color = White
         ) {
 
             Column(modifier = Modifier.padding(20.dp)) {
@@ -58,27 +67,43 @@ internal fun EditTextDialog(
                         keyboardType = keyBoardType
                     ),
                     value = text,
-                    onValueChange = {
-                        val isLengthValid = it.length <= maxLength
-                        val isNotLeadingSpace = !it.startsWith(" ")
-                        if (isLengthValid && isNotLeadingSpace) {
-                            text = it
+                    onValueChange = { input ->
+                        if (input.length > maxLength + 3 || input.startsWith(" ")) return@OutlinedTextField
+
+                        val sanitized = if (keyBoardType == KeyboardType.Number) {
+                            input.sanitizeDecimalInput()
+                        } else input
+
+                        val intPart = sanitized.substringBefore('.', sanitized)
+                        if (intPart.length <= maxLength) {
+                            text = sanitized
                         }
                     },
                     singleLine = true,
                     supportingText = {
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 8.dp),
-                            contentAlignment = Alignment.BottomEnd,
-                        ) {
-                            Text(
-                                text = "${text.length} / $maxLength",
-                                style = MaterialTheme.typography.bodySmall,
-                            )
+                        if (showTextCounter) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(top = 8.dp),
+                                contentAlignment = Alignment.BottomEnd,
+                            ) {
+                                Text(
+                                    text = "${text.length} / $maxLength",
+                                    style = MaterialTheme.typography.bodySmall,
+                                )
+                            }
                         }
                     },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        selectionColors = TextSelectionColors(
+                            handleColor = ForestGreen,
+                            backgroundColor = White
+                        ),
+                        unfocusedBorderColor = Graphite,
+                        cursorColor = ForestGreen,
+                        focusedBorderColor = ForestGreen,
+                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -86,11 +111,21 @@ internal fun EditTextDialog(
 
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
 
-                    TextButton(onClick = onDismiss) {
+                    TextButton(
+                        onClick = onDismiss,
+                        colors = ButtonDefaults.textButtonColors(
+                            contentColor = ForestGreen
+                        )
+                    ) {
                         Text(text = stringResource(R.string.cancel))
                     }
 
-                    TextButton(onClick = { onConfirm(text) }) {
+                    TextButton(
+                        onClick = { onConfirm(text) },
+                        colors = ButtonDefaults.textButtonColors(
+                            contentColor = ForestGreen
+                        )
+                    ) {
                         Text(text = stringResource(R.string.ok))
                     }
                 }
@@ -98,3 +133,5 @@ internal fun EditTextDialog(
         }
     }
 }
+
+

@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ru.point.account.R
+import ru.point.ui.colors.White
 import ru.point.ui.composables.BaseListItem
 import ru.point.ui.composables.GreyHorizontalDivider
 import ru.point.utils.extensions.CurrencyParse
@@ -37,7 +38,7 @@ internal fun CurrencyPickerBottomSheet(
         onDismissRequest = onDismiss,
         sheetState = sheetState,
         shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
-        containerColor = MaterialTheme.colorScheme.surface,
+        containerColor = White,
     ) {
         Column(modifier = Modifier.padding(bottom = 16.dp)) {
 

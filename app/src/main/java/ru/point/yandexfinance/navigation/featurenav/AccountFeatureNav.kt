@@ -16,6 +16,7 @@ import ru.point.account.ui.update.screen.UpdateAccountScreen
 import ru.point.account.ui.update.viewmodel.UpdateAccountAction
 import ru.point.account.ui.update.viewmodel.UpdateAccountViewModel
 import ru.point.ui.di.LocalViewModelFactory
+import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
@@ -25,7 +26,8 @@ import ru.point.yandexfinance.navigation.Route
 fun NavGraphBuilder.accountFeature(
     navController: NavController,
     topAppBarState: MutableState<TopAppBarState>,
-    fabState: MutableState<FabState>
+    fabState: MutableState<FabState>,
+    bottomBarState: MutableState<BottomBarState>,
 ) {
     composable<Route.Account> {
         topAppBarState.value = TopAppBarState(
@@ -41,6 +43,8 @@ fun NavGraphBuilder.accountFeature(
         )
 
         fabState.value = FabState.Hidden
+
+        bottomBarState.value = BottomBarState.Showed
 
         AccountScreen(modifier = Modifier.fillMaxSize())
     }
@@ -66,6 +70,8 @@ fun NavGraphBuilder.accountFeature(
         )
 
         fabState.value = FabState.Hidden
+
+        bottomBarState.value = BottomBarState.Hidden
 
         UpdateAccountScreen(
             state = state,
