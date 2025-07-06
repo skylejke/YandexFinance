@@ -5,9 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
-import ru.point.account.ui.account.viewmodel.AccountViewModel
-import ru.point.account.ui.update.viewmodel.UpdateAccountViewModel
-import ru.point.categories.ui.viewmodel.CategoriesViewModel
 import ru.point.transactions.expenses.ui.viewmodel.ExpensesViewModel
 import ru.point.transactions.history.ui.viewmodel.TransactionHistoryViewModel
 import ru.point.transactions.incomes.ui.viewmodel.IncomesViewModel
@@ -20,20 +17,20 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindFactory(factory: DaggerViewModelFactory): ViewModelProvider.Factory
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(AccountViewModel::class)
-    abstract fun bindAccountViewModel(accountViewModel: AccountViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(AccountViewModel::class)
+//    abstract fun bindAccountViewModel(accountViewModel: AccountViewModel): ViewModel
+//
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(UpdateAccountViewModel::class)
+//    abstract fun bindUpdateAccountViewModel(updateAccountViewModel: UpdateAccountViewModel): ViewModel
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(UpdateAccountViewModel::class)
-    abstract fun bindUpdateAccountViewModel(updateAccountViewModel: UpdateAccountViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(CategoriesViewModel::class)
-    abstract fun bindCategoriesViewModel(categoriesViewModel: CategoriesViewModel): ViewModel
+//    @Binds
+//    @IntoMap
+//    @ViewModelKey(CategoriesViewModel::class)
+//    abstract fun bindCategoriesViewModel(categoriesViewModel: CategoriesViewModel): ViewModel
 
     @Binds
     @IntoMap

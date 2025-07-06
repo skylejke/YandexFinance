@@ -3,13 +3,15 @@ package ru.point.account.ui.account.screen
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.point.account.di.component.DaggerAccountComponent
+import ru.point.account.di.deps.AccountDepsStore
 import ru.point.account.ui.account.content.AccountScreenContent
 import ru.point.account.ui.account.viewmodel.AccountAction
 import ru.point.account.ui.account.viewmodel.AccountViewModel
@@ -18,7 +20,6 @@ import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner
 import ru.point.ui.di.LocalInternetTracker
-import ru.point.ui.di.LocalViewModelFactory
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarAction
@@ -31,6 +32,7 @@ import ru.point.utils.model.toUserMessage
  * Подключает [AccountViewModel], отслеживает состояние загрузки, ошибок и подключения к интернету,
  * и отображает соответствующий UI: данные аккаунта, индикатор загрузки, сообщение об ошибке или баннер отсутствия интернета.
  */
+@NonRestartableComposable
 @Composable
 fun AccountScreen(
     topAppBarState: MutableState<TopAppBarState>,
@@ -44,10 +46,8 @@ fun AccountScreen(
         titleRes = R.string.my_account,
         actions = listOf(
             TopAppBarAction(
-                icon = ImageVector.vectorResource(R.drawable.edit_icon),
-                action = {
-                    onNavigate()
-                }
+                iconResId = R.drawable.edit_icon,
+                action = onNavigate
             )
         )
     )
@@ -56,7 +56,12 @@ fun AccountScreen(
 
     bottomBarState.value = BottomBarState.Showed
 
-    val viewModel = viewModel<AccountViewModel>(factory = LocalViewModelFactory.current)
+
+    val accountComponent = remember {
+        DaggerAccountComponent.builder().deps(accountDeps = AccountDepsStore.accountDeps).build()
+    }
+
+    val viewModel = viewModel<AccountViewModel>(factory = accountComponent.accountViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 

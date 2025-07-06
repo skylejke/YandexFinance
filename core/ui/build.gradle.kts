@@ -34,8 +34,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:utils"))
-    implementation(project(":core:res:common"))
+    implementation(projects.core.utils)
+    implementation(projects.core.res.common)
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)

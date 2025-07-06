@@ -35,7 +35,7 @@ fun YandexFinanceTopAppBar(
         actions = {
             topAppBarState.actions.forEach { action ->
                 ActionIcon(
-                    icon = action.icon,
+                    icon = ImageVector.vectorResource(action.iconResId),
                     action = action.action
                 )
             }

@@ -7,12 +7,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.point.account.di.component.DaggerUpdateAccountComponent
+import ru.point.account.di.deps.AccountDepsStore
 import ru.point.account.ui.update.content.UpdateAccountScreenContent
 import ru.point.account.ui.update.viewmodel.UpdateAccountAction
 import ru.point.account.ui.update.viewmodel.UpdateAccountEvent
@@ -22,7 +23,6 @@ import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner
 import ru.point.ui.di.LocalInternetTracker
-import ru.point.ui.di.LocalViewModelFactory
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarAction
@@ -39,30 +39,55 @@ fun UpdateAccountScreen(
     modifier: Modifier = Modifier
 ) {
 
-    val viewModel = viewModel<UpdateAccountViewModel>(factory = LocalViewModelFactory.current)
+    val updateAccountComponent = remember {
+        DaggerUpdateAccountComponent.builder().deps(accountDeps = AccountDepsStore.accountDeps).build()
+    }
+
+    val viewModel = viewModel<UpdateAccountViewModel>(factory = updateAccountComponent.updateAccountViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    val context = LocalContext.current
 
     topAppBarState.value = TopAppBarState(
         titleRes = R.string.edit_account,
         actions = listOf(
             TopAppBarAction(
-                icon = ImageVector.vectorResource(R.drawable.check_icon),
+                iconResId = R.drawable.check_icon,
                 action = {
                     viewModel.onAction(UpdateAccountAction.OnUpdatePressed)
                 }
             )
         ),
-        onBack = {
-            onBack()
-        }
+        onBack = onBack
     )
 
     fabState.value = FabState.Hidden
 
     bottomBarState.value = BottomBarState.Hidden
 
-    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        viewModel.events.collect { event ->
+            when (event) {
+                UpdateAccountEvent.ShowSuccessToastAndGoBack -> {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.successfully_update_account),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    onBack()
+                }
+
+                UpdateAccountEvent.ShowErrorToast -> {
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.something_went_wrong),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 
@@ -87,29 +112,6 @@ fun UpdateAccountScreen(
                     onAction = viewModel::onAction,
                     modifier = modifier
                 )
-            }
-        }
-    }
-
-    LaunchedEffect(Unit) {
-        viewModel.events.collect { event ->
-            when (event) {
-                UpdateAccountEvent.ShowSuccessToastAndGoBack -> {
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.successfully_update_account),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    onBack()
-                }
-
-                UpdateAccountEvent.ShowErrorToast -> {
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.something_went_wrong),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
             }
         }
     }

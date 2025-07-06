@@ -34,8 +34,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:ui"))
-    implementation(project(":core:res:settings"))
+    implementation(projects.core.ui)
+    implementation(projects.core.res.settings)
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)

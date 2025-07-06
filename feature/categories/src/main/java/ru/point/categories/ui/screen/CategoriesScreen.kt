@@ -1,12 +1,16 @@
 package ru.point.categories.ui.screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.point.categories.di.component.DaggerCategoriesComponent
+import ru.point.categories.di.deps.CategoriesDepsStore
 import ru.point.categories.ui.content.CategoriesScreenContent
 import ru.point.categories.ui.viewmodel.CategoriesViewModel
 import ru.point.core.res.categories.R
@@ -14,7 +18,6 @@ import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner
 import ru.point.ui.di.LocalInternetTracker
-import ru.point.ui.di.LocalViewModelFactory
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
@@ -34,15 +37,21 @@ fun CategoriesScreen(
     modifier: Modifier = Modifier
 ) {
 
-    topAppBarState.value = TopAppBarState(
-        titleRes = R.string.categories
-    )
+    LaunchedEffect(Unit) {
+        topAppBarState.value = TopAppBarState(
+            titleRes = R.string.categories
+        )
 
-    fabState.value = FabState.Hidden
+        fabState.value = FabState.Hidden
 
-    bottomBarState.value = BottomBarState.Showed
+        bottomBarState.value = BottomBarState.Showed
+    }
 
-    val viewModel = viewModel<CategoriesViewModel>(factory = LocalViewModelFactory.current)
+    val categoriesComponent = remember {
+        DaggerCategoriesComponent.builder().deps(categoriesDeps = CategoriesDepsStore.categoriesDeps).build()
+    }
+
+    val viewModel = viewModel<CategoriesViewModel>(factory = categoriesComponent.categoriesViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 

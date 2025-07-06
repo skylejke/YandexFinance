@@ -1,6 +1,7 @@
 package ru.point.settings.ui.content
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import ru.point.core.res.settings.R
@@ -21,13 +22,15 @@ fun SettingsScreen(
     modifier: Modifier = Modifier
 ) {
 
-    topAppBarState.value = TopAppBarState(
-        titleRes = R.string.settings,
-    )
+    LaunchedEffect(Unit) {
+        topAppBarState.value = TopAppBarState(
+            titleRes = R.string.settings,
+        )
 
-    fabState.value = FabState.Hidden
+        fabState.value = FabState.Hidden
 
-    bottomBarState.value = BottomBarState.Showed
+        bottomBarState.value = BottomBarState.Showed
+    }
 
     SettingsScreenContent(modifier = modifier)
 }

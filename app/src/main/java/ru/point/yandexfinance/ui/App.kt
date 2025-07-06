@@ -3,6 +3,8 @@ package ru.point.yandexfinance.ui
 import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
+import ru.point.account.di.deps.AccountDepsStore
+import ru.point.categories.di.deps.CategoriesDepsStore
 import ru.point.utils.network.InternetHolder
 import ru.point.yandexfinance.di.component.AppComponent
 import ru.point.yandexfinance.di.component.DaggerAppComponent
@@ -20,6 +22,10 @@ class App : Application() {
         super.onCreate()
 
         appComponent = DaggerAppComponent.create()
+
+        CategoriesDepsStore.categoriesDeps = appComponent
+        AccountDepsStore.accountDeps = appComponent
+
         InternetHolder.init(connectivityManager = getSystemService(ConnectivityManager::class.java))
     }
 }

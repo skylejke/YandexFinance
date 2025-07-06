@@ -20,21 +20,26 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "YandexFinance"
-include(":app")
-include(":feature")
-include(":feature:transactions")
-include(":feature:settings")
-include(":feature:account")
-include(":feature:categories")
-include(":core")
-include(":core:data")
-include(":core:ui")
-include(":core:utils")
-include(":core:data:api")
-include(":core:data:impl")
-include(":core:res")
-include(":core:res:common")
-include(":core:res:account")
-include(":core:res:categories")
-include(":core:res:transactions")
-include(":core:res:settings")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+include(
+    ":app",
+    ":feature",
+    ":feature:transactions",
+    ":feature:settings",
+    ":feature:account",
+    ":feature:categories",
+    ":core",
+    ":core:data",
+    ":core:ui",
+    ":core:utils",
+    ":core:data:api",
+    ":core:data:impl",
+    ":core:res",
+    ":core:res:common",
+    ":core:res:account",
+    ":core:res:categories",
+    ":core:res:transactions",
+    ":core:res:settings"
+)
+

@@ -35,8 +35,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data:api"))
-    implementation(project(":core:utils"))
+    implementation(projects.core.data.api)
+    implementation(projects.core.utils)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

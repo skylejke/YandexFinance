@@ -6,8 +6,6 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.transactions.R
@@ -39,22 +37,24 @@ fun TransactionHistoryScreen(
     modifier: Modifier = Modifier
 ) {
 
-    topAppBarState.value = TopAppBarState(
-        titleRes = R.string.my_history,
-        actions = listOf(
-            TopAppBarAction(
-                icon = ImageVector.vectorResource(R.drawable.analysis_icon),
-                action = {
+    LaunchedEffect(Unit) {
+        topAppBarState.value = TopAppBarState(
+            titleRes = R.string.my_history,
+            actions = listOf(
+                TopAppBarAction(
+                    iconResId = R.drawable.analysis_icon,
+                    action = {
 
-                }
-            )
-        ),
-        onBack = onBack
-    )
+                    }
+                )
+            ),
+            onBack = onBack
+        )
 
-    fabState.value = FabState.Hidden
+        fabState.value = FabState.Hidden
 
-    bottomBarState.value = BottomBarState.Hidden
+        bottomBarState.value = BottomBarState.Hidden
+    }
 
     val viewModel: TransactionHistoryViewModel = viewModel(factory = LocalViewModelFactory.current)
 
