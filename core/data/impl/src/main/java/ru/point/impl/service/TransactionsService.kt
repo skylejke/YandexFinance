@@ -3,7 +3,7 @@ package ru.point.impl.service
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
-import ru.point.impl.BuildConfig
+import ru.point.core.utils.BuildConfig
 import ru.point.impl.model.Transaction
 
 internal interface TransactionsService {

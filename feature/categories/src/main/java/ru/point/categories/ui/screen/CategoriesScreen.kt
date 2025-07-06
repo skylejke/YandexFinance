@@ -7,9 +7,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ru.point.categories.R
 import ru.point.categories.ui.content.CategoriesScreenContent
 import ru.point.categories.ui.viewmodel.CategoriesViewModel
+import ru.point.core.res.categories.R
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner

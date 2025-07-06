@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.settings"
+    namespace = "ru.point.feature.settings"
     compileSdk = 35
 
     defaultConfig {
@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation(project(":core:ui"))
+    implementation(project(":core:res:settings"))
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)

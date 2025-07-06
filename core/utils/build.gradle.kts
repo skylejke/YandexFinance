@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.utils"
+    namespace = "ru.point.core.utils"
     compileSdk = 35
 
     defaultConfig {

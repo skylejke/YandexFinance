@@ -2,12 +2,12 @@ package ru.point.utils.network
 
 import okhttp3.Interceptor
 import okhttp3.Response
-import ru.point.utils.BuildConfig
+import ru.point.core.utils.BuildConfig
 
 /**
  * Interceptor, добавляющий токен авторизации к каждому HTTP-запросу.
  *
- * Подставляет заголовок `Authorization: Bearer <API_KEY>` из [API_KEY]
+ * Подставляет заголовок `Authorization: Bearer <API_KEY>` из [ru.point.core.utils.BuildConfig.API_KEY]
  * для аутентификации при обращении к защищённому API.
  */
 class ApiKeyInterceptor: Interceptor {

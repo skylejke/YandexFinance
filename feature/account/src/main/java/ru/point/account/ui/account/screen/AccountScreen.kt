@@ -10,10 +10,10 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ru.point.account.R
 import ru.point.account.ui.account.content.AccountScreenContent
 import ru.point.account.ui.account.viewmodel.AccountAction
 import ru.point.account.ui.account.viewmodel.AccountViewModel
+import ru.point.core.res.account.R
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner

@@ -7,7 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import ru.point.settings.R
+import ru.point.core.res.settings.R
 import ru.point.ui.colors.MintGreen
 import ru.point.ui.composables.BaseListItem
 

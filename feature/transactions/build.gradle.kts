@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.transactions"
+    namespace = "ru.point.feature.transactions"
     compileSdk = 35
 
     defaultConfig {
@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(":core:data:api"))
+    implementation(project(":core:res:transactions"))
     implementation(project(":core:utils"))
     implementation(project(":core:ui"))
 

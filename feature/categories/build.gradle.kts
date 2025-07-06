@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.categories"
+    namespace = "ru.point.feature.categories"
     compileSdk = 35
 
     defaultConfig {
@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(":core:data:api"))
+    implementation(project(":core:res:categories"))
     implementation(project(":core:utils"))
     implementation(project(":core:ui"))
 

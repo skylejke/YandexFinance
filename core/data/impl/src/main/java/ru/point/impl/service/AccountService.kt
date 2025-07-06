@@ -4,7 +4,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.PUT
 import retrofit2.http.Path
-import ru.point.impl.BuildConfig
+import ru.point.core.utils.BuildConfig
 import ru.point.impl.model.Account
 import ru.point.impl.model.AccountUpdateRequest
 

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.account"
+    namespace = "ru.point.feature.account"
     compileSdk = 35
 
     defaultConfig {
@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(project(":core:data:api"))
+    implementation(project(":core:res:account"))
     implementation(project(":core:utils"))
     implementation(project(":core:ui"))
 

@@ -3,7 +3,7 @@ package ru.point.settings.ui.content
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import ru.point.settings.R
+import ru.point.core.res.settings.R
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState

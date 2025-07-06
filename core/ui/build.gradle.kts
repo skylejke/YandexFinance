@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.ui"
+    namespace = "ru.point.core.ui"
     compileSdk = 35
 
     defaultConfig {
@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation(project(":core:utils"))
+    implementation(project(":core:res:common"))
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)

@@ -10,7 +10,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.create
-import ru.point.impl.BuildConfig
+import ru.point.core.utils.BuildConfig
 import ru.point.impl.service.AccountService
 import ru.point.impl.service.CategoriesService
 import ru.point.impl.service.TransactionsService

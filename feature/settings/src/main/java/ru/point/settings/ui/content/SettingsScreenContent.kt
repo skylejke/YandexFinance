@@ -15,7 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.point.settings.R
+import ru.point.core.res.settings.R
 import ru.point.settings.domain.model.Setting
 import ru.point.ui.composables.GreyHorizontalDivider
 

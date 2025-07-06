@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="expenses">Расходы</string>
+    <string name="income">Доходы</string>
+    <string name="expenses_today">Расходы сегодня</string>
+    <string name="income_today">Доходы сегодня</string>
+    <string name="my_history">Моя история</string>
+    <string name="no_incomes_today">Нет доходов сегодня</string>
+    <string name="no_expenses_today">Нет расходов сегодня</string>
+    <string name="no_transactions">У вас нет транзакций</string>
+    <string name="incomes_today">Доходы сегодня</string>
+</resources>

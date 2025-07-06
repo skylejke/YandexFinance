@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.api"
+    namespace = "ru.point.core.data.api"
     compileSdk = 35
 
     defaultConfig {
