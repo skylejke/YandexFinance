@@ -2,17 +2,25 @@ package ru.point.transactions.history.ui.content
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ru.point.transactions.R
 import ru.point.transactions.history.ui.viewmodel.TransactionHistoryViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.NoInternetBanner
 import ru.point.ui.di.LocalInternetTracker
 import ru.point.ui.di.LocalViewModelFactory
+import ru.point.ui.scaffold.bottombar.BottomBarState
+import ru.point.ui.scaffold.fab.FabState
+import ru.point.ui.scaffold.topappbar.TopAppBarAction
+import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
 /**
@@ -23,9 +31,30 @@ import ru.point.utils.model.toUserMessage
  */
 @Composable
 fun TransactionHistoryScreen(
+    topAppBarState: MutableState<TopAppBarState>,
+    fabState: MutableState<FabState>,
+    bottomBarState: MutableState<BottomBarState>,
+    onBack: () -> Unit,
     isIncome: Boolean,
     modifier: Modifier = Modifier
 ) {
+
+    topAppBarState.value = TopAppBarState(
+        titleRes = R.string.my_history,
+        actions = listOf(
+            TopAppBarAction(
+                icon = ImageVector.vectorResource(R.drawable.analysis_icon),
+                action = {
+
+                }
+            )
+        ),
+        onBack = onBack
+    )
+
+    fabState.value = FabState.Hidden
+
+    bottomBarState.value = BottomBarState.Hidden
 
     val viewModel: TransactionHistoryViewModel = viewModel(factory = LocalViewModelFactory.current)
 

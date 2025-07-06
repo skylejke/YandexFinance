@@ -20,7 +20,9 @@ import ru.point.settings.domain.model.Setting
 import ru.point.ui.composables.GreyHorizontalDivider
 
 @Composable
-internal fun SettingsScreenContent(modifier: Modifier = Modifier) {
+internal fun SettingsScreenContent(
+    modifier: Modifier = Modifier
+) {
     var isDarkTheme by remember { mutableStateOf(false) }
 
     val settingsCardModifier = Modifier

@@ -2,4 +2,5 @@
 <resources>
     <string name="search_category">Найти статью</string>
     <string name="nothing_found">Ничего не найдено</string>
+    <string name="categories">Статьи</string>
 </resources>

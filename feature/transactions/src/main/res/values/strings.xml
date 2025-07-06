@@ -3,4 +3,7 @@
     <string name="no_incomes_today">Нет доходов сегодня</string>
     <string name="no_expenses_today">Нет расходов сегодня</string>
     <string name="no_transactions">У вас нет транзакций</string>
+    <string name="my_history">Моя история</string>
+    <string name="expenses_today">Расходы сегодня</string>
+    <string name="incomes_today">Доходы сегодня</string>
 </resources>
