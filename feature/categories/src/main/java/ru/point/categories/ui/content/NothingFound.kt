@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import ru.point.core.res.categories.R
 
 @Composable
-fun NothingFound(modifier: Modifier = Modifier) {
+internal fun NothingFound(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center

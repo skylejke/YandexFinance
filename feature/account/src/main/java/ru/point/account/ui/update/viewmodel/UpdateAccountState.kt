@@ -2,7 +2,7 @@ package ru.point.account.ui.update.viewmodel
 
 import ru.point.utils.model.AppError
 
-data class UpdateAccountState(
+internal data class UpdateAccountState(
     val isLoading: Boolean = true,
     val name: String = "",
     val balance: String = "",

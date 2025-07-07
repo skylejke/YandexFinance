@@ -7,7 +7,7 @@ import ru.point.account.domain.usecase.UpdateAccountUseCase
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
-class UpdateAccountViewModelFactory @Inject constructor(
+internal class UpdateAccountViewModelFactory @Inject constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val updateAccountUseCase: UpdateAccountUseCase
 ) : ViewModelProvider.Factory {

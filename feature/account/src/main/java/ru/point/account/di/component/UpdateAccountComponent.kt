@@ -5,7 +5,7 @@ import ru.point.account.di.deps.AccountDeps
 import ru.point.account.ui.update.viewmodel.UpdateAccountViewModelFactory
 
 @Component(dependencies = [AccountDeps::class])
-interface UpdateAccountComponent {
+internal interface UpdateAccountComponent {
 
     @Component.Builder
     interface Builder {

@@ -5,6 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import ru.point.account.di.deps.AccountDepsStore
 import ru.point.categories.di.deps.CategoriesDepsStore
+import ru.point.transactions.di.deps.TransactionDepsStore
 import ru.point.utils.network.InternetHolder
 import ru.point.yandexfinance.di.component.AppComponent
 import ru.point.yandexfinance.di.component.DaggerAppComponent
@@ -25,6 +26,7 @@ class App : Application() {
 
         CategoriesDepsStore.categoriesDeps = appComponent
         AccountDepsStore.accountDeps = appComponent
+        TransactionDepsStore.transactionDeps = appComponent
 
         InternetHolder.init(connectivityManager = getSystemService(ConnectivityManager::class.java))
     }

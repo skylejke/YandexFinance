@@ -9,7 +9,7 @@ import ru.point.core.res.account.R
 import ru.point.ui.composables.BaseListItem
 
 @Composable
-fun UpdateAccountCurrencyCard(accountCurrency: String, modifier: Modifier = Modifier){
+internal fun UpdateAccountCurrencyCard(accountCurrency: String, modifier: Modifier = Modifier){
     BaseListItem(
         modifier = modifier,
         content = {

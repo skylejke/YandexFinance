@@ -6,7 +6,7 @@ import ru.point.categories.domain.usecase.GetCategoriesUseCase
 import javax.inject.Inject
 
 @Suppress("UNCHECKED_CAST")
-class CategoriesViewModelFactory @Inject constructor(
+internal class CategoriesViewModelFactory @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModelProvider.Factory {
 

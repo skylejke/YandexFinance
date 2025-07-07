@@ -5,7 +5,7 @@ import ru.point.account.di.deps.AccountDeps
 import ru.point.account.ui.account.viewmodel.AccountViewModelFactory
 
 @Component(dependencies = [AccountDeps::class])
-interface AccountComponent {
+internal interface AccountComponent {
 
     @Component.Builder
     interface Builder {

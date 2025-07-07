@@ -56,7 +56,6 @@ fun AccountScreen(
 
     bottomBarState.value = BottomBarState.Showed
 
-
     val accountComponent = remember {
         DaggerAccountComponent.builder().deps(accountDeps = AccountDepsStore.accountDeps).build()
     }

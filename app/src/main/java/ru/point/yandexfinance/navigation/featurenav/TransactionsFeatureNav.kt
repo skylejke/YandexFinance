@@ -7,9 +7,9 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
-import ru.point.transactions.expenses.ui.content.ExpensesScreen
-import ru.point.transactions.history.ui.content.TransactionHistoryScreen
-import ru.point.transactions.incomes.ui.content.IncomesScreen
+import ru.point.transactions.ui.expenses.screen.ExpensesScreen
+import ru.point.transactions.ui.history.screen.TransactionHistoryScreen
+import ru.point.transactions.ui.incomes.screen.IncomesScreen
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState

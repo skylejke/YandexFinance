@@ -19,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import ru.point.ui.di.LocalInternetTracker
-import ru.point.ui.di.LocalViewModelFactory
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.fab.YandexFinanceFab
@@ -36,7 +35,7 @@ import ru.point.yandexfinance.ui.theme.YandexFinanceTheme
 /**
  * Главная активити приложения YandexFinance.
  *
- * Отвечает за инициализацию темизации, DI-контекстов ([LocalViewModelFactory], [LocalInternetTracker]),
+ * Отвечает за инициализацию темизации, DI-контекстов,
  * отображение основной Scaffold-структуры (TopAppBar, BottomNavigation, FAB) и навигации через [YandexFinanceNavHost].
  *
  * Также управляет splash-экраном и поддерживает edge-to-edge режим.
@@ -55,7 +54,6 @@ class MainActivity : ComponentActivity() {
             val bottomBarState = remember { mutableStateOf<BottomBarState>(BottomBarState.Hidden) }
 
             CompositionLocalProvider(
-                LocalViewModelFactory provides appComponent.viewModelFactoryProvider(),
                 LocalInternetTracker provides tracker
             ) {
                 YandexFinanceTheme {

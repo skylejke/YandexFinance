@@ -12,7 +12,7 @@ import ru.point.ui.colors.Graphite
 import ru.point.ui.composables.BaseListItem
 
 @Composable
-fun UpdateAccountBalanceCard(
+internal fun UpdateAccountBalanceCard(
     accountBalance: String,
     modifier: Modifier = Modifier
 ) {

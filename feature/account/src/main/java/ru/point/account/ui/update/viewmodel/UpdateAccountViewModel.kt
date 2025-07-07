@@ -12,7 +12,7 @@ import ru.point.utils.extensions.toCurrencyCode
 import ru.point.utils.model.toAppError
 import javax.inject.Inject
 
-class UpdateAccountViewModel @Inject constructor(
+internal class UpdateAccountViewModel @Inject constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val updateAccountUseCase: UpdateAccountUseCase
 ) : MviViewModel<UpdateAccountState, UpdateAccountAction, UpdateAccountEvent>(initialState = UpdateAccountState()) {

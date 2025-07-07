@@ -1,6 +1,6 @@
 package ru.point.account.ui.update.viewmodel
 
-sealed interface UpdateAccountEvent {
+internal sealed interface UpdateAccountEvent {
 
     data object ShowSuccessToastAndGoBack: UpdateAccountEvent
 

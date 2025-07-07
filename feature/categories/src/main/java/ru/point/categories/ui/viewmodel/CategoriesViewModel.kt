@@ -14,7 +14,7 @@ import javax.inject.Inject
  * Отвечает за загрузку данных через [GetCategoriesUseCase], обработку ошибок
  * и обновление состояния экрана в соответствии с действиями пользователя в рамках MVI-паттерна.
  */
-class CategoriesViewModel @Inject constructor(
+internal class CategoriesViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
 ) : MviViewModel<CategoriesState, CategoriesAction, Any>(initialState = CategoriesState()) {
 

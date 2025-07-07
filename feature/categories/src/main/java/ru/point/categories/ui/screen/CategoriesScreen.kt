@@ -1,8 +1,8 @@
 package ru.point.categories.ui.screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -29,6 +29,7 @@ import ru.point.utils.model.toUserMessage
  * Подключает [CategoriesViewModel], отслеживает состояние подключения, загрузки и ошибок,
  * и отображает соответствующий UI: список категорий, лоадер, ошибку или баннер об отсутствии интернета.
  */
+@NonRestartableComposable
 @Composable
 fun CategoriesScreen(
     topAppBarState: MutableState<TopAppBarState>,
@@ -37,15 +38,13 @@ fun CategoriesScreen(
     modifier: Modifier = Modifier
 ) {
 
-    LaunchedEffect(Unit) {
-        topAppBarState.value = TopAppBarState(
-            titleRes = R.string.categories
-        )
+    topAppBarState.value = TopAppBarState(
+        titleRes = R.string.categories
+    )
 
-        fabState.value = FabState.Hidden
+    fabState.value = FabState.Hidden
 
-        bottomBarState.value = BottomBarState.Showed
-    }
+    bottomBarState.value = BottomBarState.Showed
 
     val categoriesComponent = remember {
         DaggerCategoriesComponent.builder().deps(categoriesDeps = CategoriesDepsStore.categoriesDeps).build()
