@@ -35,10 +35,10 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.data.api)
     implementation(projects.core.res.account)
     implementation(projects.core.utils)
     implementation(projects.core.ui)
+    implementation(projects.data.account.api)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

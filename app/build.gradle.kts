@@ -48,10 +48,16 @@ android {
 }
 
 dependencies {
-    implementation(projects.core.data.api)
-    implementation(projects.core.data.impl)
+    implementation(projects.core.network)
     implementation(projects.core.ui)
     implementation(projects.core.utils)
+
+    implementation(projects.data.account.api)
+    implementation(projects.data.categories.api)
+    implementation(projects.data.transactions.api)
+    implementation(projects.data.account.impl)
+    implementation(projects.data.categories.impl)
+    implementation(projects.data.transactions.impl)
 
     implementation(projects.feature.account)
     implementation(projects.feature.categories)

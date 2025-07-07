@@ -30,11 +30,8 @@ include(
     ":feature:account",
     ":feature:categories",
     ":core",
-    ":core:data",
     ":core:ui",
     ":core:utils",
-    ":core:data:api",
-    ":core:data:impl",
     ":core:res",
     ":core:res:common",
     ":core:res:account",
@@ -43,3 +40,14 @@ include(
     ":core:res:settings"
 )
 
+include(":data")
+include(":data:account")
+include(":data:account:api")
+include(":data:account:impl")
+include(":data:categories")
+include(":data:categories:api")
+include(":data:categories:impl")
+include(":data:transactions")
+include(":data:transactions:api")
+include(":data:transactions:impl")
+include(":core:network")

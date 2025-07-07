@@ -12,9 +12,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/core/data" />
-            <option value="$PROJECT_DIR$/core/data/api" />
-            <option value="$PROJECT_DIR$/core/data/impl" />
+            <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/core/res" />
             <option value="$PROJECT_DIR$/core/res/account" />
             <option value="$PROJECT_DIR$/core/res/categories" />
@@ -23,6 +21,16 @@
             <option value="$PROJECT_DIR$/core/res/transactions" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/core/utils" />
+            <option value="$PROJECT_DIR$/data" />
+            <option value="$PROJECT_DIR$/data/account" />
+            <option value="$PROJECT_DIR$/data/account/api" />
+            <option value="$PROJECT_DIR$/data/account/impl" />
+            <option value="$PROJECT_DIR$/data/categories" />
+            <option value="$PROJECT_DIR$/data/categories/api" />
+            <option value="$PROJECT_DIR$/data/categories/impl" />
+            <option value="$PROJECT_DIR$/data/transactions" />
+            <option value="$PROJECT_DIR$/data/transactions/api" />
+            <option value="$PROJECT_DIR$/data/transactions/impl" />
             <option value="$PROJECT_DIR$/feature" />
             <option value="$PROJECT_DIR$/feature/account" />
             <option value="$PROJECT_DIR$/feature/categories" />
