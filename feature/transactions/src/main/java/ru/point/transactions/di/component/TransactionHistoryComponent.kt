@@ -4,9 +4,10 @@ import dagger.BindsInstance
 import dagger.Component
 import ru.point.transactions.di.deps.TransactionDeps
 import ru.point.transactions.ui.history.viewmodel.TransactionHistoryViewModelFactory
+import ru.point.utils.di.FeatureScope
 import javax.inject.Named
 
-@Component(dependencies = [TransactionDeps::class])
+@[FeatureScope Component(dependencies = [TransactionDeps::class])]
 internal interface TransactionHistoryComponent {
 
     @Component.Builder

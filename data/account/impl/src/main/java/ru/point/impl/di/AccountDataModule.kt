@@ -12,13 +12,11 @@ import javax.inject.Singleton
 @Module
 class AccountDataModule {
 
-    @Provides
-    @Singleton
+    @[Provides Singleton]
     internal fun provideAccountService(retrofit: Retrofit) =
         retrofit.create<AccountService>()
 
-    @Singleton
-    @Provides
+    @[Provides Singleton]
     internal fun provideAccountRepository(accountService: AccountService): AccountRepository =
         AccountRepositoryImpl(accountService = accountService)
 }

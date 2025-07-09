@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.bundles.dagger)
     implementation(libs.retrofit)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

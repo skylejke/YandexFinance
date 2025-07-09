@@ -12,13 +12,11 @@ import javax.inject.Singleton
 @Module
 class CategoriesDataModule {
 
-    @Provides
-    @Singleton
+    @[Provides Singleton]
     internal fun provideCategoriesService(retrofit: Retrofit) =
         retrofit.create<CategoriesService>()
 
-    @Singleton
-    @Provides
+    @[Provides Singleton]
     internal fun provideCategoriesRepository(categoriesService: CategoriesService): CategoriesRepository =
         CategoriesRepositoryImpl(categoriesService = categoriesService)
 }

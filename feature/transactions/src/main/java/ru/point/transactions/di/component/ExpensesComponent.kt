@@ -3,8 +3,9 @@ package ru.point.transactions.di.component
 import dagger.Component
 import ru.point.transactions.di.deps.TransactionDeps
 import ru.point.transactions.ui.expenses.viewmodel.ExpensesViewModelFactory
+import ru.point.utils.di.FeatureScope
 
-@Component(dependencies = [TransactionDeps::class])
+@[FeatureScope Component(dependencies = [TransactionDeps::class])]
 internal interface ExpensesComponent {
 
     @Component.Builder
