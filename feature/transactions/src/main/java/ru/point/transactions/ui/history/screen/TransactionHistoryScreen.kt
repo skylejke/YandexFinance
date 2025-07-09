@@ -1,7 +1,6 @@
 package ru.point.transactions.ui.history.screen
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
@@ -12,7 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.transactions.R
 import ru.point.transactions.di.component.DaggerTransactionHistoryComponent
-import ru.point.transactions.di.deps.TransactionDepsStore
+import ru.point.transactions.di.deps.TransactionDepsProvider
 import ru.point.transactions.ui.history.content.TransactionHistoryScreenContent
 import ru.point.transactions.ui.history.viewmodel.TransactionHistoryViewModel
 import ru.point.ui.composables.ErrorContent
@@ -60,17 +59,16 @@ fun TransactionHistoryScreen(
     bottomBarState.value = BottomBarState.Hidden
 
     val transactionHistoryComponent = remember {
-        DaggerTransactionHistoryComponent.builder().deps(transactionDeps = TransactionDepsStore.transactionDeps).build()
+        DaggerTransactionHistoryComponent
+            .builder()
+            .isIncome(isIncome = isIncome)
+            .deps(transactionDeps = TransactionDepsProvider.transactionDeps)
+            .build()
     }
 
     val viewModel: TransactionHistoryViewModel = viewModel(factory = transactionHistoryComponent.transactionHistoryViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
-
-    LaunchedEffect(isIncome) {
-        // Честно, не знаю, как правильно этот флажок передать, кроме как так
-        viewModel.setIsIncome(isIncome)
-    }
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 

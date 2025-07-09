@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.account.di.component.DaggerUpdateAccountComponent
-import ru.point.account.di.deps.AccountDepsStore
+import ru.point.account.di.deps.AccountDepsProvider
 import ru.point.account.ui.update.content.UpdateAccountScreenContent
 import ru.point.account.ui.update.viewmodel.UpdateAccountAction
 import ru.point.account.ui.update.viewmodel.UpdateAccountEvent
@@ -40,7 +40,7 @@ fun UpdateAccountScreen(
 ) {
 
     val updateAccountComponent = remember {
-        DaggerUpdateAccountComponent.builder().deps(accountDeps = AccountDepsStore.accountDeps).build()
+        DaggerUpdateAccountComponent.builder().deps(accountDeps = AccountDepsProvider.accountDeps).build()
     }
 
     val viewModel = viewModel<UpdateAccountViewModel>(factory = updateAccountComponent.updateAccountViewModelFactory)

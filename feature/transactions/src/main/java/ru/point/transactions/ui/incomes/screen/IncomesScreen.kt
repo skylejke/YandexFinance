@@ -13,7 +13,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.transactions.R
 import ru.point.transactions.di.component.DaggerIncomesComponent
-import ru.point.transactions.di.deps.TransactionDepsStore
+import ru.point.transactions.di.deps.TransactionDepsProvider
 import ru.point.transactions.ui.incomes.content.IncomesScreenContent
 import ru.point.transactions.ui.incomes.viewmodel.IncomesViewModel
 import ru.point.ui.composables.ErrorContent
@@ -62,7 +62,7 @@ fun IncomesScreen(
     bottomBarState.value = BottomBarState.Showed
 
     val incomesComponent = remember {
-        DaggerIncomesComponent.builder().deps(transactionDeps = TransactionDepsStore.transactionDeps).build()
+        DaggerIncomesComponent.builder().deps(transactionDeps = TransactionDepsProvider.transactionDeps).build()
     }
 
     val viewModel = viewModel<IncomesViewModel>(factory = incomesComponent.incomesViewModelFactory)

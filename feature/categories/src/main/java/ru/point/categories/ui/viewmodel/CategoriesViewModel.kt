@@ -2,6 +2,7 @@ package ru.point.categories.ui.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.point.categories.domain.usecase.GetCategoriesUseCase
 import ru.point.ui.MviViewModel
@@ -69,7 +70,7 @@ internal class CategoriesViewModel @Inject constructor(
     }
 
     private fun getCategories() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             onAction(CategoriesAction.LoadRequested)
 
             getCategoriesUseCase().fold(

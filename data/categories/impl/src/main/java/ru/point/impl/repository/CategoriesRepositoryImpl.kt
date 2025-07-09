@@ -15,18 +15,9 @@ internal class CategoriesRepositoryImpl @Inject constructor(
     private val categoriesService: CategoriesService
 ) : CategoriesRepository {
 
-    override suspend fun getCategories(query: String) = withContext(Dispatchers.IO) {
+    override suspend fun getCategories() = withContext(Dispatchers.IO) {
         categoriesService.getCategories().map { account ->
             (account.expenseStats + account.incomeStats).map { it.asStateItemDto }
-        }.map { allCategories ->
-            if (query.isBlank()) {
-                allCategories
-            } else {
-                withContext(Dispatchers.Default) {
-                    val handledQuery = query.trim().lowercase()
-                    allCategories.filter { it.categoryName.lowercase().contains(handledQuery) }
-                }
-            }
         }
     }
 }

@@ -16,12 +16,10 @@ import javax.inject.Inject
  */
 internal class TransactionHistoryViewModel @Inject constructor(
     private val getTransactionsHistoryUseCase: GetTransactionsHistoryUseCase,
+    private val isIncome: Boolean
 ) : MviViewModel<TransactionHistoryState, TransactionHistoryAction, Any>(initialState = TransactionHistoryState()) {
 
-    private var isIncome: Boolean = true
-
-    fun setIsIncome(income: Boolean) {
-        isIncome = income
+    init {
         loadTransactionsHistory()
     }
 

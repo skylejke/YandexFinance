@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.account.di.component.DaggerAccountComponent
-import ru.point.account.di.deps.AccountDepsStore
+import ru.point.account.di.deps.AccountDepsProvider
 import ru.point.account.ui.account.content.AccountScreenContent
 import ru.point.account.ui.account.viewmodel.AccountAction
 import ru.point.account.ui.account.viewmodel.AccountViewModel
@@ -57,7 +57,7 @@ fun AccountScreen(
     bottomBarState.value = BottomBarState.Showed
 
     val accountComponent = remember {
-        DaggerAccountComponent.builder().deps(accountDeps = AccountDepsStore.accountDeps).build()
+        DaggerAccountComponent.builder().deps(accountDeps = AccountDepsProvider.accountDeps).build()
     }
 
     val viewModel = viewModel<AccountViewModel>(factory = accountComponent.accountViewModelFactory)

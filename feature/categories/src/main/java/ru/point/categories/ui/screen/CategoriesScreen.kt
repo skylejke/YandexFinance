@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.categories.di.component.DaggerCategoriesComponent
-import ru.point.categories.di.deps.CategoriesDepsStore
+import ru.point.categories.di.deps.CategoriesDepsProvider
 import ru.point.categories.ui.content.CategoriesScreenContent
 import ru.point.categories.ui.viewmodel.CategoriesViewModel
 import ru.point.core.res.categories.R
@@ -47,7 +47,7 @@ fun CategoriesScreen(
     bottomBarState.value = BottomBarState.Showed
 
     val categoriesComponent = remember {
-        DaggerCategoriesComponent.builder().deps(categoriesDeps = CategoriesDepsStore.categoriesDeps).build()
+        DaggerCategoriesComponent.builder().deps(categoriesDeps = CategoriesDepsProvider.categoriesDeps).build()
     }
 
     val viewModel = viewModel<CategoriesViewModel>(factory = categoriesComponent.categoriesViewModelFactory)

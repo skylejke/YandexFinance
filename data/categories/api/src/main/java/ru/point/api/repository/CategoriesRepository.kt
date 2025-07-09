@@ -4,5 +4,5 @@ import ru.point.api.model.StateItemDto
 
 interface CategoriesRepository {
 
-    suspend fun getCategories(query: String): Result<List<StateItemDto>>
+    suspend fun getCategories(): Result<List<StateItemDto>>
 }
