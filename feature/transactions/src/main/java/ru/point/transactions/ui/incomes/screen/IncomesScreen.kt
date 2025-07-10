@@ -37,7 +37,8 @@ fun IncomesScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
-    onNavigate: () -> Unit,
+    onNavigateToHistory: () -> Unit,
+    onNavigateToEditor: (Int?) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -47,7 +48,7 @@ fun IncomesScreen(
         actions = listOf(
             TopAppBarAction(
                 iconResId = R.drawable.history_icon,
-                action = onNavigate
+                action = onNavigateToHistory
             )
         ),
     )
@@ -55,7 +56,7 @@ fun IncomesScreen(
     fabState.value = FabState.Showed(
         icon = Icons.Default.Add,
         action = {
-
+            onNavigateToEditor(null)
         }
     )
 
@@ -71,27 +72,26 @@ fun IncomesScreen(
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 
-    if (!isOnline) {
-        NoInternetBanner(modifier = modifier)
-    } else {
-        when {
-            state.isLoading -> {
-                LoadingIndicator(modifier = modifier)
-            }
+    when {
+        isOnline.not() -> NoInternetBanner(modifier = modifier)
 
-            state.error != null -> {
-                ErrorContent(
-                    message = state.error!!.toUserMessage(),
-                    modifier = modifier
-                )
-            }
+        state.isLoading -> {
+            LoadingIndicator(modifier = modifier)
+        }
 
-            else -> {
-                IncomesScreenContent(
-                    state = state,
-                    modifier = modifier
-                )
-            }
+        state.error != null -> {
+            ErrorContent(
+                message = state.error!!.toUserMessage(),
+                modifier = modifier
+            )
+        }
+
+        else -> {
+            IncomesScreenContent(
+                state = state,
+                onNavigateToEditor = onNavigateToEditor,
+                modifier = modifier
+            )
         }
     }
 }

@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import ru.point.transactions.ui.editor.screen.TransactionEditorScreen
 import ru.point.transactions.ui.expenses.screen.ExpensesScreen
 import ru.point.transactions.ui.history.screen.TransactionHistoryScreen
 import ru.point.transactions.ui.incomes.screen.IncomesScreen
@@ -26,7 +27,15 @@ fun NavGraphBuilder.transactionsFeature(
             topAppBarState = topAppBarState,
             fabState = fabState,
             bottomBarState = bottomBarState,
-            onNavigate = { navController.navigate(Route.TransactionHistory(isIncome = true)) },
+            onNavigateToHistory = { navController.navigate(Route.TransactionHistory(isIncome = true)) },
+            onNavigateToEditor = {
+                navController.navigate(
+                    Route.TransactionEditor(
+                        transactionId = it,
+                        isIncome = true
+                    )
+                )
+            },
             modifier = Modifier.fillMaxSize()
         )
     }
@@ -36,7 +45,15 @@ fun NavGraphBuilder.transactionsFeature(
             topAppBarState = topAppBarState,
             fabState = fabState,
             bottomBarState = bottomBarState,
-            onNavigate = { navController.navigate(Route.TransactionHistory(isIncome = false)) },
+            onNavigateToHistory = { navController.navigate(Route.TransactionHistory(isIncome = false)) },
+            onNavigateToEditor = {
+                navController.navigate(
+                    Route.TransactionEditor(
+                        transactionId = it,
+                        isIncome = false
+                    )
+                )
+            },
             modifier = Modifier.fillMaxSize()
         )
     }
@@ -50,6 +67,28 @@ fun NavGraphBuilder.transactionsFeature(
             bottomBarState = bottomBarState,
             onBack = navController::popBackStack,
             isIncome = isIncome,
+            onNavigateToEditor = { transactionId ->
+                navController.navigate(
+                    Route.TransactionEditor(
+                        transactionId = transactionId,
+                        isIncome = isIncome
+                    )
+                )
+            },
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+
+    composable<Route.TransactionEditor> {
+        val isIncome = it.toRoute<Route.TransactionEditor>().isIncome
+        val transactionId = it.toRoute<Route.TransactionEditor>().transactionId
+        TransactionEditorScreen(
+            topAppBarState = topAppBarState,
+            fabState = fabState,
+            bottomBarState = bottomBarState,
+            onNavigate = navController::popBackStack,
+            isIncome = isIncome,
+            transactionId = transactionId,
             modifier = Modifier.fillMaxSize()
         )
     }

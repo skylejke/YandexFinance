@@ -85,11 +85,11 @@ class MainActivity : ComponentActivity() {
                             }
                         },
                         floatingActionButton = {
-                            when (fabState.value) {
+                            when (val state = fabState.value) {
                                 is FabState.Showed -> {
                                     YandexFinanceFab(
                                         icon = Icons.Default.Add,
-                                        onClick = {}
+                                        onClick = state.action
                                     )
                                 }
 

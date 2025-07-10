@@ -38,6 +38,7 @@ fun TransactionHistoryScreen(
     bottomBarState: MutableState<BottomBarState>,
     onBack: () -> Unit,
     isIncome: Boolean,
+    onNavigateToEditor: (Int?) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -66,33 +67,33 @@ fun TransactionHistoryScreen(
             .build()
     }
 
-    val viewModel: TransactionHistoryViewModel = viewModel(factory = transactionHistoryComponent.transactionHistoryViewModelFactory)
+    val viewModel: TransactionHistoryViewModel =
+        viewModel(factory = transactionHistoryComponent.transactionHistoryViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 
-    if (!isOnline) {
-        NoInternetBanner(modifier = modifier)
-    } else {
-        when {
-            state.isLoading -> {
-                LoadingIndicator(modifier = modifier)
-            }
+    when {
+        isOnline.not() -> NoInternetBanner(modifier = modifier)
 
-            state.error != null -> {
-                ErrorContent(
-                    message = state.error!!.toUserMessage(),
-                    modifier = modifier
-                )
-            }
+        state.isLoading -> {
+            LoadingIndicator(modifier = modifier)
+        }
 
-            else -> {
-                TransactionHistoryScreenContent(
-                    state = state,
-                    modifier = modifier
-                )
-            }
+        state.error != null -> {
+            ErrorContent(
+                message = state.error!!.toUserMessage(),
+                modifier = modifier
+            )
+        }
+
+        else -> {
+            TransactionHistoryScreenContent(
+                state = state,
+                onNavigateToEditor = onNavigateToEditor,
+                modifier = modifier
+            )
         }
     }
 }

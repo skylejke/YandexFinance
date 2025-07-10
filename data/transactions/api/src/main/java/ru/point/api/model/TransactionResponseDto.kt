@@ -1,6 +1,8 @@
 package ru.point.api.model
 
-data class TransactionDto(
+import ru.point.dto.CategoryDto
+
+data class TransactionResponseDto(
     val id: Int,
     val account: AccountStateDto,
     val category: CategoryDto,

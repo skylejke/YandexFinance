@@ -1,6 +1,6 @@
 package ru.point.transactions.domain.model
 
-import ru.point.api.model.TransactionDto
+import ru.point.api.model.TransactionResponseDto
 
 internal data class Expense(
     val id: Int,
@@ -11,7 +11,7 @@ internal data class Expense(
     val currency: String
 )
 
-internal val TransactionDto.asExpense
+internal val TransactionResponseDto.asExpense
     get() = Expense(
         id = id,
         title = category.name,

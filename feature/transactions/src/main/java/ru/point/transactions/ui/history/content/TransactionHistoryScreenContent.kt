@@ -24,6 +24,7 @@ import java.util.Locale
 @Composable
 internal fun TransactionHistoryScreenContent(
     state: TransactionHistoryState,
+    onNavigateToEditor: (Int?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val monthFormatter = remember {
@@ -59,7 +60,9 @@ internal fun TransactionHistoryScreenContent(
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = ripple(),
-                            onClick = {}
+                            onClick = {
+                                onNavigateToEditor(transaction.id)
+                            }
                         )
                         .padding(horizontal = 16.dp)
                 )

@@ -1,18 +1,18 @@
-package ru.point.impl.model
+package ru.point.serializable
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import ru.point.api.model.CategoryDto
+import ru.point.dto.CategoryDto
 
 @Serializable
-internal data class Category(
+data class Category(
     @SerialName("id") val id: Int,
     @SerialName("name") val name: String,
     @SerialName("emoji") val emoji: String,
     @SerialName("isIncome") val isIncome: Boolean
 )
 
-internal val Category.asCategoryDto
+val Category.asCategoryDto
     get() = CategoryDto(
         id = id,
         name = name,

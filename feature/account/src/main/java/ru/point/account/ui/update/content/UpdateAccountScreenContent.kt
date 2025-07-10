@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import ru.point.account.ui.update.viewmodel.UpdateAccountAction
 import ru.point.account.ui.update.viewmodel.UpdateAccountState
 import ru.point.core.res.account.R
+import ru.point.ui.composables.EditTextDialog
 import ru.point.ui.composables.GreyHorizontalDivider
 import ru.point.utils.extensions.extractNumericBalance
 import ru.point.utils.extensions.toFormattedCurrency

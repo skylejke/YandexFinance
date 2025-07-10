@@ -38,7 +38,8 @@ fun ExpensesScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
-    onNavigate: () -> Unit,
+    onNavigateToHistory: () -> Unit,
+    onNavigateToEditor: (Int?) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -47,14 +48,18 @@ fun ExpensesScreen(
         actions = listOf(
             TopAppBarAction(
                 iconResId = R.drawable.history_icon,
-                action = onNavigate
+                action = onNavigateToHistory
             )
         )
     )
+
     fabState.value = FabState.Showed(
         icon = Icons.Default.Add,
-        action = {}
+        action = {
+            onNavigateToEditor(null)
+        }
     )
+
     bottomBarState.value = BottomBarState.Showed
 
     val expensesComponent = remember {
@@ -67,27 +72,26 @@ fun ExpensesScreen(
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 
-    if (!isOnline) {
-        NoInternetBanner(modifier = modifier)
-    } else {
-        when {
-            state.isLoading -> {
-                LoadingIndicator(modifier = modifier)
-            }
+    when {
+        isOnline.not() -> NoInternetBanner(modifier = modifier)
 
-            state.error != null -> {
-                ErrorContent(
-                    message = state.error!!.toUserMessage(),
-                    modifier = modifier
-                )
-            }
+        state.isLoading -> {
+            LoadingIndicator(modifier = modifier)
+        }
 
-            else -> {
-                ExpensesScreenContent(
-                    state = state,
-                    modifier = modifier
-                )
-            }
+        state.error != null -> {
+            ErrorContent(
+                message = state.error!!.toUserMessage(),
+                modifier = modifier
+            )
+        }
+
+        else -> {
+            ExpensesScreenContent(
+                state = state,
+                modifier = modifier,
+                onNavigateToEditor = onNavigateToEditor
+            )
         }
     }
 }

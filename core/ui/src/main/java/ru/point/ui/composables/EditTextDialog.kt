@@ -1,4 +1,4 @@
-package ru.point.account.ui.update.content
+package ru.point.ui.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,14 +29,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import ru.point.core.res.account.R
+import ru.point.core.res.common.R
 import ru.point.ui.colors.ForestGreen
 import ru.point.ui.colors.Graphite
 import ru.point.ui.colors.White
 import ru.point.utils.extensions.sanitizeDecimalInput
 
 @Composable
-internal fun EditTextDialog(
+fun EditTextDialog(
     title: String,
     initialValue: String,
     keyBoardType: KeyboardType,
@@ -53,7 +53,7 @@ internal fun EditTextDialog(
         Surface(
             shape = RoundedCornerShape(12.dp),
             tonalElevation = 8.dp,
-            color = White
+            color = MaterialTheme.colorScheme.surface
         ) {
 
             Column(modifier = Modifier.padding(20.dp)) {

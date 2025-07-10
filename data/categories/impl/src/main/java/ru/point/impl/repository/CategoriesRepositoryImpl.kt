@@ -5,6 +5,7 @@ import kotlinx.coroutines.withContext
 import ru.point.api.repository.CategoriesRepository
 import ru.point.impl.model.asStateItemDto
 import ru.point.impl.service.CategoriesService
+import ru.point.serializable.asCategoryDto
 import javax.inject.Inject
 
 /**
@@ -18,6 +19,12 @@ internal class CategoriesRepositoryImpl @Inject constructor(
     override suspend fun getCategories() = withContext(Dispatchers.IO) {
         categoriesService.getCategories().map { account ->
             (account.expenseStats + account.incomeStats).map { it.asStateItemDto }
+        }
+    }
+
+    override suspend fun getCategoriesByType(isIncome: Boolean) = withContext(Dispatchers.IO) {
+        categoriesService.getCategoriesByType(isIncome = isIncome).map { categories ->
+            categories.map { it.asCategoryDto }
         }
     }
 }

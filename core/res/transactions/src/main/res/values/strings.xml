@@ -9,4 +9,14 @@
     <string name="no_expenses_today">Нет расходов сегодня</string>
     <string name="no_transactions">У вас нет транзакций</string>
     <string name="incomes_today">Доходы сегодня</string>
+    <string name="account">Счет</string>
+    <string name="category">Статья</string>
+    <string name="amount">Сумма</string>
+    <string name="date">Дата</string>
+    <string name="time">Время</string>
+    <string name="comment">Комментарий</string>
+    <string name="my_incomes">Мои доходы</string>
+    <string name="my_expenses">Мои расходы</string>
+    <string name="update_amount">Изменить сумму</string>
+    <string name="choice_category">Выберите статью</string>
 </resources>

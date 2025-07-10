@@ -36,6 +36,7 @@ android {
 
 dependencies {
     implementation(projects.core.res.categories)
+    implementation(projects.core.models.vo)
     implementation(projects.core.utils)
     implementation(projects.core.ui)
     implementation(projects.data.categories.api)

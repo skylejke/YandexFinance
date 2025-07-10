@@ -32,6 +32,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.models.serializable)
+    implementation(projects.core.models.dto)
     implementation(projects.core.utils)
     implementation(projects.data.categories.api)
 

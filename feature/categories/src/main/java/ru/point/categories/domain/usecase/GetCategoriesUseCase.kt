@@ -1,8 +1,8 @@
 package ru.point.categories.domain.usecase
 
+import ru.point.api.model.asCategoryVo
 import ru.point.api.repository.CategoriesRepository
-import ru.point.categories.domain.model.CategoryVo
-import ru.point.categories.domain.model.asCategoryVo
+import ru.point.vo.CategoryVo
 import javax.inject.Inject
 
 internal class GetCategoriesUseCase @Inject constructor(

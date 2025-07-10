@@ -37,6 +37,7 @@ dependencies {
     implementation(projects.core.utils)
     implementation(projects.core.res.common)
 
+    implementation(libs.compose.material.dialogs)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

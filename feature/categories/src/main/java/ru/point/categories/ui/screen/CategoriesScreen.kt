@@ -56,28 +56,26 @@ fun CategoriesScreen(
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 
-    if (!isOnline) {
-        NoInternetBanner(modifier = modifier)
-    } else {
-        when {
-            state.isLoading -> {
-                LoadingIndicator(modifier = modifier)
-            }
+    when {
+        isOnline.not() -> NoInternetBanner(modifier = modifier)
 
-            state.error != null -> {
-                ErrorContent(
-                    message = state.error!!.toUserMessage(),
-                    modifier = modifier
-                )
-            }
+        state.isLoading -> {
+            LoadingIndicator(modifier = modifier)
+        }
 
-            else -> {
-                CategoriesScreenContent(
-                    state = state,
-                    onAction = viewModel::onAction,
-                    modifier = modifier
-                )
-            }
+        state.error != null -> {
+            ErrorContent(
+                message = state.error!!.toUserMessage(),
+                modifier = modifier
+            )
+        }
+
+        else -> {
+            CategoriesScreenContent(
+                state = state,
+                onAction = viewModel::onAction,
+                modifier = modifier
+            )
         }
     }
 }

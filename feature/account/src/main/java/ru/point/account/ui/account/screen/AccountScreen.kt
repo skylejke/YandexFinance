@@ -70,27 +70,25 @@ fun AccountScreen(
         viewModel.onAction(AccountAction.LoadRequested)
     }
 
-    if (!isOnline) {
-        NoInternetBanner(modifier = modifier)
-    } else {
-        when {
-            state.isLoading -> {
-                LoadingIndicator(modifier = modifier)
-            }
+    when {
+        isOnline.not() -> NoInternetBanner(modifier = modifier)
 
-            state.error != null -> {
-                ErrorContent(
-                    message = state.error!!.toUserMessage(),
-                    modifier = modifier
-                )
-            }
+        state.isLoading -> {
+            LoadingIndicator(modifier = modifier)
+        }
 
-            state.account != null -> {
-                AccountScreenContent(
-                    state = state,
-                    modifier = modifier
-                )
-            }
+        state.error != null -> {
+            ErrorContent(
+                message = state.error!!.toUserMessage(),
+                modifier = modifier
+            )
+        }
+
+        state.account != null -> {
+            AccountScreenContent(
+                state = state,
+                modifier = modifier
+            )
         }
     }
 }

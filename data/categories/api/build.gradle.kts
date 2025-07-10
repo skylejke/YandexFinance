@@ -30,7 +30,8 @@ android {
 }
 
 dependencies {
-
+    implementation(projects.core.models.dto)
+    implementation(projects.core.models.vo)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

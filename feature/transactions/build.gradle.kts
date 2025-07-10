@@ -35,10 +35,13 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.models.dto)
+    implementation(projects.core.models.vo)
     implementation(projects.core.res.transactions)
     implementation(projects.core.utils)
     implementation(projects.core.ui)
     implementation(projects.data.transactions.api)
+    implementation(projects.data.categories.api)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

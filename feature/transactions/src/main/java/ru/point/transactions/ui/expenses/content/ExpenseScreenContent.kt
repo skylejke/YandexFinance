@@ -23,6 +23,7 @@ import ru.point.ui.composables.TotalToday
 @Composable
 internal fun ExpensesScreenContent(
     state: ExpensesState,
+    onNavigateToEditor: (Int?) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (state.expenses.isEmpty()) {
@@ -58,7 +59,9 @@ internal fun ExpensesScreenContent(
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = ripple(),
-                            onClick = {}
+                            onClick = {
+                                onNavigateToEditor(expense.id)
+                            }
                         )
                         .padding(horizontal = 16.dp)
                 )

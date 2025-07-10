@@ -14,7 +14,6 @@ import ru.point.categories.ui.viewmodel.CategoriesState
 import ru.point.core.res.categories.R
 import ru.point.ui.colors.LavenderMist
 import ru.point.ui.composables.GreyHorizontalDivider
-import ru.point.utils.extensions.initials
 
 @Composable
 internal fun CategoriesScreenContent(
@@ -50,7 +49,7 @@ internal fun CategoriesScreenContent(
 
                 CategoryCard(
                     contentText = it.name,
-                    emojiIcon = it.emoji ?: it.name.initials(),
+                    emojiIcon = it.emoji,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(70.dp)
