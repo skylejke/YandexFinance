@@ -3,6 +3,7 @@ package ru.point.transactions.ui.expenses.screen
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
@@ -15,6 +16,7 @@ import ru.point.transactions.R
 import ru.point.transactions.di.component.DaggerExpensesComponent
 import ru.point.transactions.di.deps.TransactionDepsStore
 import ru.point.transactions.ui.expenses.content.ExpensesScreenContent
+import ru.point.transactions.ui.expenses.viewmodel.ExpensesAction
 import ru.point.transactions.ui.expenses.viewmodel.ExpensesViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
@@ -69,6 +71,10 @@ fun ExpensesScreen(
     val viewModel = viewModel<ExpensesViewModel>(factory = expensesComponent.expensesViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(ExpensesAction.LoadRequested)
+    }
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 

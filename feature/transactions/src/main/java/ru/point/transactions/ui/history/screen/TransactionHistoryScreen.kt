@@ -1,6 +1,7 @@
 package ru.point.transactions.ui.history.screen
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
@@ -13,6 +14,7 @@ import ru.point.transactions.R
 import ru.point.transactions.di.component.DaggerTransactionHistoryComponent
 import ru.point.transactions.di.deps.TransactionDepsProvider
 import ru.point.transactions.ui.history.content.TransactionHistoryScreenContent
+import ru.point.transactions.ui.history.viewmodel.TransactionHistoryAction
 import ru.point.transactions.ui.history.viewmodel.TransactionHistoryViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
@@ -71,6 +73,10 @@ fun TransactionHistoryScreen(
         viewModel(factory = transactionHistoryComponent.transactionHistoryViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(TransactionHistoryAction.LoadRequested)
+    }
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 

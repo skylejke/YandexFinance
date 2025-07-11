@@ -42,6 +42,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.data.transactions.api)
     implementation(projects.data.categories.api)
+    implementation(projects.data.account.api)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
@@ -50,11 +51,13 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.lifecycle.viewmodel.compose.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
+    debugImplementation(libs.androidx.ui.tooling)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }

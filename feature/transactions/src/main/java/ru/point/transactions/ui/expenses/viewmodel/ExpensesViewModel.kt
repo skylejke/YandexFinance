@@ -1,7 +1,5 @@
 package ru.point.transactions.ui.expenses.viewmodel
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.point.transactions.domain.usecase.GetExpensesUseCase
 import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
@@ -17,7 +15,7 @@ internal class ExpensesViewModel @Inject constructor(private val getExpensesUseC
     MviViewModel<ExpensesState, ExpensesAction, Any>(initialState = ExpensesState()) {
 
     init {
-        loadIncomes()
+        onHandeLoadExpenses()
     }
 
     override fun reduce(action: ExpensesAction, state: ExpensesState): ExpensesState {
@@ -28,10 +26,8 @@ internal class ExpensesViewModel @Inject constructor(private val getExpensesUseC
         }
     }
 
-    private fun loadIncomes() {
-        viewModelScope.launch {
-            onAction(ExpensesAction.LoadRequested)
-
+    private fun onHandeLoadExpenses() {
+        handleAction<ExpensesAction.LoadRequested> {
             getExpensesUseCase().fold(
                 onSuccess = { expenses ->
                     onAction(ExpensesAction.LoadSuccess(expenses = expenses))

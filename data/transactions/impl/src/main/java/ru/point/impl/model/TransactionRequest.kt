@@ -3,6 +3,7 @@ package ru.point.impl.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import ru.point.api.model.TransactionRequestDto
+import ru.point.core.utils.BuildConfig
 
 @Serializable
 internal data class TransactionRequest(
@@ -15,9 +16,9 @@ internal data class TransactionRequest(
 
 internal val TransactionRequestDto.asTransactionRequest
     get() = TransactionRequest(
-        accountId = accountId,
+        accountId = BuildConfig.ACCOUNT_ID.toInt(),
         categoryId = categoryId,
         amount = amount,
         transactionDate = transactionDate,
-        comment = comment,
+        comment = comment?.ifBlank { null },
     )

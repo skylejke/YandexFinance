@@ -53,7 +53,7 @@ fun EditTextDialog(
         Surface(
             shape = RoundedCornerShape(12.dp),
             tonalElevation = 8.dp,
-            color = MaterialTheme.colorScheme.surface
+            color = MaterialTheme.colorScheme.background
         ) {
 
             Column(modifier = Modifier.padding(20.dp)) {

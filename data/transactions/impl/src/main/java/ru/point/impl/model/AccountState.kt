@@ -14,6 +14,7 @@ internal data class AccountState(
 
 internal val AccountState.asAccountStateDto
     get() = AccountStateDto(
+        id = id,
         name = name,
         balance = balance,
         currency = currency,

@@ -1,7 +1,5 @@
 package ru.point.transactions.ui.history.viewmodel
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.point.transactions.domain.usecase.GetTransactionsHistoryUseCase
 import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
@@ -20,7 +18,7 @@ internal class TransactionHistoryViewModel @Inject constructor(
 ) : MviViewModel<TransactionHistoryState, TransactionHistoryAction, Any>(initialState = TransactionHistoryState()) {
 
     init {
-        loadTransactionsHistory()
+        onHandleLoadTransactionsHistory()
     }
 
     override fun reduce(action: TransactionHistoryAction, state: TransactionHistoryState): TransactionHistoryState {
@@ -37,10 +35,8 @@ internal class TransactionHistoryViewModel @Inject constructor(
         }
     }
 
-    private fun loadTransactionsHistory() {
-        viewModelScope.launch {
-            onAction(TransactionHistoryAction.LoadRequested)
-
+    private fun onHandleLoadTransactionsHistory() {
+        handleAction<TransactionHistoryAction.LoadRequested> {
             getTransactionsHistoryUseCase(isIncome).fold(
                 onSuccess = { transactions ->
                     onAction(TransactionHistoryAction.LoadSuccess(transactions = transactions))

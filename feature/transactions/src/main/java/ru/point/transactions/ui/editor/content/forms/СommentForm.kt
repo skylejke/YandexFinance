@@ -1,5 +1,6 @@
 package ru.point.transactions.ui.editor.content.forms
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -45,6 +46,7 @@ internal fun CommentForm(
                     cursorColor = ForestGreen,
                 ),
                 singleLine = true,
+                modifier = Modifier.fillMaxWidth()
             )
         }
     )

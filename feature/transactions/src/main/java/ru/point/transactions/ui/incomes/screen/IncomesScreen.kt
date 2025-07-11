@@ -3,6 +3,7 @@ package ru.point.transactions.ui.incomes.screen
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.runtime.collectAsState
@@ -15,6 +16,7 @@ import ru.point.transactions.R
 import ru.point.transactions.di.component.DaggerIncomesComponent
 import ru.point.transactions.di.deps.TransactionDepsProvider
 import ru.point.transactions.ui.incomes.content.IncomesScreenContent
+import ru.point.transactions.ui.incomes.viewmodel.IncomesAction
 import ru.point.transactions.ui.incomes.viewmodel.IncomesViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
@@ -69,6 +71,10 @@ fun IncomesScreen(
     val viewModel = viewModel<IncomesViewModel>(factory = incomesComponent.incomesViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(IncomesAction.LoadRequested)
+    }
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
 

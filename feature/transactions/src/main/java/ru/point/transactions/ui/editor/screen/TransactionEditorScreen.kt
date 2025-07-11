@@ -13,6 +13,7 @@ import ru.point.transactions.R
 import ru.point.transactions.di.component.DaggerTransactionEditorComponent
 import ru.point.transactions.di.deps.TransactionDepsStore
 import ru.point.transactions.ui.editor.content.TransactionEditorScreenContent
+import ru.point.transactions.ui.editor.viewmodel.TransactionEditorAction
 import ru.point.transactions.ui.editor.viewmodel.TransactionEditorViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
@@ -36,21 +37,6 @@ fun TransactionEditorScreen(
     modifier: Modifier = Modifier,
 ) {
 
-    topAppBarState.value = TopAppBarState(
-        titleRes = if (isIncome) R.string.my_incomes else R.string.my_expenses,
-        actions = listOf(
-            TopAppBarAction(
-                iconResId = R.drawable.check_icon,
-                action = onNavigate
-            )
-        ),
-        onBack = onNavigate
-    )
-
-    fabState.value = FabState.Hidden
-
-    bottomBarState.value = BottomBarState.Hidden
-
     val transactionEditorComponent = remember {
         DaggerTransactionEditorComponent
             .builder()
@@ -63,6 +49,26 @@ fun TransactionEditorScreen(
     val viewModel =
         viewModel<TransactionEditorViewModel>(factory = transactionEditorComponent.transactionEditorViewModelFactory)
 
+    topAppBarState.value = TopAppBarState(
+        titleRes = if (isIncome) R.string.my_incomes else R.string.my_expenses,
+        actions = listOf(
+            TopAppBarAction(
+                iconResId = R.drawable.check_icon,
+                action = {
+                    viewModel.onAction(
+                        if (transactionId != null) TransactionEditorAction.Update.OnUpdatePressed
+                        else TransactionEditorAction.Create.OnCreatePressed
+                    )
+                }
+            )
+        ),
+        onBack = onNavigate
+    )
+
+    fabState.value = FabState.Hidden
+
+    bottomBarState.value = BottomBarState.Hidden
+
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     val isOnline by LocalInternetTracker.current.online.collectAsState()
@@ -70,16 +76,19 @@ fun TransactionEditorScreen(
     when {
         isOnline.not() -> NoInternetBanner(modifier = modifier)
 
-        state.isLoading -> LoadingIndicator(modifier = modifier)
+        state.form.isInitialLoading -> LoadingIndicator(modifier = modifier)
 
-        state.error != null -> ErrorContent(
-            message = state.error!!.toUserMessage(),
+        state.form.error != null -> ErrorContent(
+            message = state.form.error!!.toUserMessage(),
             modifier = modifier
         )
 
         else -> TransactionEditorScreenContent(
             state = state,
+            events = viewModel.events,
             onAction = viewModel::onAction,
+            onNavigate = onNavigate,
+            transactionId = transactionId,
             modifier = modifier
         )
     }

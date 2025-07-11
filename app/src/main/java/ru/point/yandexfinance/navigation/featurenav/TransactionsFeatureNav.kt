@@ -86,7 +86,7 @@ fun NavGraphBuilder.transactionsFeature(
             topAppBarState = topAppBarState,
             fabState = fabState,
             bottomBarState = bottomBarState,
-            onNavigate = navController::popBackStack,
+            onNavigate = navController::navigateUp,
             isIncome = isIncome,
             transactionId = transactionId,
             modifier = Modifier.fillMaxSize()

@@ -1,6 +1,5 @@
 package ru.point.account.ui.update.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.point.account.domain.model.AccountVo
@@ -48,7 +47,6 @@ internal class UpdateAccountViewModel @Inject constructor(
     private fun handleOnUpdate() {
         handleAction<UpdateAccountAction.OnUpdatePressed> {
             val localState = state.value
-            Log.d("UpdateAccountViewModel", "handleOnUpdate: ${state.value.balance.extractNumericBalance()}")
             updateAccountUseCase(
                 account = AccountVo(
                     name = localState.name,

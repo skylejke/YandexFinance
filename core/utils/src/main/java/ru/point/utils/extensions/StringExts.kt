@@ -83,12 +83,12 @@ private fun String.normalizeLeadingZeros(): String {
     }
 }
 
-fun String.toTransactionDate(): String {
+fun String.formatAsDate(): String {
     return ZonedDateTime.parse(this)
         .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
 }
 
-fun String.toTransactionTime(): String {
+fun String.formatAsTime(): String {
     return ZonedDateTime.parse(this)
         .format(DateTimeFormatter.ofPattern("HH:mm"))
 }

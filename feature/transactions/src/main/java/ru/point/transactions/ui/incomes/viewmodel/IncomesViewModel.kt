@@ -1,7 +1,5 @@
 package ru.point.transactions.ui.incomes.viewmodel
 
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.point.transactions.domain.usecase.GetIncomesUseCase
 import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
@@ -17,7 +15,7 @@ internal class IncomesViewModel @Inject constructor(private val getIncomesUseCas
     MviViewModel<IncomesState, IncomesAction, Any>(initialState = IncomesState()) {
 
     init {
-        loadIncomes()
+        onHandleLoadIncomes()
     }
 
     override fun reduce(action: IncomesAction, state: IncomesState): IncomesState {
@@ -28,10 +26,8 @@ internal class IncomesViewModel @Inject constructor(private val getIncomesUseCas
         }
     }
 
-    private fun loadIncomes() {
-        viewModelScope.launch {
-            onAction(IncomesAction.LoadRequested)
-
+    private fun onHandleLoadIncomes() {
+        handleAction<IncomesAction.LoadRequested> {
             getIncomesUseCase().fold(
                 onSuccess = { incomes ->
                     onAction(IncomesAction.LoadSuccess(incomes = incomes))
