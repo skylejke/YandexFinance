@@ -23,4 +23,7 @@ sealed interface Route {
 
     @Serializable
     data class TransactionHistory(val isIncome: Boolean) : Route
+
+    @Serializable
+    data class TransactionEditor(val transactionId: Int?, val isIncome: Boolean): Route
 }

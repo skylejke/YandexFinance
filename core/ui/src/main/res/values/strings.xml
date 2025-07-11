@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="check_internet">Проверьте интернет-соединение</string>
-    <string name="total">Всего</string>
-    <string name="start">Начало</string>
-    <string name="end">Конец</string>
-</resources>

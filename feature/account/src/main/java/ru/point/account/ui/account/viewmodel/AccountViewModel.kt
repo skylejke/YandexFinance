@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Выполняет вызов [GetAccountUseCase], обрабатывает результаты и преобразует их в UI-состояние
  * с помощью паттерна MVI.
  */
-class AccountViewModel @Inject constructor(private val getAccountUseCase: GetAccountUseCase) :
+internal class AccountViewModel @Inject constructor(private val getAccountUseCase: GetAccountUseCase) :
     MviViewModel<AccountState, AccountAction, Any>(AccountState()) {
 
     init {

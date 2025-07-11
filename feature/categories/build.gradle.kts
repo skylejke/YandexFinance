@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.categories"
+    namespace = "ru.point.feature.categories"
     compileSdk = 35
 
     defaultConfig {
@@ -35,9 +35,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data:api"))
-    implementation(project(":core:utils"))
-    implementation(project(":core:ui"))
+    implementation(projects.core.res.categories)
+    implementation(projects.core.models.vo)
+    implementation(projects.core.utils)
+    implementation(projects.core.ui)
+    implementation(projects.data.categories.api)
+
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

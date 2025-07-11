@@ -16,9 +16,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import ru.point.account.R
 import ru.point.account.ui.update.viewmodel.UpdateAccountAction
 import ru.point.account.ui.update.viewmodel.UpdateAccountState
+import ru.point.core.res.account.R
+import ru.point.ui.composables.EditTextDialog
 import ru.point.ui.composables.GreyHorizontalDivider
 import ru.point.utils.extensions.extractNumericBalance
 import ru.point.utils.extensions.toFormattedCurrency

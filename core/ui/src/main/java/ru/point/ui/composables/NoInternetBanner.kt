@@ -12,7 +12,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ru.point.ui.R
+import ru.point.core.res.common.R
 
 @Composable
 fun NoInternetBanner(modifier: Modifier = Modifier) {

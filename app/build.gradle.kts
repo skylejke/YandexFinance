@@ -48,15 +48,21 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data:api"))
-    implementation(project(":core:data:impl"))
-    implementation(project(":core:ui"))
-    implementation(project(":core:utils"))
+    implementation(projects.core.network)
+    implementation(projects.core.ui)
+    implementation(projects.core.utils)
 
-    implementation(project(":feature:account"))
-    implementation(project(":feature:categories"))
-    implementation(project(":feature:settings"))
-    implementation(project(":feature:transactions"))
+    implementation(projects.data.account.api)
+    implementation(projects.data.categories.api)
+    implementation(projects.data.transactions.api)
+    implementation(projects.data.account.impl)
+    implementation(projects.data.categories.impl)
+    implementation(projects.data.transactions.impl)
+
+    implementation(projects.feature.account)
+    implementation(projects.feature.categories)
+    implementation(projects.feature.settings)
+    implementation(projects.feature.transactions)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

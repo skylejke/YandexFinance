@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.utils"
+    namespace = "ru.point.core.utils"
     compileSdk = 35
 
     defaultConfig {
@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.bundles.dagger)
     implementation(libs.retrofit)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

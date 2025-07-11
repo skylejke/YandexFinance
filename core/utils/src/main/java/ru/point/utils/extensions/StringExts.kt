@@ -2,6 +2,7 @@ package ru.point.utils.extensions
 
 import java.math.BigDecimal
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 fun String.startsWithEmoji(): Boolean = firstOrNull()?.isEmoji() == true
@@ -80,4 +81,14 @@ private fun String.normalizeLeadingZeros(): String {
     } else {
         intPart
     }
+}
+
+fun String.formatAsDate(): String {
+    return ZonedDateTime.parse(this)
+        .format(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+}
+
+fun String.formatAsTime(): String {
+    return ZonedDateTime.parse(this)
+        .format(DateTimeFormatter.ofPattern("HH:mm"))
 }

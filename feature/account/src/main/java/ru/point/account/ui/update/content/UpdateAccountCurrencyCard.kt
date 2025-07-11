@@ -5,11 +5,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import ru.point.account.R
+import ru.point.core.res.account.R
 import ru.point.ui.composables.BaseListItem
 
 @Composable
-fun UpdateAccountCurrencyCard(accountCurrency: String, modifier: Modifier = Modifier){
+internal fun UpdateAccountCurrencyCard(accountCurrency: String, modifier: Modifier = Modifier){
     BaseListItem(
         modifier = modifier,
         content = {

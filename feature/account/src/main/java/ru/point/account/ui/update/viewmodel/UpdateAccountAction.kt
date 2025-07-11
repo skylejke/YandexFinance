@@ -3,7 +3,7 @@ package ru.point.account.ui.update.viewmodel
 import ru.point.account.domain.model.AccountVo
 import ru.point.utils.model.AppError
 
-sealed interface UpdateAccountAction {
+internal sealed interface UpdateAccountAction {
     data object LoadRequested : UpdateAccountAction
     data class LoadSuccess(val account: AccountVo) : UpdateAccountAction
     data class LoadError(val error: AppError) : UpdateAccountAction

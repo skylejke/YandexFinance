@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.account"
+    namespace = "ru.point.feature.account"
     compileSdk = 35
 
     defaultConfig {
@@ -35,9 +35,10 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data:api"))
-    implementation(project(":core:utils"))
-    implementation(project(":core:ui"))
+    implementation(projects.core.res.account)
+    implementation(projects.core.utils)
+    implementation(projects.core.ui)
+    implementation(projects.data.account.api)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

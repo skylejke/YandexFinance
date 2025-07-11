@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import ru.point.settings.R
+import ru.point.core.res.settings.R
 import ru.point.ui.composables.BaseListItem
 
 @Composable
@@ -26,7 +26,7 @@ internal fun SettingCard(
         },
         trail = {
             Icon(
-                imageVector = ImageVector.vectorResource(R.drawable.trailing_icon),
+                imageVector = ImageVector.vectorResource(R.drawable.settings_trailing_icon),
                 contentDescription = stringResource(settingTitleResId)
             )
         }

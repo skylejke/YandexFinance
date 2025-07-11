@@ -21,7 +21,7 @@ fun TransactionCardContent(
             style = MaterialTheme.typography.bodyLarge,
             color = Graphite
         )
-        if (subtitle != null) {
+        if (!subtitle.isNullOrBlank()) {
             Text(
                 text = subtitle,
                 style = MaterialTheme.typography.bodyMedium,

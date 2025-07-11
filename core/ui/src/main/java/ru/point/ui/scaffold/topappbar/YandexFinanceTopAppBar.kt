@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import ru.point.ui.R
+import ru.point.core.res.common.R
 import ru.point.ui.colors.CharcoalGrey
 import ru.point.ui.colors.Graphite
 import ru.point.ui.colors.MintGreen
@@ -35,7 +35,7 @@ fun YandexFinanceTopAppBar(
         actions = {
             topAppBarState.actions.forEach { action ->
                 ActionIcon(
-                    icon = action.icon,
+                    icon = ImageVector.vectorResource(action.iconResId),
                     action = action.action
                 )
             }

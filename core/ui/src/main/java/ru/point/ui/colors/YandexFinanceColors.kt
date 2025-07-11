@@ -12,6 +12,8 @@ val LavenderGray = Color(0xFFCAC4D0)
 val GhostGray = Color(0x4D3C3C43)
 val ForestGreen = Color(0xFF306A42)
 val White = Color(0xFFFFFFFF)
+
+val CoralRed = Color(0xFFE46962)
 //val DeepGreen = Color(0xFF15512C)
 //val TealGreen = Color(0xFF1D6B50)
 //val DarkEmerald = Color(0xFF00513A)

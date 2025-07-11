@@ -15,10 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.point.categories.R
+import ru.point.core.res.categories.R
 
 @Composable
-fun NothingFound(modifier: Modifier = Modifier) {
+internal fun NothingFound(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center

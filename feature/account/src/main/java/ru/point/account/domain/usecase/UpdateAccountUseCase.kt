@@ -5,7 +5,7 @@ import ru.point.account.domain.model.asAccountDto
 import ru.point.api.repository.AccountRepository
 import javax.inject.Inject
 
-class UpdateAccountUseCase @Inject constructor(
+internal class UpdateAccountUseCase @Inject constructor(
     private val accountRepository: AccountRepository
 ) {
 

@@ -1,9 +1,9 @@
 package ru.point.categories.ui.viewmodel
 
 import ru.point.utils.model.AppError
-import ru.point.categories.domain.model.CategoryVo
+import ru.point.vo.CategoryVo
 
-sealed interface CategoriesAction {
+internal sealed interface CategoriesAction {
     data object LoadRequested : CategoriesAction
     data class LoadSuccess(val categories: List<CategoryVo>) : CategoriesAction
     data class LoadError(val error: AppError) : CategoriesAction
