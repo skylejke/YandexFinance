@@ -11,12 +11,17 @@ internal class GetTransactionsHistoryUseCase @Inject constructor(
     private val transactionsRepository: TransactionsRepository
 ) {
 
-    suspend operator fun invoke(isIncome: Boolean) = transactionsRepository.getTransactionsForPeriod(
-        startDate = LocalDate.now().withDayOfMonth(1).format(DateTimeFormatter.ISO_DATE),
-        endDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE)
-    ).map { transactionResponses ->
-        transactionResponses.filter { it.category.isIncome == isIncome }
-            .sortedByDescending { Instant.parse(it.transactionDate) }
-            .map { it.asTransactionHistoryItem }
-    }
+    suspend operator fun invoke(
+        isIncome: Boolean,
+        startDate: String = LocalDate.now().withDayOfMonth(1).format(DateTimeFormatter.ISO_DATE),
+        endDate: String = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
+    ) =
+        transactionsRepository.getTransactionsForPeriod(
+            startDate = startDate,
+            endDate = endDate
+        ).map { transactionResponses ->
+            transactionResponses.filter { it.category.isIncome == isIncome }
+                .sortedByDescending { Instant.parse(it.transactionDate) }
+                .map { it.asTransactionHistoryItem }
+        }
 }

@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import ru.point.transactions.ui.analysis.screen.AnalysisScreen
 import ru.point.transactions.ui.editor.screen.TransactionEditorScreen
 import ru.point.transactions.ui.expenses.screen.ExpensesScreen
 import ru.point.transactions.ui.history.screen.TransactionHistoryScreen
@@ -75,6 +76,9 @@ fun NavGraphBuilder.transactionsFeature(
                     )
                 )
             },
+            onNavigateToAnalysis = {
+                navController.navigate(Route.Analysis(isIncome))
+            },
             modifier = Modifier.fillMaxSize()
         )
     }
@@ -89,6 +93,26 @@ fun NavGraphBuilder.transactionsFeature(
             onNavigate = navController::navigateUp,
             isIncome = isIncome,
             transactionId = transactionId,
+            modifier = Modifier.fillMaxSize()
+        )
+    }
+
+    composable<Route.Analysis> {
+        val isIncome = it.toRoute<Route.TransactionHistory>().isIncome
+        AnalysisScreen(
+            topAppBarState = topAppBarState,
+            fabState = fabState,
+            bottomBarState = bottomBarState,
+            onBack = navController::navigateUp,
+            onNavigateToEditor = { transactionId ->
+                navController.navigate(
+                    Route.TransactionEditor(
+                        transactionId = transactionId,
+                        isIncome = isIncome
+                    )
+                )
+            },
+            isIncome = isIncome,
             modifier = Modifier.fillMaxSize()
         )
     }

@@ -7,6 +7,7 @@ import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
@@ -26,8 +27,29 @@ import java.time.format.DateTimeFormatter
 fun YandexFinanceDatePickerDialog(
     onDateSelected: (String) -> Unit,
     onDismiss: () -> Unit,
+    minDateMillis: Long? = null,
+    maxDateMillis: Long? = null,
 ) {
-    val datePickerState = rememberDatePickerState()
+
+    val datePickerState = rememberDatePickerState(
+        initialSelectedDateMillis = null,
+        selectableDates = object : SelectableDates {
+            override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+                val afterMin = minDateMillis?.let { utcTimeMillis >= it } ?: true
+                val beforeMax = maxDateMillis?.let { utcTimeMillis <= it } ?: true
+                return afterMin && beforeMax
+            }
+            override fun isSelectableYear(year: Int): Boolean {
+                val afterMinYear = minDateMillis
+                    ?.let { Instant.ofEpochMilli(it).atZone(ZoneId.systemDefault()).year <= year }
+                    ?: true
+                val beforeMaxYear = maxDateMillis
+                    ?.let { Instant.ofEpochMilli(it).atZone(ZoneId.systemDefault()).year >= year }
+                    ?: true
+                return afterMinYear && beforeMaxYear
+            }
+        }
+    )
 
     DatePickerDialog(
         colors = DatePickerDefaults.colors(

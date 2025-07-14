@@ -2,23 +2,25 @@ package ru.point.transactions.domain.model
 
 import ru.point.api.model.TransactionResponseDto
 
-internal data class TransactionHistoryItem(
+internal data class AnalysisTransaction(
     val id: Int,
     val title: String,
-    val subtitle: String?,
+    val comment: String?,
     val emojiIcon: String,
     val amount: String,
     val currency: String,
-    val transactionDate: String
+    val transactionDate: String,
+    val part: String,
 )
 
-internal val TransactionResponseDto.asTransactionHistoryItem
-    get() = TransactionHistoryItem(
+internal fun TransactionResponseDto.asAnalysisTransaction(part: String) =
+    AnalysisTransaction(
         id = id,
         title = category.name,
-        subtitle = comment,
+        comment = comment,
         emojiIcon = category.emoji,
         amount = amount,
         currency = account.currency,
-        transactionDate = transactionDate
+        transactionDate = transactionDate,
+        part = part
     )

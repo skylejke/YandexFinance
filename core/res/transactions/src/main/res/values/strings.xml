@@ -7,7 +7,7 @@
     <string name="my_history">Моя история</string>
     <string name="no_incomes_today">Нет доходов сегодня</string>
     <string name="no_expenses_today">Нет расходов сегодня</string>
-    <string name="no_transactions">У вас нет транзакций</string>
+    <string name="no_transactions">У вас нет транзакций за текущий период</string>
     <string name="incomes_today">Доходы сегодня</string>
     <string name="account">Счет</string>
     <string name="category">Статья</string>
@@ -29,4 +29,7 @@
     <string name="delete_transaction_title">Вы уверены что хотите удалить транзакцию?</string>
     <string name="delete_transaction">Удалить транзакцию</string>
     <string name="successfully_deleted_transaction">Транзакция успешно удалена</string>
+    <string name="analysis">Анализ</string>
+    <string name="period_start">Период: начало</string>
+    <string name="period_end">Период: конец</string>
 </resources>
