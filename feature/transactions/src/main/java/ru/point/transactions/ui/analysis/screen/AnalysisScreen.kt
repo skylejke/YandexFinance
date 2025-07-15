@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -18,8 +17,7 @@ import ru.point.transactions.ui.analysis.viewmodel.AnalysisAction
 import ru.point.transactions.ui.analysis.viewmodel.AnalysisViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
-import ru.point.ui.composables.NoInternetBanner
-import ru.point.ui.di.LocalInternetTracker
+import ru.point.ui.composables.RequiredInternetContent
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
@@ -62,29 +60,31 @@ fun AnalysisScreen(
         viewModel.onAction(AnalysisAction.InitialLoadRequested)
     }
 
-    val isOnline by LocalInternetTracker.current.online.collectAsState()
+    RequiredInternetContent(
+        modifier = modifier,
+        content = {
+            when {
 
-    when {
-        isOnline.not() -> NoInternetBanner(modifier = modifier)
+                state.isLoading -> {
+                    LoadingIndicator(modifier = modifier)
+                }
 
-        state.isLoading -> {
-            LoadingIndicator(modifier = modifier)
+                state.error != null -> {
+                    ErrorContent(
+                        message = state.error!!.toUserMessage(),
+                        modifier = modifier
+                    )
+                }
+
+                else -> {
+                    AnalysisScreenContent(
+                        state = state,
+                        onAction = viewModel::onAction,
+                        onNavigateToEditor = onNavigateToEditor,
+                        modifier = modifier
+                    )
+                }
+            }
         }
-
-        state.error != null -> {
-            ErrorContent(
-                message = state.error!!.toUserMessage(),
-                modifier = modifier
-            )
-        }
-
-        else -> {
-            AnalysisScreenContent(
-                state = state,
-                onAction = viewModel::onAction,
-                onNavigateToEditor = onNavigateToEditor,
-                modifier = modifier
-            )
-        }
-    }
+    )
 }

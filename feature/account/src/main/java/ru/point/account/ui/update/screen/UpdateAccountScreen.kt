@@ -1,11 +1,9 @@
 package ru.point.account.ui.update.screen
 
-import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -21,12 +19,12 @@ import ru.point.account.ui.update.viewmodel.UpdateAccountViewModel
 import ru.point.core.res.account.R
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
-import ru.point.ui.composables.NoInternetBanner
-import ru.point.ui.di.LocalInternetTracker
+import ru.point.ui.composables.RequiredInternetContent
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
+import ru.point.utils.extensions.showToast
 import ru.point.utils.model.toUserMessage
 
 @NonRestartableComposable
@@ -70,49 +68,40 @@ fun UpdateAccountScreen(
         viewModel.events.collect { event ->
             when (event) {
                 UpdateAccountEvent.ShowSuccessToastAndGoBack -> {
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.successfully_update_account),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast(context = context, messageResId = R.string.successfully_update_account)
                     onBack()
                 }
 
                 UpdateAccountEvent.ShowErrorToast -> {
-                    Toast.makeText(
-                        context,
-                        context.getString(R.string.something_went_wrong),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showToast(context = context, messageResId = R.string.something_went_wrong)
                 }
             }
         }
     }
 
-    val isOnline by LocalInternetTracker.current.online.collectAsState()
+    RequiredInternetContent(
+        modifier = modifier,
+        content = {
+            when {
+                state.isLoading -> {
+                    LoadingIndicator(modifier = modifier)
+                }
 
-    if (!isOnline) {
-        NoInternetBanner(modifier = modifier)
-    } else {
-        when {
-            state.isLoading -> {
-                LoadingIndicator(modifier = modifier)
-            }
+                state.error != null -> {
+                    ErrorContent(
+                        message = state.error!!.toUserMessage(),
+                        modifier = modifier
+                    )
+                }
 
-            state.error != null -> {
-                ErrorContent(
-                    message = state.error!!.toUserMessage(),
-                    modifier = modifier
-                )
-            }
-
-            else -> {
-                UpdateAccountScreenContent(
-                    state = state,
-                    onAction = viewModel::onAction,
-                    modifier = modifier
-                )
+                else -> {
+                    UpdateAccountScreenContent(
+                        state = state,
+                        onAction = viewModel::onAction,
+                        modifier = modifier
+                    )
+                }
             }
         }
-    }
+    )
 }
