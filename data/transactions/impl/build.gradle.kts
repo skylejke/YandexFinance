@@ -36,12 +36,18 @@ dependencies {
     implementation(projects.core.models.dto)
     implementation(projects.core.utils)
     implementation(projects.data.transactions.api)
+    implementation(projects.data.database)
+
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)
     implementation(libs.retrofit)
     implementation(libs.retrofit2.kotlinx.serialization.converter)
+
+    implementation(libs.kotlinx.serialization.json)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

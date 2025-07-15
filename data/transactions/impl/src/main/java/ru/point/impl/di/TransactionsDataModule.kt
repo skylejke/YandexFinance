@@ -5,8 +5,10 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.create
 import ru.point.api.repository.TransactionsRepository
+import ru.point.database.dao.TransactionsDao
 import ru.point.impl.repository.TransactionsRepositoryImpl
 import ru.point.impl.service.TransactionsService
+import ru.point.utils.network.InternetTracker
 import javax.inject.Singleton
 
 @Module
@@ -17,6 +19,14 @@ class TransactionsDataModule {
         retrofit.create<TransactionsService>()
 
     @[Provides Singleton]
-    internal fun provideTransactionsRepository(transactionsService: TransactionsService): TransactionsRepository =
-        TransactionsRepositoryImpl(transactionsService = transactionsService)
+    internal fun provideTransactionsRepository(
+        transactionsService: TransactionsService,
+        transactionsDao: TransactionsDao,
+        internetTracker: InternetTracker
+    ): TransactionsRepository =
+        TransactionsRepositoryImpl(
+            transactionsService = transactionsService,
+            transactionsDao = transactionsDao,
+            internetTracker = internetTracker,
+        )
 }

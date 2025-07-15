@@ -36,6 +36,10 @@ dependencies {
     implementation(projects.core.models.dto)
     implementation(projects.core.utils)
     implementation(projects.data.categories.api)
+    implementation(projects.data.database)
+
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

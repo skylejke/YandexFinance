@@ -2,6 +2,7 @@ package ru.point.ui.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,20 +25,26 @@ import ru.point.ui.colors.Mint
 
 @Composable
 fun NoInternetBanner(modifier: Modifier = Modifier) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceEvenly
-    ) {
-        Icon(
-            imageVector = ImageVector.vectorResource(R.drawable.no_internet_icon),
-            contentDescription = null
-        )
-        Spacer(modifier = Modifier.width(12.dp))
-        Text(
-            text = stringResource(R.string.check_internet),
-            style = MaterialTheme.typography.bodyLarge
-        )
+    Column {
+        GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
+
+        Row(
+            modifier = modifier,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.no_internet_icon),
+                contentDescription = null
+            )
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                text = stringResource(R.string.check_internet),
+                style = MaterialTheme.typography.bodyLarge
+            )
+        }
+
+        GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
     }
 }
 

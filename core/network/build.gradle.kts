@@ -43,6 +43,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.utils)
+
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)

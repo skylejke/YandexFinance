@@ -1,12 +1,17 @@
 package ru.point.api.model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import ru.point.vo.CategoryVo
 
+@Entity(tableName = "categories")
 data class StateItemDto(
-    val categoryId: Int,
-    val categoryName: String,
-    val emoji: String,
-    val amount: String,
+    @PrimaryKey
+    @ColumnInfo("category_id") val categoryId: Int,
+    @ColumnInfo("category_name") val categoryName: String,
+    @ColumnInfo("emoji") val emoji: String,
+    @ColumnInfo("amount") val amount: String,
 )
 
 val StateItemDto.asCategoryVo

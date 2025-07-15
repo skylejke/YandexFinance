@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.point.data.categories.api"
+    namespace = "ru.point.data.database"
     compileSdk = 35
 
     defaultConfig {
@@ -31,8 +31,14 @@ android {
 }
 
 dependencies {
+    implementation(projects.data.categories.api)
+    implementation(projects.data.account.api)
+    implementation(projects.data.transactions.api)
     implementation(projects.core.models.dto)
-    implementation(projects.core.models.vo)
+
+    implementation(libs.bundles.dagger)
+    ksp(libs.dagger.compiler)
+    ksp(libs.dagger.android.processor)
 
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)

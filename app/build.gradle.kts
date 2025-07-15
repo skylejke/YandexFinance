@@ -52,6 +52,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.core.utils)
 
+    implementation(projects.data.database)
     implementation(projects.data.account.api)
     implementation(projects.data.categories.api)
     implementation(projects.data.transactions.api)

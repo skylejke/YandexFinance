@@ -23,6 +23,7 @@
             <option value="$PROJECT_DIR$/core/res/common" />
             <option value="$PROJECT_DIR$/core/res/settings" />
             <option value="$PROJECT_DIR$/core/res/transactions" />
+            <option value="$PROJECT_DIR$/core/roomdatabase" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/core/utils" />
             <option value="$PROJECT_DIR$/data" />
@@ -32,6 +33,7 @@
             <option value="$PROJECT_DIR$/data/categories" />
             <option value="$PROJECT_DIR$/data/categories/api" />
             <option value="$PROJECT_DIR$/data/categories/impl" />
+            <option value="$PROJECT_DIR$/data/database" />
             <option value="$PROJECT_DIR$/data/transactions" />
             <option value="$PROJECT_DIR$/data/transactions/api" />
             <option value="$PROJECT_DIR$/data/transactions/impl" />

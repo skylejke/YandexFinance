@@ -22,13 +22,19 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        appComponent = DaggerAppComponent.create()
+        appComponent = DaggerAppComponent.builder().bindContext(this).build()
 
+        appComponent.inject(this)
+
+        initDeps()
+
+        InternetHolder.init(connectivityManager = getSystemService(ConnectivityManager::class.java))
+    }
+
+    private fun initDeps() {
         CategoriesDepsStore.categoriesDeps = appComponent
         AccountDepsStore.accountDeps = appComponent
         TransactionDepsStore.transactionDeps = appComponent
-
-        InternetHolder.init(connectivityManager = getSystemService(ConnectivityManager::class.java))
     }
 }
 

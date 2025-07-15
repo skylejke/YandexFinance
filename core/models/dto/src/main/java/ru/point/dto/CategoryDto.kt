@@ -1,12 +1,18 @@
 package ru.point.dto
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import ru.point.vo.CategoryVo
 
+
+@Entity(tableName = "categories_dropdown")
 data class CategoryDto(
-    val id: Int,
-    val name: String,
-    val emoji: String,
-    val isIncome: Boolean
+    @PrimaryKey
+    @ColumnInfo("id") val id: Int,
+    @ColumnInfo("name") val name: String,
+    @ColumnInfo("emoji") val emoji: String,
+    @ColumnInfo("is_income") val isIncome: Boolean
 )
 
 val CategoryDto.asCategoryVo
