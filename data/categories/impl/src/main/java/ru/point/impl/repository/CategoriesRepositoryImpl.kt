@@ -23,15 +23,15 @@ internal class CategoriesRepositoryImpl @Inject constructor(
 
     override suspend fun getCategories() = withContext(Dispatchers.IO) {
 
-        val cache = categoriesDao.getAllCategories().first()
+        val cache = categoriesDao.getUsersCategories().first()
 
         if (internetTracker.online.first()) {
             val remote = categoriesService.getCategories()
                 .map { resp -> (resp.expenseStats + resp.incomeStats).map { it.asStateItemDto } }
                 .getOrThrow()
 
-            categoriesDao.clearCategoriesTable()
-            categoriesDao.insertAllCategories(remote)
+            categoriesDao.clearUsersCategories()
+            categoriesDao.insertUsersCategories(remote)
             Result.success(remote)
         } else {
             Result.success(cache)
@@ -47,7 +47,7 @@ internal class CategoriesRepositoryImpl @Inject constructor(
                 .getOrThrow()
 
             categoriesDao.clearCategoriesByType(isIncome)
-            categoriesDao.insertAllCategoriesByType(remote.map { it })
+            categoriesDao.insertCategoriesByType(remote.map { it })
 
             Result.success(remote)
         } else {

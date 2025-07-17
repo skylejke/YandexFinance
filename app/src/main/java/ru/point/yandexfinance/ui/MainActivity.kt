@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -26,11 +27,13 @@ import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.ui.scaffold.topappbar.YandexFinanceTopAppBar
 import ru.point.utils.network.InternetHolder.tracker
 import ru.point.yandexfinance.R
+import ru.point.yandexfinance.app.appComponent
 import ru.point.yandexfinance.navigation.Route
 import ru.point.yandexfinance.navigation.YandexFinanceNavHost
 import ru.point.yandexfinance.navigation.bottombar.BottomBarItem
 import ru.point.yandexfinance.navigation.bottombar.YandexFinanceNavBar
 import ru.point.yandexfinance.ui.theme.YandexFinanceTheme
+import javax.inject.Inject
 
 /**
  * Главная активити приложения YandexFinance.
@@ -42,10 +45,20 @@ import ru.point.yandexfinance.ui.theme.YandexFinanceTheme
  *
  */
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var mainActivityViewModelFactory: MainActivityViewModelFactory
+
+    val mainActivityViewModel by viewModels<MainActivityViewModel> { mainActivityViewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appComponent.inject(this)
+
         installSplashScreen()
         enableEdgeToEdge()
+        mainActivityViewModel
         setContent {
             val navController = rememberNavController()
             val selectedItemIndex = rememberSaveable { mutableIntStateOf(0) }

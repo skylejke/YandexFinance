@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.utils)
     implementation(projects.data.categories.api)
     implementation(projects.data.account.api)
     implementation(projects.data.transactions.api)

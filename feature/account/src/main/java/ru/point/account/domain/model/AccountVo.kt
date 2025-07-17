@@ -5,9 +5,9 @@ import ru.point.utils.extensions.toCurrencySymbol
 import ru.point.utils.extensions.toFormattedCurrency
 
 internal data class AccountVo(
-    val name: String,
-    val balance: String,
-    val currency: String
+    val name: String = "",
+    val balance: String = "0.00",
+    val currency: String = "$",
 )
 
 internal val AccountDto.asAccountVo

@@ -1,4 +1,4 @@
-package ru.point.yandexfinance.ui
+package ru.point.yandexfinance.app
 
 import android.app.Application
 import android.content.Context

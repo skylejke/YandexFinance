@@ -11,7 +11,6 @@ import ru.point.database.model.PendingAccountUpdate
 @Dao
 interface AccountDao {
 
-    /** Возвращает сохранённый аккаунт (или null), упакованный в List для совместимости с getAccounts() */
     @Query("SELECT * FROM account")
     fun getAllAccounts(): Flow<List<AccountDto>>
 

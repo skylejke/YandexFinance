@@ -26,6 +26,4 @@ internal val TransactionResponse.asTransactionResponseDto
         amount = amount,
         transactionDate = transactionDate,
         comment = comment,
-        createdAt = createdAt,
-        updatedAt = updatedAt,
     )

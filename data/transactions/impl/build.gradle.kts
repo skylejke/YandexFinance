@@ -37,6 +37,7 @@ dependencies {
     implementation(projects.core.utils)
     implementation(projects.data.transactions.api)
     implementation(projects.data.database)
+    implementation(projects.data.account.api)
 
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)

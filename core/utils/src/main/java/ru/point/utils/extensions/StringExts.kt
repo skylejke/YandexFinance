@@ -106,3 +106,8 @@ fun String.toEpochMillis(): Long =
         .atStartOfDay(ZoneId.systemDefault())
         .toInstant()
         .toEpochMilli()
+
+
+fun String.startOfDayIso() = "${this}T00:00:00.000Z"
+
+fun String.endOfDayIso() = "${this}T23:59:59.999Z"

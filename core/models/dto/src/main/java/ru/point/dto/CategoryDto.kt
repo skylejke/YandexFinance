@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import ru.point.vo.CategoryVo
 
 
-@Entity(tableName = "categories_dropdown")
+@Entity(tableName = "categories")
 data class CategoryDto(
     @PrimaryKey
     @ColumnInfo("id") val id: Int,

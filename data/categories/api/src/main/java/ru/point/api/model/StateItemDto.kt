@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import ru.point.vo.CategoryVo
 
-@Entity(tableName = "categories")
+@Entity(tableName = "users_categories")
 data class StateItemDto(
     @PrimaryKey
     @ColumnInfo("category_id") val categoryId: Int,

@@ -56,7 +56,7 @@ internal class AccountRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun updateAccount(accountDto: AccountDto): Result<Unit> = withContext(Dispatchers.IO) {
+    override suspend fun updateAccount(accountDto: AccountDto) = withContext(Dispatchers.IO) {
         accountDao.clearAccountsTable()
         accountDao.insertAllAccounts(listOf(accountDto))
 
@@ -107,7 +107,7 @@ internal class AccountRepositoryImpl @Inject constructor(
                     balance = pending.balance,
                     currency = pending.currency
                 )
-                accountDao.clearAccountsTable()
+                accountDao.clearPendingAccountUpdateTable()
             }
         }
     }

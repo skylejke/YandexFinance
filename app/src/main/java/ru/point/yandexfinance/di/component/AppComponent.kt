@@ -11,7 +11,8 @@ import ru.point.impl.di.CategoriesDataModule
 import ru.point.impl.di.TransactionsDataModule
 import ru.point.network.di.NetworkModule
 import ru.point.transactions.di.deps.TransactionDeps
-import ru.point.yandexfinance.ui.App
+import ru.point.yandexfinance.app.App
+import ru.point.yandexfinance.ui.MainActivity
 import javax.inject.Singleton
 
 @[Singleton Component(
@@ -26,15 +27,13 @@ import javax.inject.Singleton
 interface AppComponent : CategoriesDeps, AccountDeps, TransactionDeps{
     @Component.Builder
     interface Builder {
-        /**
-         * Скажи Dagger’у: “Беру Context у пользователя при сборке графа”
-         */
         @BindsInstance
         fun bindContext(context: Context): Builder
 
         fun build(): AppComponent
     }
 
-    // Точка входа в ваш граф, например:
     fun inject(app: App)
+
+    fun inject(mainActivity: MainActivity)
 }

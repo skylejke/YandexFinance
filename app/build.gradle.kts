@@ -51,6 +51,7 @@ dependencies {
     implementation(projects.core.network)
     implementation(projects.core.ui)
     implementation(projects.core.utils)
+    implementation(projects.core.models.dto)
 
     implementation(projects.data.database)
     implementation(projects.data.account.api)
