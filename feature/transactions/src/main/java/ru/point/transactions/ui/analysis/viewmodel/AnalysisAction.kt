@@ -1,6 +1,6 @@
 package ru.point.transactions.ui.analysis.viewmodel
 
-import ru.point.transactions.domain.model.AnalysisTransaction
+import ru.point.transactions.domain.model.AnalysisCategories
 import ru.point.utils.model.AppError
 
 internal sealed interface AnalysisAction {
@@ -11,7 +11,7 @@ internal sealed interface AnalysisAction {
 
     data class LoadError(val error: AppError) : AnalysisAction
 
-    data class LoadSuccess(val analysisTransactions: List<AnalysisTransaction>) : AnalysisAction
+    data class LoadSuccess(val analysisCategories: List<AnalysisCategories>) : AnalysisAction
 
     data class OnStartMonthChanged(val startMonth: String) : AnalysisAction
 

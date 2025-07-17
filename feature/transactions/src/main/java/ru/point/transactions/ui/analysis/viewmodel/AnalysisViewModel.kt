@@ -32,7 +32,7 @@ internal class AnalysisViewModel @Inject constructor(
 
             is AnalysisAction.LoadSuccess -> state.copy(
                 isLoading = false,
-                transactions = action.analysisTransactions
+                transactions = action.analysisCategories
             )
 
             is AnalysisAction.LoadError -> state.copy(isLoading = false, error = action.error)
@@ -54,7 +54,7 @@ internal class AnalysisViewModel @Inject constructor(
                 endDate = localState.endDate.toIsoDate(),
             ).fold(
                 onSuccess = { analysisTransaction ->
-                    onAction(AnalysisAction.LoadSuccess(analysisTransactions = analysisTransaction))
+                    onAction(AnalysisAction.LoadSuccess(analysisCategories = analysisTransaction))
                 },
                 onFailure = { error ->
                     onAction(AnalysisAction.LoadError(error.toAppError()))

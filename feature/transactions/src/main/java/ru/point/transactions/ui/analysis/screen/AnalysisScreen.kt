@@ -31,7 +31,6 @@ fun AnalysisScreen(
     bottomBarState: MutableState<BottomBarState>,
     onBack: () -> Unit,
     isIncome: Boolean,
-    onNavigateToEditor: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -80,7 +79,6 @@ fun AnalysisScreen(
                     AnalysisScreenContent(
                         state = state,
                         onAction = viewModel::onAction,
-                        onNavigateToEditor = onNavigateToEditor,
                         modifier = modifier
                     )
                 }

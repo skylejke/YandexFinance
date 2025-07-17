@@ -1,6 +1,6 @@
 package ru.point.transactions.ui.analysis.viewmodel
 
-import ru.point.transactions.domain.model.AnalysisTransaction
+import ru.point.transactions.domain.model.AnalysisCategories
 import ru.point.utils.extensions.toAmountInt
 import ru.point.utils.extensions.toFormattedCurrency
 import ru.point.utils.model.AppError
@@ -10,7 +10,7 @@ internal data class AnalysisState(
     val error: AppError? = null,
     val startDate: String = "",
     val endDate: String = "",
-    val transactions: List<AnalysisTransaction> = emptyList(),
+    val transactions: List<AnalysisCategories> = emptyList(),
 ) {
 
     val totalAmount: String

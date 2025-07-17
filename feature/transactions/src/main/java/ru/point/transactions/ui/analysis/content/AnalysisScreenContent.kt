@@ -1,14 +1,11 @@
 package ru.point.transactions.ui.analysis.content
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -28,7 +25,6 @@ import ru.point.utils.extensions.toEpochMillis
 internal fun AnalysisScreenContent(
     state: AnalysisState,
     onAction: (AnalysisAction) -> Unit,
-    onNavigateToEditor: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -60,13 +56,6 @@ internal fun AnalysisScreenContent(
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(70.dp)
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = ripple(),
-                                onClick = {
-                                    onNavigateToEditor(it.id)
-                                }
-                            )
                             .padding(horizontal = 16.dp)
                     )
 

@@ -104,14 +104,6 @@ fun NavGraphBuilder.transactionsFeature(
             fabState = fabState,
             bottomBarState = bottomBarState,
             onBack = navController::navigateUp,
-            onNavigateToEditor = { transactionId ->
-                navController.navigate(
-                    Route.TransactionEditor(
-                        transactionId = transactionId,
-                        isIncome = isIncome
-                    )
-                )
-            },
             isIncome = isIncome,
             modifier = Modifier.fillMaxSize()
         )
