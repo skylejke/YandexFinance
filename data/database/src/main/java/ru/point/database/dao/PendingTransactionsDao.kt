@@ -21,4 +21,11 @@ interface PendingTransactionsDao {
 
     @Query("DELETE FROM pending_transactions")
     suspend fun clearAll()
+
+    @Query("""
+    UPDATE pending_transactions
+       SET transaction_id = :newId
+     WHERE transaction_id = :oldId
+  """)
+    suspend fun replaceTransactionId(oldId: Int, newId: Int)
 }

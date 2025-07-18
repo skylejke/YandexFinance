@@ -9,10 +9,10 @@ import ru.point.vo.CategoryVo
 @Entity(tableName = "categories")
 data class CategoryDto(
     @PrimaryKey
-    @ColumnInfo("id") val id: Int,
-    @ColumnInfo("name") val name: String,
-    @ColumnInfo("emoji") val emoji: String,
-    @ColumnInfo("is_income") val isIncome: Boolean
+    @ColumnInfo("id") val id: Int = -1,
+    @ColumnInfo("name") val name: String = "",
+    @ColumnInfo("emoji") val emoji: String = "",
+    @ColumnInfo("is_income") val isIncome: Boolean = false
 )
 
 val CategoryDto.asCategoryVo

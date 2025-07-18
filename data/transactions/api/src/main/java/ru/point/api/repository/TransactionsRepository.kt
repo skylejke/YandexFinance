@@ -1,5 +1,6 @@
 package ru.point.api.repository
 
+import kotlinx.coroutines.flow.Flow
 import ru.point.api.model.TransactionRequestDto
 import ru.point.api.model.TransactionResponseDto
 
@@ -16,4 +17,6 @@ interface TransactionsRepository {
     suspend fun deleteTransactionById(transactionId: Int): Result<Unit>
 
     suspend fun syncPendingTransaction()
+
+    suspend fun getLastSync(): Flow<Long>
 }

@@ -6,6 +6,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 fun String.startsWithEmoji(): Boolean = firstOrNull()?.isEmoji() == true
 
@@ -111,3 +112,13 @@ fun String.toEpochMillis(): Long =
 fun String.startOfDayIso() = "${this}T00:00:00.000Z"
 
 fun String.endOfDayIso() = "${this}T23:59:59.999Z"
+
+fun String.toReadableDateTimeWithSeconds(): String {
+    return try {
+        val parsed = ZonedDateTime.parse(this)
+        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm:ss", Locale("ru"))
+        parsed.format(formatter)
+    } catch (_: Exception) {
+        this
+    }
+}

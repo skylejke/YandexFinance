@@ -20,4 +20,5 @@ data class TransactionResponseDto(
     @ColumnInfo(name = "amount") val amount: String,
     @ColumnInfo(name = "transaction_date") val transactionDate: String,
     @ColumnInfo(name = "comment") val comment: String?,
+    @ColumnInfo(name = "updated_at") val updatedAt: String,
 )

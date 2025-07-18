@@ -8,6 +8,7 @@ import ru.point.api.repository.TransactionsRepository
 import ru.point.database.dao.AccountDao
 import ru.point.database.dao.CategoriesDao
 import ru.point.database.dao.PendingTransactionsDao
+import ru.point.database.dao.SyncMetadataDao
 import ru.point.database.dao.TransactionsDao
 import ru.point.impl.repository.TransactionsRepositoryImpl
 import ru.point.impl.service.TransactionsService
@@ -28,6 +29,7 @@ class TransactionsDataModule {
         pendingTransactionsDao: PendingTransactionsDao,
         accountDao: AccountDao,
         categoriesDao: CategoriesDao,
+        syncMetadataDao: SyncMetadataDao,
         internetTracker: InternetTracker
     ): TransactionsRepository =
         TransactionsRepositoryImpl(
@@ -36,6 +38,7 @@ class TransactionsDataModule {
             pendingTransactionsDao = pendingTransactionsDao,
             accountDao = accountDao,
             categoriesDao = categoriesDao,
+            metadataDao = syncMetadataDao,
             internetTracker = internetTracker,
         )
 }

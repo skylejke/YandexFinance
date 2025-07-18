@@ -8,6 +8,7 @@ import ru.point.transactions.domain.usecase.CreateTransactionUseCase
 import ru.point.transactions.domain.usecase.DeleteTransactionUseCase
 import ru.point.transactions.domain.usecase.GetAccountDataUseCase
 import ru.point.transactions.domain.usecase.GetCategoriesByTypeUseCase
+import ru.point.transactions.domain.usecase.GetLastTransactionsSync
 import ru.point.transactions.domain.usecase.GetTransactionUseCase
 import ru.point.transactions.domain.usecase.UpdateTransactionUseCase
 import ru.point.transactions.ui.editor.viewmodel.state.FormState
@@ -17,6 +18,7 @@ import ru.point.utils.extensions.dateFormatter
 import ru.point.utils.extensions.extractNumericBalance
 import ru.point.utils.extensions.timeFormatter
 import ru.point.utils.extensions.toFormattedCurrency
+import ru.point.utils.extensions.toReadableDateTimeWithSeconds
 import ru.point.utils.model.toAppError
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -29,6 +31,7 @@ internal class TransactionEditorViewModel @Inject constructor(
     private val getTransactionUseCase: GetTransactionUseCase,
     private val getCategoriesByTypeUseCase: GetCategoriesByTypeUseCase,
     private val getAccountDataUseCase: GetAccountDataUseCase,
+    private val getLastTransactionsSync: GetLastTransactionsSync,
     private val createTransactionUseCase: Lazy<CreateTransactionUseCase>,
     private val updateTransactionUseCase: Lazy<UpdateTransactionUseCase>,
     private val deleteTransactionUseCase: Lazy<DeleteTransactionUseCase>,
@@ -47,6 +50,7 @@ internal class TransactionEditorViewModel @Inject constructor(
         loadAccountData()
         if (transactionId != null) {
             loadTransaction()
+            getLastTimeSync()
             onHandleUpdate()
             onHandleDelete()
         } else {
@@ -56,6 +60,8 @@ internal class TransactionEditorViewModel @Inject constructor(
     }
 
     override fun reduce(action: TransactionEditorAction, state: TransactionEditorState) = when (action) {
+
+        is TransactionEditorAction.LastTimeSync.OnGetLastTimeSync -> state.copy(lastTimeSync = action.lastTimeSync)
 
         is TransactionEditorAction.Initial.TransactionLoadSuccess ->
             with(action.transactionVo) {
@@ -248,6 +254,14 @@ internal class TransactionEditorViewModel @Inject constructor(
                     onEvent(TransactionEditorEvent.ShowErrorDialog)
                 }
             )
+        }
+    }
+
+    private fun getLastTimeSync() {
+        viewModelScope.launch {
+            getLastTransactionsSync().collect {
+                onAction(TransactionEditorAction.LastTimeSync.OnGetLastTimeSync(lastTimeSync = it.toReadableDateTimeWithSeconds()))
+            }
         }
     }
 

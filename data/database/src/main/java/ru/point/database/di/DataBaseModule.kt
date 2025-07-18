@@ -34,6 +34,9 @@ class DataBaseModule {
     internal fun providePendingTransactionsDao(database: YandexFinanceDatabase) = database.getPendingTransactionsDao()
 
     @[Provides Singleton]
+    internal fun provideSyncMetadataDao(database: YandexFinanceDatabase) = database.getSyncMetadataDao()
+
+    @[Provides Singleton]
     internal fun provideLocalDatabaseRepository(
        internetTracker: InternetTracker,
        transactionsDao: TransactionsDao,

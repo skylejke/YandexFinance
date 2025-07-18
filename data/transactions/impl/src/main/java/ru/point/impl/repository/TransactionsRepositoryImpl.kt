@@ -4,8 +4,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import ru.point.api.model.AccountStateDto
 import ru.point.api.model.TransactionRequestDto
 import ru.point.api.model.TransactionResponseDto
@@ -14,9 +16,12 @@ import ru.point.core.utils.BuildConfig
 import ru.point.database.dao.AccountDao
 import ru.point.database.dao.CategoriesDao
 import ru.point.database.dao.PendingTransactionsDao
+import ru.point.database.dao.SyncMetadataDao
 import ru.point.database.dao.TransactionsDao
 import ru.point.database.model.PendingTransactionEntity
 import ru.point.database.model.PendingTransactionOperation
+import ru.point.database.model.SyncMetadata
+import ru.point.dto.CategoryDto
 import ru.point.impl.model.Transaction
 import ru.point.impl.model.TransactionRequest
 import ru.point.impl.model.asTransactionRequest
@@ -25,7 +30,12 @@ import ru.point.impl.service.TransactionsService
 import ru.point.utils.extensions.endOfDayIso
 import ru.point.utils.extensions.startOfDayIso
 import ru.point.utils.network.InternetTracker
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 import javax.inject.Inject
+
+
+private const val TRANSACTIONS_SYNC_TYPE = "transactions"
 
 /**
  * Репозиторий, отвечающий за получение транзакций за указанный период из сетевого источника.
@@ -37,6 +47,7 @@ internal class TransactionsRepositoryImpl @Inject constructor(
     private val pendingTransactionsDao: PendingTransactionsDao,
     private val accountDao: AccountDao,
     private val categoriesDao: CategoriesDao,
+    private val metadataDao: SyncMetadataDao,
     private val internetTracker: InternetTracker
 ) : TransactionsRepository {
 
@@ -61,6 +72,9 @@ internal class TransactionsRepositoryImpl @Inject constructor(
 
             transactionsDao.clearPeriod(startDate.startOfDayIso(), endDate.endOfDayIso())
             transactionsDao.insertAllTransactions(remote)
+
+            metadataDao.upsert(SyncMetadata(TRANSACTIONS_SYNC_TYPE, System.currentTimeMillis()))
+
             Result.success(remote)
         } else {
             Result.success(cached)
@@ -167,45 +181,71 @@ internal class TransactionsRepositoryImpl @Inject constructor(
         }
 
     override suspend fun syncPendingTransaction() {
-        pendingTransactionsDao.getAllFlow().first().forEach {
-            when (it.operation) {
-                PendingTransactionOperation.CREATE -> {
-                    transactionsService.createTransaction(it.asTransactionRequest).getOrThrow().let { transaction ->
-                        transactionsDao.deleteTransactionById(it.transactionId)
-                        transactionsDao.insertTransaction(
-                            TransactionResponseDto(
-                                id = transaction.id,
-                                account = accountDao.getAllAccounts().first().map { accountDto ->
-                                    AccountStateDto(
-                                        id = transaction.accountId,
-                                        name = accountDto.name,
-                                        balance = accountDto.balance,
-                                        currency = accountDto.currency,
-                                    )
-                                }.firstOrNull() ?: AccountStateDto(),
-                                category = categoriesDao.getCategoryById(categoryId = it.categoryId!!).first(),
-                                transactionDate = transaction.transactionDate,
-                                comment = transaction.comment,
-                                amount = transaction.amount,
-                            )
-                        )
-                    }
-                }
+        pendingTransactionsDao.getAllFlow().first()
+            .filter { it.operation == PendingTransactionOperation.CREATE }
+            .forEach { pending ->
+                try {
+                    val server = transactionsService
+                        .createTransaction(pending.asTransactionRequest)
+                        .getOrThrow()
 
-                PendingTransactionOperation.UPDATE -> {
-                    transactionsService.updateTransactionById(
-                        transactionId = it.transactionId,
-                        transactionRequest = it.asTransactionRequest
-                    ).getOrThrow()
-                }
-
-                PendingTransactionOperation.DELETE -> {
-                    transactionsService.deleteTransactionById(it.transactionId).getOrThrow()
+                    transactionsDao.deleteTransactionById(pending.transactionId)
+                    transactionsDao.insertTransaction(server.asTransactionResponseDto())
+                    pendingTransactionsDao.replaceTransactionId(
+                        oldId = pending.transactionId,
+                        newId = server.id
+                    )
+                    pendingTransactionsDao.deleteById(pending.id)
+                    metadataDao.upsert(SyncMetadata(TRANSACTIONS_SYNC_TYPE, System.currentTimeMillis()))
+                } catch (_: Exception) {
                 }
             }
-            pendingTransactionsDao.deleteById(it.id)
-        }
+
+        pendingTransactionsDao.getAllFlow().first()
+            .filter { it.operation == PendingTransactionOperation.UPDATE }
+            .forEach { pending ->
+                try {
+                    transactionsService
+                        .updateTransactionById(
+                            transactionId = pending.transactionId,
+                            transactionRequest = pending.asTransactionRequest
+                        )
+                        .getOrThrow()
+
+                    val fresh = transactionsService
+                        .getTransactionById(pending.transactionId)
+                        .map { it.asTransactionResponseDto }
+                        .getOrThrow()
+                    transactionsDao.insertTransaction(fresh)
+
+                    pendingTransactionsDao.deleteById(pending.id)
+                    metadataDao.upsert(SyncMetadata(TRANSACTIONS_SYNC_TYPE, System.currentTimeMillis()))
+                } catch (_: Exception) {
+                }
+            }
+
+        pendingTransactionsDao.getAllFlow().first()
+            .filter { it.operation == PendingTransactionOperation.DELETE }
+            .forEach { pending ->
+                try {
+                    transactionsService
+                        .deleteTransactionById(pending.transactionId)
+                        .getOrThrow()
+
+                    pendingTransactionsDao.deleteById(pending.id)
+                    metadataDao.upsert(SyncMetadata(TRANSACTIONS_SYNC_TYPE, System.currentTimeMillis()))
+                } catch (e: HttpException) {
+                    if (e.code() == 404) {
+                        pendingTransactionsDao.deleteById(pending.id)
+                        metadataDao.upsert(SyncMetadata(TRANSACTIONS_SYNC_TYPE, System.currentTimeMillis()))
+                    }
+                } catch (_: Exception) {
+                }
+            }
     }
+
+    override suspend fun getLastSync() =
+        metadataDao.getLastSync(TRANSACTIONS_SYNC_TYPE)
 
     private suspend fun Transaction.asTransactionResponseDto() =
         TransactionResponseDto(
@@ -218,12 +258,12 @@ internal class TransactionsRepositoryImpl @Inject constructor(
                     currency = it.currency,
                 )
             }.first(),
-            category = categoriesDao.getCategoryById(categoryId = categoryId).first(),
+            category = categoriesDao.getCategoryById(categoryId = categoryId).firstOrNull() ?: CategoryDto(),
             amount = amount,
             transactionDate = transactionDate,
             comment = comment,
+            updatedAt = updatedAt
         )
-
 
     private suspend fun TransactionRequestDto.asTransactionResponseDto(id: Int) =
         TransactionResponseDto(
@@ -236,10 +276,14 @@ internal class TransactionsRepositoryImpl @Inject constructor(
                     currency = it.currency,
                 )
             }.first(),
-            category = categoriesDao.getCategoryById(categoryId = categoryId).first(),
+            category = categoriesDao.getCategoryById(categoryId = categoryId).firstOrNull() ?: CategoryDto(),
             amount = amount,
             transactionDate = transactionDate,
             comment = comment,
+            updatedAt = Instant
+                .now()
+                .truncatedTo(ChronoUnit.SECONDS)
+                .toString()
         )
 
     private val PendingTransactionEntity.asTransactionRequest
@@ -252,6 +296,3 @@ internal class TransactionsRepositoryImpl @Inject constructor(
                 comment = comment
             )
 }
-
-
-

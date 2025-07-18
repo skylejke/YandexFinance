@@ -12,7 +12,8 @@ data class PendingTransactionEntity(
     @ColumnInfo("amount") val amount: String?,
     @ColumnInfo("transaction_date") val transactionDate: String?,
     @ColumnInfo("comment") val comment: String?,
-    @ColumnInfo("operation") val operation: PendingTransactionOperation
+    @ColumnInfo("operation") val operation: PendingTransactionOperation,
+    @ColumnInfo("local_ts") val localTimestamp: Long = System.currentTimeMillis()
 )
 
 enum class PendingTransactionOperation {

@@ -3,6 +3,7 @@ package ru.point.yandexfinance.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.point.api.model.AccountDto
 import ru.point.database.repo.LocalDatabaseRepository
 
 class MainActivityViewModel (
@@ -19,7 +20,7 @@ class MainActivityViewModel (
 
     private fun prefetchAccounts() {
         viewModelScope.launch {
-            localDatabaseRepository.prefetchAccounts().onSuccess { it.first() }
+            localDatabaseRepository.prefetchAccounts().onSuccess { it.firstOrNull() ?: AccountDto() }
         }
     }
 

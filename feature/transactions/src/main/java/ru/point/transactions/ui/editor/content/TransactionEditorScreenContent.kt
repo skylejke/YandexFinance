@@ -10,6 +10,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
@@ -34,6 +35,7 @@ import ru.point.transactions.ui.editor.content.forms.TimeForm
 import ru.point.transactions.ui.editor.viewmodel.TransactionEditorAction
 import ru.point.transactions.ui.editor.viewmodel.TransactionEditorEvent
 import ru.point.transactions.ui.editor.viewmodel.state.TransactionEditorState
+import ru.point.ui.colors.CharcoalGrey
 import ru.point.ui.colors.CoralRed
 import ru.point.ui.colors.White
 import ru.point.ui.composables.EditTextDialog
@@ -137,7 +139,7 @@ internal fun TransactionEditorScreenContent(
         GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
 
         CommentForm(
-            commentValue = state.form.comment ?: "",
+            commentValue = state.form.comment.orEmpty(),
             onCommentChanged = {
                 onAction(TransactionEditorAction.Form.OnCommentChanged(comment = it))
             },
@@ -147,16 +149,25 @@ internal fun TransactionEditorScreenContent(
         GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
 
         if (transactionId != null) {
-            Button(
-                onClick = { showDeleteTransactionDialog = true },
-                colors = ButtonDefaults.buttonColors(containerColor = CoralRed),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 32.dp, start = 16.dp, end = 16.dp)
-            ) {
+            Column {
+                Button(
+                    onClick = { showDeleteTransactionDialog = true },
+                    colors = ButtonDefaults.buttonColors(containerColor = CoralRed),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 32.dp, start = 16.dp, end = 16.dp)
+                ) {
+                    Text(
+                        text = stringResource(R.string.delete_transaction),
+                        color = White,
+                    )
+                }
+
                 Text(
-                    text = stringResource(R.string.delete_transaction),
-                    color = White,
+                    text = stringResource(R.string.last_sync_time, state.lastTimeSync),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = CharcoalGrey,
+                    modifier = Modifier.padding(16.dp)
                 )
             }
         }

@@ -7,6 +7,11 @@ import ru.point.vo.CategoryVo
 
 internal sealed interface TransactionEditorAction {
 
+    sealed interface LastTimeSync : TransactionEditorAction {
+
+        data class OnGetLastTimeSync(val lastTimeSync: String) : LastTimeSync
+    }
+
     sealed interface Initial : TransactionEditorAction {
 
         data object InitialLoadRequested : Initial

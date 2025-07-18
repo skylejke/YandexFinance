@@ -48,7 +48,6 @@ internal class AccountRepositoryImpl @Inject constructor(
                 .map { accounts -> accounts.map { it.asAccountDto } }
                 .getOrThrow()
 
-            accountDao.clearAccountsTable()
             accountDao.insertAllAccounts(remote)
             Result.success(remote)
         } else {

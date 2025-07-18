@@ -30,7 +30,6 @@ internal class CategoriesRepositoryImpl @Inject constructor(
                 .map { resp -> (resp.expenseStats + resp.incomeStats).map { it.asStateItemDto } }
                 .getOrThrow()
 
-            categoriesDao.clearUsersCategories()
             categoriesDao.insertUsersCategories(remote)
             Result.success(remote)
         } else {
@@ -46,9 +45,7 @@ internal class CategoriesRepositoryImpl @Inject constructor(
                 .map { list -> list.map { it.asCategoryDto } }
                 .getOrThrow()
 
-            categoriesDao.clearCategoriesByType(isIncome)
             categoriesDao.insertCategoriesByType(remote.map { it })
-
             Result.success(remote)
         } else {
             Result.success(cache.map { it })

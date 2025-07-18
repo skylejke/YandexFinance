@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "account")
 data class AccountDto(
     @PrimaryKey
-    @ColumnInfo("name") val name: String,
-    @ColumnInfo("balance") val balance: String,
-    @ColumnInfo("currency") val currency: String,
+    @ColumnInfo("name") val name: String = "",
+    @ColumnInfo("balance") val balance: String = "",
+    @ColumnInfo("currency") val currency: String = "",
 )
