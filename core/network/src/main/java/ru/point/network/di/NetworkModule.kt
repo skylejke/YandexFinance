@@ -1,5 +1,7 @@
 package ru.point.network.di
 
+import android.content.Context
+import android.net.ConnectivityManager
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.skydoves.retrofit.adapters.result.ResultCallAdapterFactory
 import dagger.Module
@@ -12,6 +14,7 @@ import retrofit2.Retrofit
 import ru.point.network.BuildConfig
 import ru.point.network.utils.ApiKeyInterceptor
 import ru.point.network.utils.RetryInterceptor
+import ru.point.utils.network.InternetTracker
 import javax.inject.Singleton
 
 @Module
@@ -36,4 +39,17 @@ class NetworkModule {
             .client(okHttpClient)
             .build()
     }
+
+    @Provides
+    @Singleton
+    internal fun provideConnectivityManager(
+        context: Context
+    ): ConnectivityManager =
+        context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+    @Provides
+    @Singleton
+    internal fun provideInternetTracker(
+        connectivityManager: ConnectivityManager
+    ) = InternetTracker(connectivityManager = connectivityManager)
 }

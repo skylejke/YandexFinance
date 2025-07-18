@@ -7,6 +7,7 @@ import ru.point.transactions.domain.usecase.CreateTransactionUseCase
 import ru.point.transactions.domain.usecase.DeleteTransactionUseCase
 import ru.point.transactions.domain.usecase.GetAccountDataUseCase
 import ru.point.transactions.domain.usecase.GetCategoriesByTypeUseCase
+import ru.point.transactions.domain.usecase.GetLastTransactionsSync
 import ru.point.transactions.domain.usecase.GetTransactionUseCase
 import ru.point.transactions.domain.usecase.UpdateTransactionUseCase
 import javax.inject.Inject
@@ -17,6 +18,7 @@ internal class TransactionEditorViewModelFactory @Inject constructor(
     private val getTransactionUseCase: GetTransactionUseCase,
     private val getCategoriesByTypeUseCase: GetCategoriesByTypeUseCase,
     private val getAccountDataUseCase: GetAccountDataUseCase,
+    private val getLastTransactionsSync: GetLastTransactionsSync,
     private val createTransactionUseCase: Lazy<CreateTransactionUseCase>,
     private val updateTransactionUseCase: Lazy<UpdateTransactionUseCase>,
     private val deleteTransactionUseCase: Lazy<DeleteTransactionUseCase>,
@@ -29,6 +31,7 @@ internal class TransactionEditorViewModelFactory @Inject constructor(
             getTransactionUseCase = getTransactionUseCase,
             getCategoriesByTypeUseCase = getCategoriesByTypeUseCase,
             getAccountDataUseCase = getAccountDataUseCase,
+            getLastTransactionsSync = getLastTransactionsSync,
             createTransactionUseCase = createTransactionUseCase,
             updateTransactionUseCase = updateTransactionUseCase,
             deleteTransactionUseCase = deleteTransactionUseCase,

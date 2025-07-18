@@ -1,9 +1,12 @@
 package ru.point.utils.extensions
 
 import java.math.BigDecimal
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 fun String.startsWithEmoji(): Boolean = firstOrNull()?.isEmoji() == true
 
@@ -91,4 +94,31 @@ fun String.formatAsDate(): String {
 fun String.formatAsTime(): String {
     return ZonedDateTime.parse(this)
         .format(DateTimeFormatter.ofPattern("HH:mm"))
+}
+
+fun String.toIsoDate(): String {
+    val inputFormatter = dateFormatter
+    val outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE
+    return LocalDate.parse(this, inputFormatter).format(outputFormatter)
+}
+
+fun String.toEpochMillis(): Long =
+    LocalDate.parse(this, DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+        .atStartOfDay(ZoneId.systemDefault())
+        .toInstant()
+        .toEpochMilli()
+
+
+fun String.startOfDayIso() = "${this}T00:00:00.000Z"
+
+fun String.endOfDayIso() = "${this}T23:59:59.999Z"
+
+fun String.toReadableDateTimeWithSeconds(): String {
+    return try {
+        val parsed = ZonedDateTime.parse(this)
+        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm:ss", Locale("ru"))
+        parsed.format(formatter)
+    } catch (_: Exception) {
+        this
+    }
 }

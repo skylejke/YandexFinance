@@ -34,6 +34,12 @@ android {
 dependencies {
     implementation(projects.core.utils)
     implementation(projects.data.account.api)
+    implementation(projects.data.database)
+
+    implementation(libs.androidx.work.runtime.ktx)
+
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)

@@ -6,7 +6,7 @@ internal data class TransactionHistoryItem(
     val id: Int,
     val title: String,
     val subtitle: String?,
-    val emojiIcon: String?,
+    val emojiIcon: String,
     val amount: String,
     val currency: String,
     val transactionDate: String

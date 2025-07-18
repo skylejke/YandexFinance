@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -20,8 +19,7 @@ import ru.point.transactions.ui.expenses.viewmodel.ExpensesAction
 import ru.point.transactions.ui.expenses.viewmodel.ExpensesViewModel
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
-import ru.point.ui.composables.NoInternetBanner
-import ru.point.ui.di.LocalInternetTracker
+import ru.point.ui.composables.RequiredInternetContent
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarAction
@@ -76,28 +74,29 @@ fun ExpensesScreen(
         viewModel.onAction(ExpensesAction.LoadRequested)
     }
 
-    val isOnline by LocalInternetTracker.current.online.collectAsState()
+    RequiredInternetContent(
+        modifier = modifier,
+        content = {
+            when {
+                state.isLoading -> {
+                    LoadingIndicator(modifier = modifier)
+                }
 
-    when {
-        isOnline.not() -> NoInternetBanner(modifier = modifier)
+                state.error != null -> {
+                    ErrorContent(
+                        message = state.error!!.toUserMessage(),
+                        modifier = modifier
+                    )
+                }
 
-        state.isLoading -> {
-            LoadingIndicator(modifier = modifier)
-        }
-
-        state.error != null -> {
-            ErrorContent(
-                message = state.error!!.toUserMessage(),
-                modifier = modifier
-            )
-        }
-
-        else -> {
-            ExpensesScreenContent(
-                state = state,
-                modifier = modifier,
-                onNavigateToEditor = onNavigateToEditor
-            )
-        }
-    }
+                else -> {
+                    ExpensesScreenContent(
+                        state = state,
+                        modifier = modifier,
+                        onNavigateToEditor = onNavigateToEditor
+                    )
+                }
+            }
+        },
+    )
 }

@@ -32,6 +32,7 @@
             <option value="$PROJECT_DIR$/data/categories" />
             <option value="$PROJECT_DIR$/data/categories/api" />
             <option value="$PROJECT_DIR$/data/categories/impl" />
+            <option value="$PROJECT_DIR$/data/database" />
             <option value="$PROJECT_DIR$/data/transactions" />
             <option value="$PROJECT_DIR$/data/transactions/api" />
             <option value="$PROJECT_DIR$/data/transactions/impl" />

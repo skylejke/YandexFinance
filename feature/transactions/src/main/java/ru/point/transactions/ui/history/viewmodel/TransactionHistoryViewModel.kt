@@ -37,7 +37,9 @@ internal class TransactionHistoryViewModel @Inject constructor(
 
     private fun onHandleLoadTransactionsHistory() {
         handleAction<TransactionHistoryAction.LoadRequested> {
-            getTransactionsHistoryUseCase(isIncome).fold(
+            getTransactionsHistoryUseCase(
+                isIncome = isIncome
+            ).fold(
                 onSuccess = { transactions ->
                     onAction(TransactionHistoryAction.LoadSuccess(transactions = transactions))
                 },

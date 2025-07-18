@@ -2,6 +2,7 @@ package ru.point.transactions.domain.usecase
 
 import ru.point.api.repository.TransactionsRepository
 import ru.point.transactions.domain.model.asIncome
+import java.time.Instant
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -12,6 +13,8 @@ internal class GetIncomesUseCase @Inject constructor(private val transactionsRep
         startDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
         endDate = LocalDate.now().format(DateTimeFormatter.ISO_DATE)
     ).map { transactionResponses ->
-        transactionResponses.filter { it.category.isIncome }.map { it.asIncome }
+        transactionResponses.filter { it.category.isIncome }
+            .sortedByDescending { Instant.parse(it.transactionDate) }
+            .map { it.asIncome }
     }
 }
