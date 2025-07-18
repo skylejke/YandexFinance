@@ -14,4 +14,6 @@ interface TransactionsRepository {
     suspend fun updateTransactionById(transactionId: Int, transactionRequestDto: TransactionRequestDto): Result<Unit>
 
     suspend fun deleteTransactionById(transactionId: Int): Result<Unit>
+
+    suspend fun syncPendingTransaction()
 }

@@ -6,10 +6,10 @@ import dagger.Provides
 import ru.point.api.repository.AccountRepository
 import ru.point.api.repository.CategoriesRepository
 import ru.point.api.repository.TransactionsRepository
-import ru.point.database.YandexFinanceDatabase
 import ru.point.database.dao.AccountDao
 import ru.point.database.dao.CategoriesDao
 import ru.point.database.dao.TransactionsDao
+import ru.point.database.database.YandexFinanceDatabase
 import ru.point.database.repo.LocalDatabaseRepository
 import ru.point.database.repo.LocalDatabaseRepositoryImpl
 import ru.point.utils.network.InternetTracker

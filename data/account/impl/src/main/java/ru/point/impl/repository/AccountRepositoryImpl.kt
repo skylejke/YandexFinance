@@ -93,7 +93,7 @@ internal class AccountRepositoryImpl @Inject constructor(
         Result.success(Unit)
     }
 
-    private suspend fun syncPendingUpdate() {
+    override suspend fun syncPendingUpdate() {
         accountDao.getPendingAccountUpdate().first()?.let { pending ->
             accountService.updateAccount(
                 accountUpdateRequest = AccountUpdateRequest(

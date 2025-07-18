@@ -36,6 +36,8 @@ dependencies {
     implementation(projects.data.account.api)
     implementation(projects.data.database)
 
+    implementation(libs.androidx.work.runtime.ktx)
+
     implementation(libs.room.ktx)
     ksp(libs.room.compiler)
 

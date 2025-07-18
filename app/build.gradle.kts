@@ -48,6 +48,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.work.runtime.ktx)
     implementation(projects.core.network)
     implementation(projects.core.ui)
     implementation(projects.core.utils)

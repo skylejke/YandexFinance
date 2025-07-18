@@ -1,4 +1,4 @@
-package ru.point.database
+package ru.point.database.database
 
 import android.content.Context
 import androidx.room.Database

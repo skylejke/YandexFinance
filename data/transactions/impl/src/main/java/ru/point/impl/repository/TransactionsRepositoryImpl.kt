@@ -24,7 +24,6 @@ import ru.point.impl.model.asTransactionResponseDto
 import ru.point.impl.service.TransactionsService
 import ru.point.utils.extensions.endOfDayIso
 import ru.point.utils.extensions.startOfDayIso
-import ru.point.utils.network.InternetHolder.tracker
 import ru.point.utils.network.InternetTracker
 import javax.inject.Inject
 
@@ -43,9 +42,9 @@ internal class TransactionsRepositoryImpl @Inject constructor(
 
     init {
         CoroutineScope(Dispatchers.IO).launch {
-            tracker.online
+            internetTracker.online
                 .filter { it }
-                .collect { syncPending() }
+                .collect { syncPendingTransaction() }
         }
     }
 
@@ -167,7 +166,7 @@ internal class TransactionsRepositoryImpl @Inject constructor(
             Result.success(Unit)
         }
 
-    private suspend fun syncPending() {
+    override suspend fun syncPendingTransaction() {
         pendingTransactionsDao.getAllFlow().first().forEach {
             when (it.operation) {
                 PendingTransactionOperation.CREATE -> {
@@ -183,7 +182,7 @@ internal class TransactionsRepositoryImpl @Inject constructor(
                                         balance = accountDto.balance,
                                         currency = accountDto.currency,
                                     )
-                                }.first(),
+                                }.firstOrNull() ?: AccountStateDto(),
                                 category = categoriesDao.getCategoryById(categoryId = it.categoryId!!).first(),
                                 transactionDate = transaction.transactionDate,
                                 comment = transaction.comment,
