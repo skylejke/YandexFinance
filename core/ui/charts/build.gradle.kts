@@ -2,15 +2,14 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.ksp)
 }
 
 android {
-    namespace = "ru.point.feature.transactions"
+    namespace = "ru.point.core.ui.charts"
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 30
+        minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -19,7 +18,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -40,26 +42,17 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.core.models.dto)
     implementation(projects.core.models.vo)
-    implementation(projects.core.res.transactions)
-    implementation(projects.core.utils)
+    implementation(projects.core.res.common)
     implementation(projects.core.ui)
-    implementation(projects.core.ui.charts)
-    implementation(projects.data.transactions.api)
-    implementation(projects.data.categories.api)
-    implementation(projects.data.account.api)
+    implementation(projects.core.utils)
 
-    implementation(libs.bundles.dagger)
-    ksp(libs.dagger.compiler)
-    ksp(libs.dagger.android.processor)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.lifecycle.viewmodel.compose.android)
+    debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    debugImplementation(libs.androidx.ui.tooling)
 }

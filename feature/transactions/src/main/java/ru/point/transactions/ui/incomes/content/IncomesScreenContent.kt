@@ -46,8 +46,11 @@ internal fun IncomesScreenContent(
                 GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
             }
 
-            items(items = state.incomes, key = { it.id }) { income ->
-
+            items(
+                items = state.incomes,
+                key = { it.id },
+                contentType = { it::class },
+            ) { income ->
                 IncomesCard(
                     title = income.title,
                     amount = income.amount,

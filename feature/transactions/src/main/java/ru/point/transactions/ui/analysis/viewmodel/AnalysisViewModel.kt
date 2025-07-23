@@ -2,7 +2,7 @@ package ru.point.transactions.ui.analysis.viewmodel
 
 import ru.point.transactions.domain.usecase.GetAnalysisTransactionsUseCase
 import ru.point.ui.MviViewModel
-import ru.point.utils.extensions.dateFormatter
+import ru.point.utils.extensions.fullDateFormatter
 import ru.point.utils.extensions.toIsoDate
 import ru.point.utils.model.toAppError
 import java.time.LocalDate
@@ -13,8 +13,8 @@ internal class AnalysisViewModel @Inject constructor(
     private val isIncome: Boolean,
 ) : MviViewModel<AnalysisState, AnalysisAction, Any>(
     initialState = AnalysisState(
-        startDate = LocalDate.now().withDayOfMonth(1).format(dateFormatter),
-        endDate = LocalDate.now().format(dateFormatter)
+        startDate = LocalDate.now().withDayOfMonth(1).format(fullDateFormatter),
+        endDate = LocalDate.now().format(fullDateFormatter)
     )
 ) {
 

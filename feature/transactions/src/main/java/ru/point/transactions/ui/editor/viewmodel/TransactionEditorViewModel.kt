@@ -14,8 +14,8 @@ import ru.point.transactions.domain.usecase.UpdateTransactionUseCase
 import ru.point.transactions.ui.editor.viewmodel.state.FormState
 import ru.point.transactions.ui.editor.viewmodel.state.TransactionEditorState
 import ru.point.ui.MviViewModel
-import ru.point.utils.extensions.dateFormatter
 import ru.point.utils.extensions.extractNumericBalance
+import ru.point.utils.extensions.fullDateFormatter
 import ru.point.utils.extensions.timeFormatter
 import ru.point.utils.extensions.toFormattedCurrency
 import ru.point.utils.extensions.toReadableDateTimeWithSeconds
@@ -40,7 +40,7 @@ internal class TransactionEditorViewModel @Inject constructor(
 ) : MviViewModel<TransactionEditorState, TransactionEditorAction, TransactionEditorEvent>(
     initialState = TransactionEditorState(
         form = FormState(
-            transactionDate = LocalDate.now().format(dateFormatter),
+            transactionDate = LocalDate.now().format(fullDateFormatter),
             transactionTime = LocalTime.now().format(timeFormatter)
         )
     )

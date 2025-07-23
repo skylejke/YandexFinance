@@ -39,3 +39,6 @@ val CoralRed = Color(0xFFE46962)
 //val LightMint = Color(0xFFE5EAE2)
 //val FadedMint = Color(0xFFDFE4DC)
 
+val BrightYellow = Color(0xFFFCE300)
+val CocoaBrown = Color(0xFF795548)
+

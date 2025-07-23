@@ -1,11 +1,13 @@
 package ru.point.yandexfinance.navigation.bottombar
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import ru.point.yandexfinance.R
 import ru.point.yandexfinance.navigation.Route
 
 sealed class BottomBarItem(
-    val titleResId: Int,
-    val iconResId: Int,
+    @param:StringRes val titleResId: Int,
+    @param:DrawableRes val iconResId: Int,
     val route: Route
 ) {
     data object Expenses : BottomBarItem(

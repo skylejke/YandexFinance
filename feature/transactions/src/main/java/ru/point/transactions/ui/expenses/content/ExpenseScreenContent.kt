@@ -46,7 +46,11 @@ internal fun ExpensesScreenContent(
                 GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
             }
 
-            items(items = state.expenses, key = { it.id }) { expense ->
+            items(
+                items = state.expenses,
+                key = { it.id },
+                contentType = { it::class },
+            ) { expense ->
                 ExpensesCard(
                     title = expense.title,
                     subtitle = expense.subtitle,

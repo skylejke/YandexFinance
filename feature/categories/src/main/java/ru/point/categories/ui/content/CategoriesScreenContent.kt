@@ -45,8 +45,11 @@ internal fun CategoriesScreenContent(
                 )
             }
         } else {
-            items(items = state.categories, key = { it.id }) {
-
+            items(
+                items = state.categories,
+                key = { it.id },
+                contentType = { it::class },
+            ) {
                 CategoryCard(
                     contentText = it.name,
                     emojiIcon = it.emoji,

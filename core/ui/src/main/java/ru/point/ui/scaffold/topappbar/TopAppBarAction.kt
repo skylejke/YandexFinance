@@ -1,7 +1,9 @@
 package ru.point.ui.scaffold.topappbar
 
+import androidx.annotation.DrawableRes
+
 data class TopAppBarAction(
-    val iconResId: Int,
+    @param:DrawableRes val iconResId: Int,
     val action: () -> Unit,
     val tag: String = ""
 )

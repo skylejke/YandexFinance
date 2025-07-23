@@ -1,5 +1,6 @@
 package ru.point.settings.ui.content
 
+import androidx.annotation.StringRes
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -13,7 +14,7 @@ import ru.point.ui.composables.BaseListItem
 
 @Composable
 internal fun SettingCard(
-    settingTitleResId: Int,
+    @StringRes settingTitleResId: Int,
     modifier: Modifier = Modifier
 ) {
     BaseListItem(

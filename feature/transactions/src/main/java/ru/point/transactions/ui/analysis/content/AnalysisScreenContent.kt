@@ -12,7 +12,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import ru.point.charts.AnalysisDonutChart
 import ru.point.transactions.R
 import ru.point.transactions.ui.analysis.viewmodel.AnalysisAction
 import ru.point.transactions.ui.analysis.viewmodel.AnalysisState
@@ -45,14 +47,28 @@ internal fun AnalysisScreenContent(
                 modifier = modifier
             )
         } else {
+            AnalysisDonutChart(
+                analysisCategories = state.transactions,
+                context = LocalContext.current,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+            )
+
+            GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
+
             LazyColumn {
-                items(items = state.transactions, key = { it.id }) {
+                items(
+                    items = state.transactions,
+                    key = { it.id },
+                    contentType = { it::class },
+                ) { analysisCategory ->
                     AnalysisTransactionCard(
-                        emoji = it.emojiIcon,
-                        title = it.title,
-                        amount = it.amount,
-                        currency = it.currency,
-                        part = it.part,
+                        emoji = analysisCategory.emojiIcon,
+                        title = analysisCategory.title,
+                        amount = analysisCategory.amount,
+                        currency = analysisCategory.currency,
+                        part = analysisCategory.part,
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(70.dp)

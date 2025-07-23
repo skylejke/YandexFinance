@@ -3,8 +3,8 @@ package ru.point.transactions.domain.usecase
 import ru.point.api.model.TransactionResponseDto
 import ru.point.api.repository.TransactionsRepository
 import ru.point.dto.CategoryDto
-import ru.point.transactions.domain.model.AnalysisCategories
 import ru.point.utils.extensions.toAmountInt
+import ru.point.vo.AnalysisCategory
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
@@ -18,7 +18,7 @@ internal class GetAnalysisTransactionsUseCase @Inject constructor(
         isIncome: Boolean,
         startDate: String = LocalDate.now().withDayOfMonth(1).format(DateTimeFormatter.ISO_DATE),
         endDate: String = LocalDate.now().format(DateTimeFormatter.ISO_DATE),
-    ): Result<List<AnalysisCategories>> {
+    ): Result<List<AnalysisCategory>> {
         val transactionResponseDtos = transactionsRepository
             .getTransactionsForPeriod(startDate = startDate, endDate = endDate)
             .getOrThrow()
@@ -33,7 +33,7 @@ internal class GetAnalysisTransactionsUseCase @Inject constructor(
             val sum = list.sumOf { it.amount.toAmountInt() }
             val percent = if (totalAmount > 0) sum * 100f / totalAmount else 0f
             val part = String.format(Locale.getDefault(), "%.2f %%", percent)
-            AnalysisCategories(
+            AnalysisCategory(
                 id = category.id,
                 title = category.name,
                 emojiIcon = category.emoji,

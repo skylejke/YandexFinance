@@ -2,6 +2,8 @@ package ru.point.utils.network
 
 import okhttp3.Interceptor
 import okhttp3.Response
+import ru.point.utils.network.RetryInterceptor.Companion.DELAY_MS
+import ru.point.utils.network.RetryInterceptor.Companion.MAX_RETRIES
 
 /**
  * Interceptor, повторяющий HTTP-запрос при получении ответа с кодом 500 (Internal Server Error).
@@ -15,7 +17,7 @@ class RetryInterceptor : Interceptor {
         var tries = 0
         var response = chain.proceed(chain.request())
 
-        while (response.code() == 500 && tries < MAX_RETRIES) {
+        while (response.code == 500 && tries < MAX_RETRIES) {
             tries++
             response.close()
             Thread.sleep(DELAY_MS)

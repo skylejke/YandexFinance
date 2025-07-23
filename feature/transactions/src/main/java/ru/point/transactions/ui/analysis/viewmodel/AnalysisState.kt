@@ -1,16 +1,16 @@
 package ru.point.transactions.ui.analysis.viewmodel
 
-import ru.point.transactions.domain.model.AnalysisCategories
 import ru.point.utils.extensions.toAmountInt
 import ru.point.utils.extensions.toFormattedCurrency
 import ru.point.utils.model.AppError
+import ru.point.vo.AnalysisCategory
 
 internal data class AnalysisState(
     val isLoading: Boolean = true,
     val error: AppError? = null,
     val startDate: String = "",
     val endDate: String = "",
-    val transactions: List<AnalysisCategories> = emptyList(),
+    val transactions: List<AnalysisCategory> = emptyList(),
 ) {
 
     val totalAmount: String

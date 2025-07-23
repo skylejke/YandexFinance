@@ -28,7 +28,7 @@ internal fun TransactionHistoryScreenContent(
     modifier: Modifier = Modifier
 ) {
     val monthFormatter = remember {
-        DateTimeFormatter.ofPattern("LLLL yyyy", Locale("ru"))
+        DateTimeFormatter.ofPattern("LLLL yyyy", Locale.forLanguageTag("ru"))
     }
 
     if (state.transactionsHistory.isEmpty()) {
@@ -46,7 +46,11 @@ internal fun TransactionHistoryScreenContent(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
-            items(items = state.transactionsHistory, key = { it.id }) { transaction ->
+            items(
+                items = state.transactionsHistory,
+                key = { it.id },
+                contentType = { it::class },
+            ) { transaction ->
                 TransactionsHistoryCard(
                     title = transaction.title,
                     subtitle = transaction.subtitle,
