@@ -16,14 +16,6 @@ import ru.point.ui.colors.LavenderWhite
 import ru.point.ui.colors.Mint
 import ru.point.ui.colors.MintGreen
 
-/**
- * Нижняя навигационная панель приложения YandexFinance.
- *
- * Отображает список пунктов [entryPoints], выделяет активный пункт по [selectedItemIndex]
- * и уведомляет об изменении выбора через [onItemSelected].
- *
- * Использует стилизацию согласно дизайн-системе приложения и Material 3.
- */
 @Composable
 fun YandexFinanceNavBar(
     entryPoints: List<BottomBarItem>,

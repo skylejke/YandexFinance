@@ -10,11 +10,6 @@ import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 
-/**
- * Экран настроек приложения.
- *
- * Отображает UI с настройками пользователя.
- */
 @NonRestartableComposable
 @Composable
 fun SettingsScreen(

@@ -8,12 +8,7 @@ import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
 import javax.inject.Inject
 
-/**
- * ViewModel, отвечающая за загрузку и управление состоянием данных аккаунта пользователя.
- *
- * Выполняет вызов [GetAccountUseCase], обрабатывает результаты и преобразует их в UI-состояние
- * с помощью паттерна MVI.
- */
+
 internal class AccountViewModel @Inject constructor(
     private val getAccountUseCase: GetAccountUseCase,
     private val calculateTransactionDiffUseCase: CalculateTransactionDiffUseCase,

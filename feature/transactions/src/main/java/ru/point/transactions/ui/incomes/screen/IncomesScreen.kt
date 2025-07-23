@@ -27,11 +27,6 @@ import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран доходов пользователя. Отображает список доходов, либо состояние загрузки, ошибки или отсутствия интернета.
- *
- * Выполняет подписку на [IncomesViewModel], наблюдает за состоянием и отображает соответствующий UI.
- */
 @NonRestartableComposable
 @Composable
 fun IncomesScreen(

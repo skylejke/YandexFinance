@@ -25,11 +25,6 @@ private const val SYNC_ACCOUNT_WORKER_NAME = "sync_account_worker"
 
 private const val SYNC_TRANSACTION_WORKER_NAME = "sync_transaction_worker"
 
-/**
- * Класс приложения, инициализирующий корневой Dagger-компонент [AppComponent] и трекер сети [InternetHolder].
- *
- * Используется как точка входа для внедрения зависимостей и отслеживания состояния подключения к интернету.
- */
 class App : Application(), Configuration.Provider {
 
     lateinit var appComponent: AppComponent
@@ -92,11 +87,6 @@ class App : Application(), Configuration.Provider {
     }
 }
 
-/**
- * Расширение для получения [AppComponent] из любого контекста.
- *
- * Позволяет безопасно получать зависимостный граф из [Context], включая вложенные контексты.
- */
 val Context.appComponent: AppComponent
     get() = when (this) {
         is App -> appComponent

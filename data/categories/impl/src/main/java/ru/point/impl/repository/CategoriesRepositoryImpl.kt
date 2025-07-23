@@ -11,10 +11,7 @@ import ru.point.serializable.asCategoryDto
 import ru.point.utils.network.InternetTracker
 import javax.inject.Inject
 
-/**
- * Репозиторий, отвечающий за получение категорий из удалённого источника.
- * Делегирует вызов [CategoriesService] и обеспечивает выполнение в IO-контексте.
- */
+
 internal class CategoriesRepositoryImpl @Inject constructor(
     private val categoriesService: CategoriesService,
     private val categoriesDao: CategoriesDao,

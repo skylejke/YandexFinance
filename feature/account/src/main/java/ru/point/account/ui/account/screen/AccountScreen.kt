@@ -25,12 +25,6 @@ import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран отображения информации об аккаунте пользователя.
- *
- * Подключает [AccountViewModel], отслеживает состояние загрузки, ошибок и подключения к интернету,
- * и отображает соответствующий UI: данные аккаунта, индикатор загрузки, сообщение об ошибке или баннер отсутствия интернета.
- */
 @NonRestartableComposable
 @Composable
 fun AccountScreen(

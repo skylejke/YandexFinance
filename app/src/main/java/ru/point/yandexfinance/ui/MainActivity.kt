@@ -35,15 +35,7 @@ import ru.point.yandexfinance.navigation.bottombar.YandexFinanceNavBar
 import ru.point.yandexfinance.ui.theme.YandexFinanceTheme
 import javax.inject.Inject
 
-/**
- * Главная активити приложения YandexFinance.
- *
- * Отвечает за инициализацию темизации, DI-контекстов,
- * отображение основной Scaffold-структуры (TopAppBar, BottomNavigation, FAB) и навигации через [YandexFinanceNavHost].
- *
- * Также управляет splash-экраном и поддерживает edge-to-edge режим.
- *
- */
+
 class MainActivity : ComponentActivity() {
 
     @Inject

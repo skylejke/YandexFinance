@@ -25,12 +25,6 @@ import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран истории транзакций пользователя для выбранного типа операций (доходы или расходы).
- *
- * Подключает [TransactionHistoryViewModel], устанавливает флаг [isIncome],
- * отслеживает состояние и отображает соответствующий UI (список, загрузку, ошибку или отсутствие интернета).
- */
 @NonRestartableComposable
 @Composable
 fun TransactionHistoryScreen(

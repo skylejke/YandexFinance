@@ -21,12 +21,6 @@ import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран выбора категорий транзакций.
- *
- * Подключает [CategoriesViewModel], отслеживает состояние подключения, загрузки и ошибок,
- * и отображает соответствующий UI: список категорий, лоадер, ошибку или баннер об отсутствии интернета.
- */
 @NonRestartableComposable
 @Composable
 fun CategoriesScreen(

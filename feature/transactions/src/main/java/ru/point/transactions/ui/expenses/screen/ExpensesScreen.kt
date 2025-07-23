@@ -27,12 +27,6 @@ import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран с расходами пользователя за текущий период.
- *
- * Подключает [ExpensesViewModel], отслеживает состояние загрузки, ошибок и соединения,
- * отображает соответствующий UI (список расходов, лоадер, ошибку или баннер отсутствия интернета).
- */
 @NonRestartableComposable
 @Composable
 fun ExpensesScreen(
