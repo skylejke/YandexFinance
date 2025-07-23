@@ -40,7 +40,7 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.core.res.categories)
+    implementation(projects.core.resources)
     implementation(projects.core.models.vo)
     implementation(projects.core.utils)
     implementation(projects.core.ui)

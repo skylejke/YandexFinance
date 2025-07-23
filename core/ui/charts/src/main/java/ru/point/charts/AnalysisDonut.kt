@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.point.core.res.common.R
+import ru.point.core.resources.R
 import ru.point.ui.colors.BrightYellow
 import ru.point.ui.colors.CocoaBrown
 import ru.point.ui.colors.CoralRed

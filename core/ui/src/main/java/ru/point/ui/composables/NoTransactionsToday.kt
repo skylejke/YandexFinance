@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.point.core.res.common.R
+import ru.point.core.resources.R
 
 @Composable
 fun NoTransactionsToday(messageResId: Int, modifier: Modifier = Modifier) {

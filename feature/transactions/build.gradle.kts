@@ -42,7 +42,7 @@ kotlin {
 dependencies {
     implementation(projects.core.models.dto)
     implementation(projects.core.models.vo)
-    implementation(projects.core.res.transactions)
+    implementation(projects.core.resources)
     implementation(projects.core.utils)
     implementation(projects.core.ui)
     implementation(projects.core.ui.charts)

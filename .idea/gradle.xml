@@ -17,12 +17,7 @@
             <option value="$PROJECT_DIR$/core/models/serializable" />
             <option value="$PROJECT_DIR$/core/models/vo" />
             <option value="$PROJECT_DIR$/core/network" />
-            <option value="$PROJECT_DIR$/core/res" />
-            <option value="$PROJECT_DIR$/core/res/account" />
-            <option value="$PROJECT_DIR$/core/res/categories" />
-            <option value="$PROJECT_DIR$/core/res/common" />
-            <option value="$PROJECT_DIR$/core/res/settings" />
-            <option value="$PROJECT_DIR$/core/res/transactions" />
+            <option value="$PROJECT_DIR$/core/resources" />
             <option value="$PROJECT_DIR$/core/ui" />
             <option value="$PROJECT_DIR$/core/ui/charts" />
             <option value="$PROJECT_DIR$/core/utils" />

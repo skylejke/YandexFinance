@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import ru.point.core.res.settings.R
+import ru.point.core.resources.R
 import ru.point.ui.composables.BaseListItem
 
 @Composable

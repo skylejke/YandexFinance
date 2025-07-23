@@ -15,7 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.point.core.res.categories.R
+import ru.point.core.resources.R
 
 @Composable
 internal fun NothingFound(modifier: Modifier = Modifier) {

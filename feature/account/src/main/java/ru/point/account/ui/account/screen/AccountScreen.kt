@@ -14,7 +14,7 @@ import ru.point.account.di.deps.AccountDepsProvider
 import ru.point.account.ui.account.content.AccountScreenContent
 import ru.point.account.ui.account.viewmodel.AccountAction
 import ru.point.account.ui.account.viewmodel.AccountViewModel
-import ru.point.core.res.account.R
+import ru.point.core.resources.R
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.RequiredInternetContent

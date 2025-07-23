@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.point.categories.ui.viewmodel.CategoriesAction
 import ru.point.categories.ui.viewmodel.CategoriesState
-import ru.point.core.res.categories.R
+import ru.point.core.resources.R
 import ru.point.ui.colors.LavenderMist
 import ru.point.ui.composables.GreyHorizontalDivider
 

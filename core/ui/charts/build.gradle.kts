@@ -43,7 +43,7 @@ kotlin {
 
 dependencies {
     implementation(projects.core.models.vo)
-    implementation(projects.core.res.common)
+    implementation(projects.core.resources)
     implementation(projects.core.ui)
     implementation(projects.core.utils)
 

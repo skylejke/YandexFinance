@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import ru.point.core.res.common.R
+import ru.point.core.resources.R
 
 @Composable
 fun ErrorContent(message: String, modifier: Modifier = Modifier) {

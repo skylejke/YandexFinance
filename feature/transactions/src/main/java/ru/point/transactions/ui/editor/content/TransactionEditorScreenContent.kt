@@ -25,7 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.Flow
-import ru.point.transactions.R
+import ru.point.core.resources.R
 import ru.point.transactions.ui.editor.content.forms.AccountForm
 import ru.point.transactions.ui.editor.content.forms.AmountForm
 import ru.point.transactions.ui.editor.content.forms.CategoryForm

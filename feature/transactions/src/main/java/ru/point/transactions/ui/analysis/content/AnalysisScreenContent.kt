@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import ru.point.charts.AnalysisDonutChart
-import ru.point.transactions.R
+import ru.point.core.resources.R
 import ru.point.transactions.ui.analysis.viewmodel.AnalysisAction
 import ru.point.transactions.ui.analysis.viewmodel.AnalysisState
 import ru.point.ui.composables.GreyHorizontalDivider

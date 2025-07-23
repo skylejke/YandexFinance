@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.point.transactions.R
+import ru.point.core.resources.R
 import ru.point.transactions.ui.analysis.viewmodel.AnalysisState
 import ru.point.ui.composables.GreyHorizontalDivider
 

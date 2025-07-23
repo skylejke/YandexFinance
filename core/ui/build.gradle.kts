@@ -40,7 +40,7 @@ kotlin {
 
 dependencies {
     implementation(projects.core.utils)
-    implementation(projects.core.res.common)
+    implementation(projects.core.resources)
 
     implementation(libs.compose.material.dialogs)
     implementation(libs.androidx.material3)

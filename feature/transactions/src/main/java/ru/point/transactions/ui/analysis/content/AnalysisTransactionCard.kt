@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.point.transactions.R
+import ru.point.core.resources.R
 import ru.point.ui.colors.GhostGray
 import ru.point.ui.colors.Graphite
 import ru.point.ui.composables.BaseListItem

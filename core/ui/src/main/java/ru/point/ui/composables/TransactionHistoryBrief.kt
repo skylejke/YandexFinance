@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.point.core.res.common.R
+import ru.point.core.resources.R
 import ru.point.ui.colors.Mint
 import ru.point.utils.extensions.toTimeHHmm
 import java.util.Locale
@@ -38,7 +38,7 @@ fun TransactionHistoryBrief(
             },
             trail = {
                 Text(
-                    text = startDate.replaceFirstChar { it.titlecase(Locale("ru")) }
+                    text = startDate.replaceFirstChar { it.titlecase(Locale.forLanguageTag("ru")) }
                 )
             },
             modifier = baseModifier

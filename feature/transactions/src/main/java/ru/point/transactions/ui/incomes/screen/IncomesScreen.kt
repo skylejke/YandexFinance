@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ru.point.transactions.R
+import ru.point.core.resources.R
 import ru.point.transactions.di.component.DaggerIncomesComponent
 import ru.point.transactions.di.deps.TransactionDepsProvider
 import ru.point.transactions.ui.incomes.content.IncomesScreenContent

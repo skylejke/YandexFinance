@@ -40,7 +40,7 @@ kotlin {
 
 dependencies {
     implementation(projects.core.ui)
-    implementation(projects.core.res.settings)
+    implementation(projects.core.resources)
 
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)

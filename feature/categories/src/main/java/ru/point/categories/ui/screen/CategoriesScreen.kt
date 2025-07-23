@@ -12,7 +12,7 @@ import ru.point.categories.di.component.DaggerCategoriesComponent
 import ru.point.categories.di.deps.CategoriesDepsProvider
 import ru.point.categories.ui.content.CategoriesScreenContent
 import ru.point.categories.ui.viewmodel.CategoriesViewModel
-import ru.point.core.res.categories.R
+import ru.point.core.resources.R
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.RequiredInternetContent

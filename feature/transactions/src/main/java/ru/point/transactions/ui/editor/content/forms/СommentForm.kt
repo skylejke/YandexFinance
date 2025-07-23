@@ -9,7 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import ru.point.transactions.R
+import ru.point.core.resources.R
 import ru.point.ui.colors.CharcoalGrey
 import ru.point.ui.colors.ForestGreen
 import ru.point.ui.composables.BaseListItem

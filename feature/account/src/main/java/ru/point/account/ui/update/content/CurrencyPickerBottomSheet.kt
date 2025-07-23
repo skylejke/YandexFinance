@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ru.point.core.res.account.R
+import ru.point.core.resources.R
 import ru.point.ui.colors.White
 import ru.point.ui.composables.BaseListItem
 import ru.point.ui.composables.GreyHorizontalDivider

@@ -40,7 +40,7 @@ kotlin {
 }
 
 dependencies {
-    implementation(projects.core.res.account)
+    implementation(projects.core.resources)
     implementation(projects.core.utils)
     implementation(projects.core.ui)
     implementation(projects.core.ui.charts)

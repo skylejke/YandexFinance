@@ -13,7 +13,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import ru.point.core.res.common.R
+import ru.point.core.resources.R
 import ru.point.ui.colors.ForestGreen
 import ru.point.ui.colors.Graphite
 import ru.point.ui.colors.MintGreen
