@@ -15,6 +15,7 @@ import ru.point.account.ui.account.content.AccountScreenContent
 import ru.point.account.ui.account.viewmodel.AccountAction
 import ru.point.account.ui.account.viewmodel.AccountViewModel
 import ru.point.core.resources.R
+import ru.point.navigation.NavigationRoute
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.RequiredInternetContent
@@ -36,7 +37,7 @@ fun AccountScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
-    onNavigate: () -> Unit,
+    onNavigate: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -45,7 +46,9 @@ fun AccountScreen(
         actions = listOf(
             TopAppBarAction(
                 iconResId = R.drawable.edit_icon,
-                action = onNavigate
+                action = {
+                    onNavigate(NavigationRoute.AccountFeature.EditAccount)
+                }
             )
         )
     )

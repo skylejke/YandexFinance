@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.point.core.resources.R
+import ru.point.navigation.NavigationRoute
 import ru.point.transactions.ui.expenses.viewmodel.ExpensesState
 import ru.point.ui.colors.Mint
 import ru.point.ui.composables.GreyHorizontalDivider
@@ -23,7 +24,7 @@ import ru.point.ui.composables.TotalToday
 @Composable
 internal fun ExpensesScreenContent(
     state: ExpensesState,
-    onNavigateToEditor: (Int?) -> Unit,
+    onNavigateToEditor: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (state.expenses.isEmpty()) {
@@ -64,7 +65,12 @@ internal fun ExpensesScreenContent(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = ripple(),
                             onClick = {
-                                onNavigateToEditor(expense.id)
+                                onNavigateToEditor(
+                                    NavigationRoute.TransactionsFeature.TransactionEditor(
+                                        transactionId = expense.id,
+                                        isIncome = false,
+                                    )
+                                )
                             }
                         )
                         .padding(horizontal = 16.dp)

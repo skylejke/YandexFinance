@@ -13,14 +13,16 @@ import androidx.compose.ui.unit.dp
 import ru.point.core.resources.R
 import ru.point.ui.colors.Mint
 import ru.point.utils.extensions.toTimeHHmm
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 @Composable
 fun TransactionHistoryBrief(
-    startDate: String,
     endDate: String,
     amount: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    startDate: String = LocalDate.now().format(DateTimeFormatter.ofPattern("LLLL yyyy", Locale.forLanguageTag("ru"))),
 ) {
 
     val baseModifier = Modifier

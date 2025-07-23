@@ -28,7 +28,7 @@ import ru.point.ui.scaffold.topappbar.YandexFinanceTopAppBar
 import ru.point.utils.network.InternetHolder.tracker
 import ru.point.yandexfinance.R
 import ru.point.yandexfinance.app.appComponent
-import ru.point.yandexfinance.navigation.Route
+import ru.point.yandexfinance.navigation.ComposeNavigationRoute
 import ru.point.yandexfinance.navigation.YandexFinanceNavHost
 import ru.point.yandexfinance.navigation.bottombar.BottomBarItem
 import ru.point.yandexfinance.navigation.bottombar.YandexFinanceNavBar
@@ -88,7 +88,7 @@ class MainActivity : ComponentActivity() {
                                         onItemSelected = { index ->
                                             if (selectedItemIndex.intValue != index) {
                                                 selectedItemIndex.intValue = index
-                                                navController.navigate(BottomBarItem.entryPoints[index].route)
+                                                navController.navigate(BottomBarItem.entryPoints[index].composeNavigationRoute)
                                             }
                                         },
                                         modifier = Modifier
@@ -112,7 +112,7 @@ class MainActivity : ComponentActivity() {
                     ) { innerPadding ->
                         YandexFinanceNavHost(
                             navHostController = navController,
-                            startDestination = Route.Expenses,
+                            startDestination = ComposeNavigationRoute.TransactionsFeature.Expenses,
                             topAppBarState = topAppBarState,
                             fabState = fabState,
                             bottomBarState = bottomBarState,

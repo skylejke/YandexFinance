@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.core.resources.R
+import ru.point.navigation.NavigationRoute
 import ru.point.transactions.di.component.DaggerTransactionHistoryComponent
 import ru.point.transactions.di.deps.TransactionDepsProvider
 import ru.point.transactions.ui.history.content.TransactionHistoryScreenContent
@@ -38,8 +39,7 @@ fun TransactionHistoryScreen(
     bottomBarState: MutableState<BottomBarState>,
     onBack: () -> Unit,
     isIncome: Boolean,
-    onNavigateToEditor: (Int?) -> Unit,
-    onNavigateToAnalysis: (Boolean)-> Unit,
+    onNavigate: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -49,7 +49,7 @@ fun TransactionHistoryScreen(
             TopAppBarAction(
                 iconResId = R.drawable.analysis_icon,
                 action = {
-                    onNavigateToAnalysis(isIncome)
+                    onNavigate(NavigationRoute.TransactionsFeature.Analysis(isIncome = isIncome))
                 }
             )
         ),
@@ -95,7 +95,8 @@ fun TransactionHistoryScreen(
                 else -> {
                     TransactionHistoryScreenContent(
                         state = state,
-                        onNavigateToEditor = onNavigateToEditor,
+                        isIncome = isIncome,
+                        onNavigateToEditor = onNavigate,
                         modifier = modifier
                     )
                 }

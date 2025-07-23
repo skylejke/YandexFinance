@@ -15,7 +15,8 @@ import ru.point.transactions.ui.incomes.screen.IncomesScreen
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
-import ru.point.yandexfinance.navigation.Route
+import ru.point.yandexfinance.navigation.ComposeNavigationRoute
+import ru.point.yandexfinance.navigation.asComposeNavigationRoute
 
 fun NavGraphBuilder.transactionsFeature(
     navController: NavController,
@@ -23,44 +24,29 @@ fun NavGraphBuilder.transactionsFeature(
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
 ) {
-    composable<Route.Incomes> {
+    composable<ComposeNavigationRoute.TransactionsFeature.Incomes> {
         IncomesScreen(
             topAppBarState = topAppBarState,
             fabState = fabState,
             bottomBarState = bottomBarState,
-            onNavigateToHistory = { navController.navigate(Route.TransactionHistory(isIncome = true)) },
-            onNavigateToEditor = {
-                navController.navigate(
-                    Route.TransactionEditor(
-                        transactionId = it,
-                        isIncome = true
-                    )
-                )
-            },
+            onNavigate = { navigationRoute -> navController.navigate(navigationRoute.asComposeNavigationRoute) },
             modifier = Modifier.fillMaxSize()
         )
     }
 
-    composable<Route.Expenses> {
+    composable<ComposeNavigationRoute.TransactionsFeature.Expenses> {
         ExpensesScreen(
             topAppBarState = topAppBarState,
             fabState = fabState,
             bottomBarState = bottomBarState,
-            onNavigateToHistory = { navController.navigate(Route.TransactionHistory(isIncome = false)) },
-            onNavigateToEditor = {
-                navController.navigate(
-                    Route.TransactionEditor(
-                        transactionId = it,
-                        isIncome = false
-                    )
-                )
-            },
+            onNavigate = { navigationRoute -> navController.navigate(navigationRoute.asComposeNavigationRoute) },
             modifier = Modifier.fillMaxSize()
         )
     }
 
-    composable<Route.TransactionHistory> {
-        val isIncome = it.toRoute<Route.TransactionHistory>().isIncome
+    composable<ComposeNavigationRoute.TransactionsFeature.TransactionHistory> {
+        val isIncome =
+            it.toRoute<ComposeNavigationRoute.TransactionsFeature.TransactionHistory>().isIncome
 
         TransactionHistoryScreen(
             topAppBarState = topAppBarState,
@@ -68,24 +54,16 @@ fun NavGraphBuilder.transactionsFeature(
             bottomBarState = bottomBarState,
             onBack = navController::popBackStack,
             isIncome = isIncome,
-            onNavigateToEditor = { transactionId ->
-                navController.navigate(
-                    Route.TransactionEditor(
-                        transactionId = transactionId,
-                        isIncome = isIncome
-                    )
-                )
-            },
-            onNavigateToAnalysis = {
-                navController.navigate(Route.Analysis(isIncome))
-            },
+            onNavigate = { navigationRoute -> navController.navigate(navigationRoute.asComposeNavigationRoute) },
             modifier = Modifier.fillMaxSize()
         )
     }
 
-    composable<Route.TransactionEditor> {
-        val isIncome = it.toRoute<Route.TransactionEditor>().isIncome
-        val transactionId = it.toRoute<Route.TransactionEditor>().transactionId
+    composable<ComposeNavigationRoute.TransactionsFeature.TransactionEditor> {
+        val isIncome =
+            it.toRoute<ComposeNavigationRoute.TransactionsFeature.TransactionEditor>().isIncome
+        val transactionId =
+            it.toRoute<ComposeNavigationRoute.TransactionsFeature.TransactionEditor>().transactionId
         TransactionEditorScreen(
             topAppBarState = topAppBarState,
             fabState = fabState,
@@ -97,8 +75,9 @@ fun NavGraphBuilder.transactionsFeature(
         )
     }
 
-    composable<Route.Analysis> {
-        val isIncome = it.toRoute<Route.TransactionHistory>().isIncome
+    composable<ComposeNavigationRoute.TransactionsFeature.Analysis> {
+        val isIncome =
+            it.toRoute<ComposeNavigationRoute.TransactionsFeature.TransactionHistory>().isIncome
         AnalysisScreen(
             topAppBarState = topAppBarState,
             fabState = fabState,

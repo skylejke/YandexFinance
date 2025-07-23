@@ -36,6 +36,7 @@ include(
     ":core:models:dto",
     ":core:models:serializable",
     ":core:models:vo",
+    ":core:navigation",
     ":core:network",
     ":core:resources",
     ":core:ui",

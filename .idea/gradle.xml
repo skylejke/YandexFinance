@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/core/models/dto" />
             <option value="$PROJECT_DIR$/core/models/serializable" />
             <option value="$PROJECT_DIR$/core/models/vo" />
+            <option value="$PROJECT_DIR$/core/navigation" />
             <option value="$PROJECT_DIR$/core/network" />
             <option value="$PROJECT_DIR$/core/resources" />
             <option value="$PROJECT_DIR$/core/ui" />

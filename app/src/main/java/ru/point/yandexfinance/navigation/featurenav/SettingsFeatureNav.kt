@@ -9,14 +9,14 @@ import ru.point.settings.ui.screen.SettingsScreen
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
-import ru.point.yandexfinance.navigation.Route
+import ru.point.yandexfinance.navigation.ComposeNavigationRoute
 
 fun NavGraphBuilder.settingsFeature(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
 ) {
-    composable<Route.Settings> {
+    composable<ComposeNavigationRoute.SettingsFeature.Settings> {
         SettingsScreen(
             topAppBarState = topAppBarState,
             fabState = fabState,

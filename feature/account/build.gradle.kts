@@ -46,6 +46,7 @@ dependencies {
     implementation(projects.core.ui.charts)
     implementation(projects.core.models.dto)
     implementation(projects.core.models.vo)
+    implementation(projects.core.navigation)
     implementation(projects.data.account.api)
     implementation(projects.data.transactions.api)
 

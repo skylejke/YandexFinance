@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.core.resources.R
+import ru.point.navigation.NavigationRoute
 import ru.point.transactions.di.component.DaggerIncomesComponent
 import ru.point.transactions.di.deps.TransactionDepsProvider
 import ru.point.transactions.ui.incomes.content.IncomesScreenContent
@@ -37,8 +38,7 @@ fun IncomesScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
-    onNavigateToHistory: () -> Unit,
-    onNavigateToEditor: (Int?) -> Unit,
+    onNavigate: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -48,7 +48,9 @@ fun IncomesScreen(
         actions = listOf(
             TopAppBarAction(
                 iconResId = R.drawable.history_icon,
-                action = onNavigateToHistory
+                action = {
+                    onNavigate(NavigationRoute.TransactionsFeature.TransactionHistory(isIncome = true))
+                }
             )
         ),
     )
@@ -56,14 +58,20 @@ fun IncomesScreen(
     fabState.value = FabState.Showed(
         icon = Icons.Default.Add,
         action = {
-            onNavigateToEditor(null)
+            onNavigate(
+                NavigationRoute.TransactionsFeature.TransactionEditor(
+                    transactionId = null,
+                    isIncome = true
+                )
+            )
         }
     )
 
     bottomBarState.value = BottomBarState.Showed
 
     val incomesComponent = remember {
-        DaggerIncomesComponent.builder().deps(transactionDeps = TransactionDepsProvider.transactionDeps).build()
+        DaggerIncomesComponent.builder()
+            .deps(transactionDeps = TransactionDepsProvider.transactionDeps).build()
     }
 
     val viewModel = viewModel<IncomesViewModel>(factory = incomesComponent.incomesViewModelFactory)
@@ -92,7 +100,7 @@ fun IncomesScreen(
                 else -> {
                     IncomesScreenContent(
                         state = state,
-                        onNavigateToEditor = onNavigateToEditor,
+                        onNavigateToEditor = onNavigate,
                         modifier = modifier
                     )
                 }

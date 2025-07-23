@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.point.core.resources.R
+import ru.point.navigation.NavigationRoute
 import ru.point.transactions.ui.incomes.viewmodel.IncomesState
 import ru.point.ui.colors.Mint
 import ru.point.ui.composables.GreyHorizontalDivider
@@ -23,7 +24,7 @@ import ru.point.ui.composables.TotalToday
 @Composable
 internal fun IncomesScreenContent(
     state: IncomesState,
-    onNavigateToEditor: (Int?) -> Unit,
+    onNavigateToEditor: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if (state.incomes.isEmpty()) {
@@ -62,7 +63,12 @@ internal fun IncomesScreenContent(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = ripple(),
                             onClick = {
-                                onNavigateToEditor(income.id)
+                                onNavigateToEditor(
+                                    NavigationRoute.TransactionsFeature.TransactionEditor(
+                                        income.id,
+                                        isIncome = true
+                                    )
+                                )
                             }
                         )
                         .padding(horizontal = 16.dp)

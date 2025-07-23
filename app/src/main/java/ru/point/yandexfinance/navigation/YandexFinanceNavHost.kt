@@ -24,7 +24,7 @@ import ru.point.yandexfinance.navigation.featurenav.transactionsFeature
 @Composable
 fun YandexFinanceNavHost(
     navHostController: NavHostController,
-    startDestination: Route,
+    startDestination: ComposeNavigationRoute,
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
