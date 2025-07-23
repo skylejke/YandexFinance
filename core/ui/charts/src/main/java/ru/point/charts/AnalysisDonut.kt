@@ -49,8 +49,18 @@ fun AnalysisDonutChart(
     val categories = remember(analysisCategories) { prepareForPie(analysisCategories, context) }
 
     val totalPercent = remember(categories) {
-        categories.fold(BigDecimal.ZERO) { acc, category ->
-            acc + category.part.toBigDecimalPercent()
+        categories.sumOf { it.part.toBigDecimalPercent() }
+    }
+
+    val initialSweepAngles = remember(categories, totalPercent) {
+        categories.map { category ->
+            (category.part.toBigDecimalPercent() / totalPercent * BigDecimal(360)).toFloat()
+        }.toMutableList().also { sweeps ->
+            val sum = sweeps.sum()
+            val diff = 360f - sum
+            if (sweeps.isNotEmpty()) {
+                sweeps[sweeps.lastIndex] = sweeps.last() + diff
+            }
         }
     }
 
@@ -61,23 +71,22 @@ fun AnalysisDonutChart(
                 .align(Alignment.Center)
         ) {
             var startAngle = -90f
-            val size = size.minDimension
-            val thickness = 24f
-            val radius = size / 2f
-            categories.forEachIndexed { index, cat ->
-                val pct = cat.part.toBigDecimalPercent()
-                val sweepAngle = (pct / totalPercent * BigDecimal(360)).toFloat()
+            val donutSize = size.minDimension
+            val strokeWidth = 24f
+            val radius = donutSize / 2f
+
+            initialSweepAngles.forEachIndexed { index, sweepAngle ->
                 drawArc(
                     color = colors[index % colors.size],
                     startAngle = startAngle,
                     sweepAngle = sweepAngle,
                     useCenter = false,
                     topLeft = Offset(
-                        (size - radius * 2) / 2,
-                        (size - radius * 2) / 2
+                        (donutSize - radius * 2) / 2,
+                        (donutSize - radius * 2) / 2
                     ),
                     size = Size(radius * 2, radius * 2),
-                    style = Stroke(width = thickness)
+                    style = Stroke(width = strokeWidth)
                 )
                 startAngle += sweepAngle
             }
@@ -88,7 +97,7 @@ fun AnalysisDonutChart(
                 .align(Alignment.Center),
             horizontalAlignment = Alignment.Start
         ) {
-            categories.forEachIndexed { i, cat ->
+            categories.forEachIndexed { index, category ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(vertical = 2.dp)
@@ -96,10 +105,10 @@ fun AnalysisDonutChart(
                     Box(
                         Modifier
                             .size(8.dp)
-                            .background(colors[i % colors.size], CircleShape)
+                            .background(colors[index % colors.size], CircleShape)
                     )
                     Text(
-                        text = "${cat.emojiIcon} ${cat.part} ${cat.title}",
+                        text = "${category.emojiIcon} ${category.part} ${category.title}",
                         style = MaterialTheme.typography.labelSmall.copy(
                             fontSize = 8.sp
                         ),
@@ -119,36 +128,33 @@ private fun prepareForPie(
 ): List<AnalysisCategory> {
     if (originalAnalysisCategories.isEmpty()) return emptyList()
 
-    val sorted = originalAnalysisCategories.sortedByDescending { it.part.toBigDecimalPercent() }
+    val sortedByPercent = originalAnalysisCategories.sortedByDescending { it.part.toBigDecimalPercent() }
 
-    val majors = sorted.filter { it.part.toBigDecimalPercent() >= minPercent }
-    val visibleMajors = majors.take(maxSlices)
-
-    val others = sorted - visibleMajors.toSet()
-
-    val otherPercent = others.fold(BigDecimal.ZERO) { acc, cat ->
-        acc + cat.part.toBigDecimalPercent()
+    val majorCategories = sortedByPercent.filter {
+        it.part.toBigDecimalPercent() >= minPercent
     }
 
-    val otherAmount = others.fold(BigDecimal.ZERO) { acc, cat ->
-        acc + cat.amount.toBigDecimalAmount()
-    }
+    val visibleMajors = majorCategories.take(maxSlices)
 
-    val df = DecimalFormat("#.##")
-    val otherPartStr = df.format(otherPercent) + " %"
-    val otherAmountStr = df.format(otherAmount)
+    val remaining = sortedByPercent - visibleMajors.toSet()
+
+    val othersTotalPercent = remaining.sumOf { it.part.toBigDecimalPercent() }
+    val othersTotalAmount = remaining.sumOf { it.amount.toBigDecimalAmount() }
+
+    val formattedAmount = DecimalFormat("#.##").format(othersTotalAmount)
+    val formattedPercent = DecimalFormat("#.##").format(othersTotalPercent) + " %"
 
     return buildList {
         addAll(visibleMajors)
-        if (otherPercent > BigDecimal.ZERO) {
+        if (othersTotalPercent > BigDecimal.ZERO) {
             add(
                 AnalysisCategory(
                     id = -1,
                     title = context.getString(R.string.other),
                     emojiIcon = "📦",
-                    amount = otherAmountStr,
+                    amount = formattedAmount,
                     currency = "",
-                    part = otherPartStr
+                    part = formattedPercent
                 )
             )
         }

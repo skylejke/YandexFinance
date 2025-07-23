@@ -32,7 +32,10 @@ internal class GetAnalysisTransactionsUseCase @Inject constructor(
         val analysisCategories = byCategory.map { (category, list) ->
             val sum = list.sumOf { it.amount.toAmountInt() }
             val percent = if (totalAmount > 0) sum * 100f / totalAmount else 0f
-            val part = String.format(Locale.getDefault(), "%.2f %%", percent)
+            val part = when {
+                percent in 0f..1f && sum > 0 -> "<1 %"
+                else -> String.format(Locale.getDefault(), "%.2f %%", percent)
+            }
             AnalysisCategory(
                 id = category.id,
                 title = category.name,
