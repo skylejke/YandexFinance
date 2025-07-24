@@ -1,11 +1,12 @@
-package ru.point.settings.ui.screen
+package ru.point.settings.ui.settings.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.NonRestartableComposable
 import androidx.compose.ui.Modifier
 import ru.point.core.resources.R
-import ru.point.settings.ui.content.SettingsScreenContent
+import ru.point.navigation.NavigationRoute
+import ru.point.settings.ui.settings.content.SettingsScreenContent
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
@@ -16,9 +17,9 @@ fun SettingsScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
+    onNavigate: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
-
 
     topAppBarState.value = TopAppBarState(
         titleRes = R.string.settings,
@@ -28,5 +29,8 @@ fun SettingsScreen(
 
     bottomBarState.value = BottomBarState.Showed
 
-    SettingsScreenContent(modifier = modifier)
+    SettingsScreenContent(
+        onNavigate = onNavigate,
+        modifier = modifier
+    )
 }

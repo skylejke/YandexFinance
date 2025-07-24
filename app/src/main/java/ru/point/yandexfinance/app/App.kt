@@ -13,6 +13,7 @@ import ru.point.account.di.deps.AccountDepsStore
 import ru.point.categories.di.deps.CategoriesDepsStore
 import ru.point.impl.worker.SyncAccountWorker
 import ru.point.impl.worker.SyncTransactionWorker
+import ru.point.settings.di.deps.SettingsDepsStore
 import ru.point.transactions.di.deps.TransactionDepsStore
 import ru.point.utils.network.InternetHolder
 import ru.point.yandexfinance.di.component.AppComponent
@@ -55,6 +56,7 @@ class App : Application(), Configuration.Provider {
         CategoriesDepsStore.categoriesDeps = appComponent
         AccountDepsStore.accountDeps = appComponent
         TransactionDepsStore.transactionDeps = appComponent
+        SettingsDepsStore.settingsDeps = appComponent
     }
 
     private fun schedulePeriodicSync(context: Context) {

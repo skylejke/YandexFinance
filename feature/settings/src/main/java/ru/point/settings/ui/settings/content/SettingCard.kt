@@ -1,32 +1,34 @@
-package ru.point.settings.ui.content
+package ru.point.settings.ui.settings.content
 
+import androidx.annotation.StringRes
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import ru.point.core.resources.R
 import ru.point.ui.composables.BaseListItem
 
 @Composable
-internal fun SwitchThemeCard(
-    isDarkTheme: Boolean,
-    switchTheme: (Boolean) -> Unit,
+internal fun SettingCard(
+    @StringRes settingTitleResId: Int,
     modifier: Modifier = Modifier
 ) {
     BaseListItem(
         modifier = modifier,
         content = {
             Text(
-                text = stringResource(R.string.setting_theme),
+                text = stringResource(settingTitleResId),
                 style = MaterialTheme.typography.bodyLarge
             )
         },
         trail = {
-            Switch(
-                checked = isDarkTheme,
-                onCheckedChange = switchTheme,
+            Icon(
+                imageVector = ImageVector.vectorResource(R.drawable.settings_trailing_icon),
+                contentDescription = stringResource(settingTitleResId)
             )
         }
     )

@@ -55,3 +55,6 @@ include(
     ":data:transactions:impl",
     ":data:database"
 )
+include(":data:settings")
+include(":data:settings:api")
+include(":data:settings:impl")

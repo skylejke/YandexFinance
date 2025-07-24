@@ -30,5 +30,7 @@ sealed interface NavigationRoute {
     sealed interface SettingsFeature : NavigationRoute {
 
         data object Settings : SettingsFeature
+
+        data object AppInfo : SettingsFeature
     }
 }

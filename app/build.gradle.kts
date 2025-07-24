@@ -26,6 +26,7 @@ android {
         buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
         buildConfigField("String", "BASE_URL", "\"https://shmr-finance.ru/\"")
         buildConfigField("String", "ACCOUNT_ID", "\"${properties.getProperty("ACCOUNT_ID")}\"")
+        buildConfigField("String", "APP_VERSION_NAME", "\"$versionName\"")
     }
 
     buildTypes {
@@ -64,9 +65,11 @@ dependencies {
     implementation(projects.data.account.api)
     implementation(projects.data.categories.api)
     implementation(projects.data.transactions.api)
+    implementation(projects.data.settings.api)
     implementation(projects.data.account.impl)
     implementation(projects.data.categories.impl)
     implementation(projects.data.transactions.impl)
+    implementation(projects.data.settings.impl)
 
     implementation(projects.feature.account)
     implementation(projects.feature.categories)
