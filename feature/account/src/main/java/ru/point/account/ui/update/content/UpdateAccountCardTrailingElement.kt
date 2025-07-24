@@ -12,8 +12,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ru.point.core.resources.R
-import ru.point.ui.colors.GhostGray
-import ru.point.ui.colors.Graphite
 
 @Composable
 internal fun UpdateAccountCardTrailingElement(trailingText: String, modifier: Modifier = Modifier) {
@@ -25,12 +23,11 @@ internal fun UpdateAccountCardTrailingElement(trailingText: String, modifier: Mo
         Text(
             text = trailingText,
             style = MaterialTheme.typography.bodyLarge,
-            color = Graphite
         )
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.more_icon),
             contentDescription = null,
-            tint = GhostGray
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

@@ -9,7 +9,7 @@ import javax.inject.Named
 @Suppress("UNCHECKED_CAST")
 internal class AnalysisViewModelFactory @Inject constructor(
     private val getAnalysisTransactionsUseCase: GetAnalysisTransactionsUseCase,
-    @Named("isIncome") private val isIncome: Boolean,
+    @param:Named("isIncome") private val isIncome: Boolean,
 ): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) =

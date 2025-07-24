@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import ru.point.core.resources.R
-import ru.point.ui.colors.Graphite
 import ru.point.ui.composables.BaseListItem
 
 @Composable
@@ -20,14 +19,12 @@ fun AccountCurrency(
             Text(
                 text = stringResource(R.string.currency),
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
         },
         trail = {
             Text(
                 text = currency,
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
         }
     )

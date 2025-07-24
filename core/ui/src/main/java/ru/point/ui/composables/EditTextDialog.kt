@@ -10,11 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.selection.TextSelectionColors
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -30,9 +27,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import ru.point.core.resources.R
-import ru.point.ui.colors.ForestGreen
-import ru.point.ui.colors.Graphite
-import ru.point.ui.colors.White
 import ru.point.utils.extensions.sanitizeDecimalInput
 
 @Composable
@@ -53,7 +47,6 @@ fun EditTextDialog(
         Surface(
             shape = RoundedCornerShape(12.dp),
             tonalElevation = 8.dp,
-            color = MaterialTheme.colorScheme.background
         ) {
 
             Column(modifier = Modifier.padding(20.dp)) {
@@ -95,15 +88,6 @@ fun EditTextDialog(
                             }
                         }
                     },
-                    colors = OutlinedTextFieldDefaults.colors(
-                        selectionColors = TextSelectionColors(
-                            handleColor = ForestGreen,
-                            backgroundColor = White
-                        ),
-                        unfocusedBorderColor = Graphite,
-                        cursorColor = ForestGreen,
-                        focusedBorderColor = ForestGreen,
-                    ),
                     modifier = Modifier.fillMaxWidth()
                 )
 
@@ -113,18 +97,12 @@ fun EditTextDialog(
 
                     TextButton(
                         onClick = onDismiss,
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = ForestGreen
-                        )
                     ) {
                         Text(text = stringResource(R.string.cancel))
                     }
 
                     TextButton(
                         onClick = { onConfirm(text) },
-                        colors = ButtonDefaults.textButtonColors(
-                            contentColor = ForestGreen
-                        )
                     ) {
                         Text(text = stringResource(R.string.ok))
                     }

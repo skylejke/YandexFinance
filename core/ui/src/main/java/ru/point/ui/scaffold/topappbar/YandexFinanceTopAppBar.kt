@@ -13,9 +13,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ru.point.core.resources.R
-import ru.point.ui.colors.CharcoalGrey
-import ru.point.ui.colors.Graphite
-import ru.point.ui.colors.MintGreen
 import ru.point.ui.scaffold.action.ActionIcon
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -29,7 +26,6 @@ fun YandexFinanceTopAppBar(
             Text(
                 text = stringResource(topAppBarState.titleRes),
                 style = MaterialTheme.typography.titleLarge,
-                color = Graphite
             )
         },
         actions = {
@@ -41,9 +37,7 @@ fun YandexFinanceTopAppBar(
             }
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = MintGreen,
-            titleContentColor = Graphite,
-            actionIconContentColor = CharcoalGrey
+            containerColor = MaterialTheme.colorScheme.primary,
         ),
         navigationIcon = {
             if (topAppBarState.onBack != null) {

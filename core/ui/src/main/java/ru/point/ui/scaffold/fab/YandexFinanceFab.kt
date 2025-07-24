@@ -4,12 +4,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import ru.point.ui.colors.MintGreen
 
 @Composable
 fun YandexFinanceFab(
@@ -19,7 +18,8 @@ fun YandexFinanceFab(
 ) {
     FloatingActionButton(
         onClick = onClick,
-        containerColor = MintGreen,
+        containerColor = MaterialTheme.colorScheme.primary,
+        contentColor = MaterialTheme.colorScheme.onPrimary,
         shape = CircleShape,
         elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
         modifier = modifier
@@ -27,7 +27,6 @@ fun YandexFinanceFab(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = Color.White
         )
     }
 }

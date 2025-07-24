@@ -3,11 +3,11 @@ package ru.point.transactions.ui.expenses.content
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import ru.point.ui.colors.Mint
 import ru.point.ui.composables.BaseListItem
 import ru.point.ui.composables.CategoryIcon
 import ru.point.ui.composables.TransactionCardContent
@@ -33,7 +33,7 @@ internal fun ExpensesCard(
                 modifier = Modifier
                     .size(24.dp)
                     .clip(CircleShape)
-                    .background(Mint)
+                    .background(MaterialTheme.colorScheme.secondaryContainer)
             )
         },
         trail = {

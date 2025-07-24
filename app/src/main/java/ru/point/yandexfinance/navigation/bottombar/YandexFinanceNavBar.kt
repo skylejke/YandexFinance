@@ -4,17 +4,12 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import ru.point.ui.colors.Graphite
-import ru.point.ui.colors.LavenderWhite
-import ru.point.ui.colors.Mint
-import ru.point.ui.colors.MintGreen
 
 @Composable
 fun YandexFinanceNavBar(
@@ -23,10 +18,7 @@ fun YandexFinanceNavBar(
     onItemSelected: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    NavigationBar(
-        containerColor = LavenderWhite,
-        modifier = modifier
-    ) {
+    NavigationBar(modifier = modifier) {
         entryPoints.forEachIndexed { index, item ->
             val selected = index == selectedItemIndex
             NavigationBarItem(
@@ -46,12 +38,6 @@ fun YandexFinanceNavBar(
                         contentDescription = stringResource(item.titleResId)
                     )
                 },
-
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MintGreen,
-                    indicatorColor = Mint,
-                    selectedTextColor = Graphite
-                )
             )
         }
     }

@@ -23,11 +23,6 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.point.core.resources.R
-import ru.point.ui.colors.BrightYellow
-import ru.point.ui.colors.CocoaBrown
-import ru.point.ui.colors.CoralRed
-import ru.point.ui.colors.ForestGreen
-import ru.point.ui.colors.MintGreen
 import ru.point.utils.extensions.toBigDecimalAmount
 import ru.point.utils.extensions.toBigDecimalPercent
 import ru.point.vo.AnalysisCategory
@@ -40,9 +35,9 @@ fun AnalysisDonutChart(
     context: Context,
     modifier: Modifier = Modifier,
     colors: List<Color> = listOf(
-        MintGreen, BrightYellow,
-        CoralRed, ForestGreen,
-        CocoaBrown,
+        Color(0xFF2AE881), Color(0xFFFCE300),
+        Color(0xFFE46962), Color(0xFF306A42),
+        Color(0xFF795548),
     ),
 ) {
 

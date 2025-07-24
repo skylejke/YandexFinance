@@ -6,8 +6,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import ru.point.ui.colors.CharcoalGrey
-import ru.point.ui.colors.Graphite
 
 @Composable
 fun TransactionCardContent(
@@ -19,13 +17,12 @@ fun TransactionCardContent(
         Text(
             text = title,
             style = MaterialTheme.typography.bodyLarge,
-            color = Graphite
         )
         if (!subtitle.isNullOrBlank()) {
             Text(
                 text = subtitle,
                 style = MaterialTheme.typography.bodyMedium,
-                color = CharcoalGrey
+                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

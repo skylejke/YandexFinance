@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
@@ -29,13 +28,13 @@ fun ErrorContent(message: String, modifier: Modifier = Modifier) {
         ) {
             Icon(
                 imageVector = ImageVector.vectorResource(R.drawable.error_filled),
-                tint = Color.Red,
+                tint = MaterialTheme.colorScheme.error,
                 contentDescription = message,
                 modifier = Modifier.size(96.dp)
             )
             Text(
                 text = message,
-                color = Color.Red,
+                color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center
             )

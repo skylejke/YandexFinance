@@ -13,9 +13,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ru.point.core.resources.R
-import ru.point.ui.colors.CharcoalGrey
-import ru.point.ui.colors.GhostGray
-import ru.point.ui.colors.Graphite
 import ru.point.utils.extensions.toFormattedCurrency
 import ru.point.utils.extensions.toTimeHHmm
 
@@ -37,20 +34,19 @@ fun TransactionsCardTrail(
             Text(
                 text = amount.toFormattedCurrency(currency),
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
             if (transactionDate != null) {
                 Text(
                     text = transactionDate.toTimeHHmm(),
                     style = MaterialTheme.typography.bodyMedium,
-                    color = CharcoalGrey
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.more_icon),
             contentDescription = null,
-            tint = GhostGray
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

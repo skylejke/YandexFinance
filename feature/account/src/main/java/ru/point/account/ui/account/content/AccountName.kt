@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import ru.point.core.resources.R
-import ru.point.ui.colors.Graphite
 import ru.point.ui.composables.BaseListItem
 
 @Composable
@@ -20,7 +19,6 @@ internal fun AccountName(name: String, modifier: Modifier = Modifier) {
             Text(
                 text = stringResource(R.string.name),
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
         },
         lead = {
@@ -33,7 +31,6 @@ internal fun AccountName(name: String, modifier: Modifier = Modifier) {
             Text(
                 text = name,
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
         }
     )

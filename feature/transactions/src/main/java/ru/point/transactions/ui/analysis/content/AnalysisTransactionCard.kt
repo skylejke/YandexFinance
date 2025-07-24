@@ -17,8 +17,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.point.core.resources.R
-import ru.point.ui.colors.GhostGray
-import ru.point.ui.colors.Graphite
 import ru.point.ui.composables.BaseListItem
 import ru.point.ui.composables.CategoryIcon
 import ru.point.utils.extensions.toFormattedCurrency
@@ -39,7 +37,6 @@ internal fun AnalysisTransactionCard(
             Text(
                 text = title,
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite,
             )
         },
         lead = {
@@ -75,18 +72,16 @@ private fun AnalysisTransactionCardTrail(
             Text(
                 text = part,
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
             Text(
                 text = amount.toFormattedCurrency(currency),
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
         }
         Icon(
             imageVector = ImageVector.vectorResource(R.drawable.more_icon),
             contentDescription = null,
-            tint = GhostGray
+            tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }
 }

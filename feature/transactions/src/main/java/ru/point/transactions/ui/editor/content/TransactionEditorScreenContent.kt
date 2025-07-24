@@ -35,9 +35,6 @@ import ru.point.transactions.ui.editor.content.forms.TimeForm
 import ru.point.transactions.ui.editor.viewmodel.TransactionEditorAction
 import ru.point.transactions.ui.editor.viewmodel.TransactionEditorEvent
 import ru.point.transactions.ui.editor.viewmodel.state.TransactionEditorState
-import ru.point.ui.colors.CharcoalGrey
-import ru.point.ui.colors.CoralRed
-import ru.point.ui.colors.White
 import ru.point.ui.composables.EditTextDialog
 import ru.point.ui.composables.GreyHorizontalDivider
 import ru.point.ui.composables.LoadingIndicator
@@ -152,21 +149,21 @@ internal fun TransactionEditorScreenContent(
             Column {
                 Button(
                     onClick = { showDeleteTransactionDialog = true },
-                    colors = ButtonDefaults.buttonColors(containerColor = CoralRed),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error),
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(top = 32.dp, start = 16.dp, end = 16.dp)
                 ) {
                     Text(
                         text = stringResource(R.string.delete_transaction),
-                        color = White,
+                        color = MaterialTheme.colorScheme.onError,
                     )
                 }
 
                 Text(
                     text = stringResource(R.string.last_sync_time, state.lastTimeSync),
                     style = MaterialTheme.typography.bodySmall,
-                    color = CharcoalGrey,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(16.dp)
                 )
             }

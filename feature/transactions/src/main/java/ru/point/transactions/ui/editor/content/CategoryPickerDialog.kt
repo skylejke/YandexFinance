@@ -33,7 +33,6 @@ internal fun CategoryPickerDialog(
         Surface(
             shape = RoundedCornerShape(12.dp),
             tonalElevation = 8.dp,
-            color = MaterialTheme.colorScheme.surface,
             modifier = modifier
         ) {
 

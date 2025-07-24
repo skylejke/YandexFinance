@@ -1,6 +1,7 @@
 package ru.point.charts
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
@@ -9,9 +10,11 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ru.point.utils.extensions.monthDayDateFormatter
 import ru.point.vo.TransactionDiff
 import java.math.RoundingMode
@@ -37,6 +40,11 @@ fun TransactionsDiffsGraph(
 
     val positiveColor = Color(0xFF2AE881)
     val negativeColor = Color(0xFFFF5722)
+
+    val labelTextStyle = TextStyle(
+        color = MaterialTheme.colorScheme.onSurface,
+        fontSize = 12.sp
+    )
 
     val textMeasurer = rememberTextMeasurer()
 
@@ -71,12 +79,13 @@ fun TransactionsDiffsGraph(
 
         labelIndexes.sorted().forEach { i ->
             val dateLabel = transactionDiffs[i].date.format(monthDayDateFormatter)
-            val labelWidth = textMeasurer.measure(dateLabel).size.width
+            val labelLayoutResult = textMeasurer.measure(dateLabel, style = labelTextStyle)
+            val labelWidth = labelLayoutResult.size.width
             val labelCenterX = horizontalStartOffset + i * (barWidth + gapWidth) + barWidth / 2f
             val labelX = (labelCenterX - labelWidth / 2)
                 .coerceIn(horizontalStartOffset, size.width - labelWidth)
 
-            drawText(textMeasurer, dateLabel, topLeft = Offset(labelX, graphHeight + xAxisLabelOffset))
+            drawText(labelLayoutResult, topLeft = Offset(labelX, graphHeight + xAxisLabelOffset))
         }
     }
 }

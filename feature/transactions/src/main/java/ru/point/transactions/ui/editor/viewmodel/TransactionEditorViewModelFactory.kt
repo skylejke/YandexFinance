@@ -22,8 +22,8 @@ internal class TransactionEditorViewModelFactory @Inject constructor(
     private val createTransactionUseCase: Lazy<CreateTransactionUseCase>,
     private val updateTransactionUseCase: Lazy<UpdateTransactionUseCase>,
     private val deleteTransactionUseCase: Lazy<DeleteTransactionUseCase>,
-    @Named("transactionId") private val transactionId: Int?,
-    @Named("isIncome") private val isIncome: Boolean,
+    @param:Named("transactionId") private val transactionId: Int?,
+    @param:Named("isIncome") private val isIncome: Boolean,
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>) =
