@@ -1,9 +1,11 @@
 package ru.point.account.domain.model
 
+import androidx.compose.runtime.Immutable
 import ru.point.api.model.AccountDto
 import ru.point.utils.extensions.toCurrencySymbol
 import ru.point.utils.extensions.toFormattedCurrency
 
+@Immutable
 internal data class AccountVo(
     val name: String = "",
     val balance: String = "0.00",

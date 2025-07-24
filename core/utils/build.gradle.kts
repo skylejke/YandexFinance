@@ -46,6 +46,7 @@ kotlin {
 }
 
 dependencies {
+    implementation(libs.compose.runtime)
     implementation(libs.bundles.dagger)
     implementation(libs.retrofit)
     implementation(libs.androidx.core.ktx)

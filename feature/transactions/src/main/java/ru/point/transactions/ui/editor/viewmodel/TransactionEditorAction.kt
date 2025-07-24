@@ -1,10 +1,12 @@
 package ru.point.transactions.ui.editor.viewmodel
 
+import androidx.compose.runtime.Immutable
 import ru.point.transactions.domain.model.AccountData
 import ru.point.transactions.domain.model.TransactionVo
 import ru.point.utils.model.AppError
 import ru.point.vo.CategoryVo
 
+@Immutable
 internal sealed interface TransactionEditorAction {
 
     sealed interface LastTimeSync : TransactionEditorAction {

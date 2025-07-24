@@ -47,7 +47,7 @@ dependencies {
     implementation(projects.core.ui)
     implementation(projects.data.categories.api)
 
-
+    implementation(libs.compose.runtime)
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)

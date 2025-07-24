@@ -34,5 +34,6 @@ kotlin {
 }
 
 dependencies {
+    implementation(libs.compose.runtime)
     implementation(libs.androidx.core.ktx)
 }

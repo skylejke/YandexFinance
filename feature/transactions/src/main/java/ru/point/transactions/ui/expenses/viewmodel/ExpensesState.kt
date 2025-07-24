@@ -1,10 +1,12 @@
 package ru.point.transactions.ui.expenses.viewmodel
 
+import androidx.compose.runtime.Immutable
 import ru.point.transactions.domain.model.Expense
 import ru.point.utils.extensions.toAmountInt
 import ru.point.utils.extensions.toFormattedCurrency
 import ru.point.utils.model.AppError
 
+@Immutable
 internal data class ExpensesState(
     val expenses: List<Expense> = emptyList(),
     val isLoading: Boolean = true,

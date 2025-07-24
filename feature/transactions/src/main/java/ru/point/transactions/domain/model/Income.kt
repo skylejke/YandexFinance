@@ -1,7 +1,9 @@
 package ru.point.transactions.domain.model
 
+import androidx.compose.runtime.Immutable
 import ru.point.api.model.TransactionResponseDto
 
+@Immutable
 internal data class Income(
     val id: Int,
     val title: String,

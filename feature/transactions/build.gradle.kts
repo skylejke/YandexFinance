@@ -51,6 +51,7 @@ dependencies {
     implementation(projects.data.categories.api)
     implementation(projects.data.account.api)
 
+    implementation(libs.compose.runtime)
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)

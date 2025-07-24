@@ -1,8 +1,10 @@
 package ru.point.transactions.ui.analysis.viewmodel
 
+import androidx.compose.runtime.Immutable
 import ru.point.utils.model.AppError
 import ru.point.vo.AnalysisCategory
 
+@Immutable
 internal sealed interface AnalysisAction {
 
     data object InitialLoadRequested : AnalysisAction
