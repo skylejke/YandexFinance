@@ -43,6 +43,9 @@ sealed interface ComposeNavigationRoute {
 
         @Serializable
         data object AppInfo : SettingsFeature
+
+        @Serializable
+        data object AppColor : SettingsFeature
     }
 }
 
@@ -57,6 +60,8 @@ val NavigationRoute.asComposeNavigationRoute
         is NavigationRoute.SettingsFeature.Settings -> ComposeNavigationRoute.SettingsFeature.Settings
 
         is NavigationRoute.SettingsFeature.AppInfo -> ComposeNavigationRoute.SettingsFeature.AppInfo
+
+        is NavigationRoute.SettingsFeature.AppColor -> ComposeNavigationRoute.SettingsFeature.AppColor
 
         is NavigationRoute.TransactionsFeature.Analysis -> ComposeNavigationRoute.TransactionsFeature.Analysis(
             isIncome = isIncome

@@ -40,7 +40,9 @@ kotlin {
 dependencies {
     implementation(projects.data.settings.api)
     implementation(projects.core.utils)
+    implementation(projects.core.utils)
 
+    implementation(libs.datastore.preferences)
     implementation(libs.bundles.dagger)
     ksp(libs.dagger.compiler)
     ksp(libs.dagger.android.processor)

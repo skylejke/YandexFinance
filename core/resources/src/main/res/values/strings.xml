@@ -67,4 +67,6 @@
     <string name="app_info">Информация о приложении</string>
     <string name="app_version">Версия приложения: %1$s</string>
     <string name="last_time_update">Последнее обновление: %1$s</string>
+    <string name="primary_color">Основной цвет</string>
+    <string name="pick_primary_color">Выберите основной цвет приложения</string>
 </resources>

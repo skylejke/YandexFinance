@@ -23,6 +23,7 @@ composeMaterialDialogs = "0.9.0"
 roomVersion = "2.7.2"
 workRuntimeKtx = "2.10.2"
 composeRuntimeVersion = "1.8.3"
+dataStoreVersion = "1.1.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +60,7 @@ compose-material-dialogs = { module = "io.github.vanpra.compose-material-dialogs
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
 compose_runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeRuntimeVersion" }
+datastore_preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStoreVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -10,22 +10,22 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.point.core.resources.R
 import ru.point.navigation.NavigationRoute
+import ru.point.settings.ui.settings.viewmodel.SettingsAction
+import ru.point.settings.ui.settings.viewmodel.SettingsState
 import ru.point.ui.composables.GreyHorizontalDivider
 
 @Composable
 internal fun SettingsScreenContent(
+    state: SettingsState,
+    onAction: (SettingsAction) -> Unit,
     onNavigate: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var isDarkTheme by remember { mutableStateOf(false) }
 
     val settingsCardModifier = Modifier
         .fillMaxWidth()
@@ -37,8 +37,8 @@ internal fun SettingsScreenContent(
 
         SwitchThemeCard(
             modifier = settingsCardModifier.padding(horizontal = 16.dp),
-            isDarkTheme = isDarkTheme,
-            switchTheme = { isDarkTheme = it }
+            isDarkTheme = state.isDarkThemeEnabled,
+            switchTheme = { onAction(SettingsAction.OnToggleDarkTheme(it)) }
         )
 
         GreyHorizontalDivider(modifier = Modifier.fillMaxWidth())
@@ -48,7 +48,9 @@ internal fun SettingsScreenContent(
                 .clickable(
                     interactionSource = remember { MutableInteractionSource() },
                     indication = ripple(),
-                    onClick = {}
+                    onClick = {
+                        onNavigate(NavigationRoute.SettingsFeature.AppColor)
+                    }
                 )
                 .padding(horizontal = 16.dp),
             settingTitleResId = R.string.setting_color

@@ -1,4 +1,4 @@
-package ru.point.settings.ui.settings.screen
+package ru.point.settings.ui.appcolor.screen
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -9,46 +9,45 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ru.point.core.resources.R
-import ru.point.navigation.NavigationRoute
-import ru.point.settings.di.component.DaggerSettingsComponent
+import ru.point.settings.di.component.DaggerAppColorComponent
 import ru.point.settings.di.deps.SettingsDepsProvider
-import ru.point.settings.ui.settings.content.SettingsScreenContent
-import ru.point.settings.ui.settings.viewmodel.SettingsViewModel
+import ru.point.settings.ui.appcolor.content.AppColorPicker
+import ru.point.settings.ui.appcolor.viewmodel.AppColorViewModel
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 
 @NonRestartableComposable
 @Composable
-fun SettingsScreen(
+fun AppColorScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
-    onNavigate: (NavigationRoute) -> Unit,
-    modifier: Modifier = Modifier
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
 
     topAppBarState.value = TopAppBarState(
-        titleRes = R.string.settings,
+        titleRes = R.string.primary_color,
+        onBack = onBack
     )
 
     fabState.value = FabState.Hidden
 
-    bottomBarState.value = BottomBarState.Showed
+    bottomBarState.value = BottomBarState.Hidden
 
-    val settingsComponent = remember {
-        DaggerSettingsComponent.builder().deps(settingsDeps = SettingsDepsProvider.settingsDeps).build()
+    val appColorComponent = remember {
+        DaggerAppColorComponent.builder().deps(settingsDeps = SettingsDepsProvider.settingsDeps)
+            .build()
     }
 
-    val viewModel =
-        viewModel<SettingsViewModel>(factory = settingsComponent.settingsViewModelFactory)
+    val viewModel = viewModel<AppColorViewModel>(factory = appColorComponent.appColorViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    SettingsScreenContent(
+    AppColorPicker(
         state = state,
-        onAction = viewModel::onAction,
-        onNavigate = onNavigate,
-        modifier = modifier
+        onColorSelected = viewModel::onAction,
+        modifier = modifier,
     )
 }

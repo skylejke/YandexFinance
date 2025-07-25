@@ -32,5 +32,7 @@ sealed interface NavigationRoute {
         data object Settings : SettingsFeature
 
         data object AppInfo : SettingsFeature
+
+        data object AppColor : SettingsFeature
     }
 }
