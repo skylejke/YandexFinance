@@ -13,6 +13,7 @@ import ru.point.account.di.deps.AccountDepsStore
 import ru.point.categories.di.deps.CategoriesDepsStore
 import ru.point.impl.worker.SyncAccountWorker
 import ru.point.impl.worker.SyncTransactionWorker
+import ru.point.settings.di.deps.SettingsDepsStore
 import ru.point.transactions.di.deps.TransactionDepsStore
 import ru.point.utils.network.InternetHolder
 import ru.point.yandexfinance.di.component.AppComponent
@@ -25,11 +26,6 @@ private const val SYNC_ACCOUNT_WORKER_NAME = "sync_account_worker"
 
 private const val SYNC_TRANSACTION_WORKER_NAME = "sync_transaction_worker"
 
-/**
- * Класс приложения, инициализирующий корневой Dagger-компонент [AppComponent] и трекер сети [InternetHolder].
- *
- * Используется как точка входа для внедрения зависимостей и отслеживания состояния подключения к интернету.
- */
 class App : Application(), Configuration.Provider {
 
     lateinit var appComponent: AppComponent
@@ -60,6 +56,7 @@ class App : Application(), Configuration.Provider {
         CategoriesDepsStore.categoriesDeps = appComponent
         AccountDepsStore.accountDeps = appComponent
         TransactionDepsStore.transactionDeps = appComponent
+        SettingsDepsStore.settingsDeps = appComponent
     }
 
     private fun schedulePeriodicSync(context: Context) {
@@ -92,11 +89,6 @@ class App : Application(), Configuration.Provider {
     }
 }
 
-/**
- * Расширение для получения [AppComponent] из любого контекста.
- *
- * Позволяет безопасно получать зависимостный граф из [Context], включая вложенные контексты.
- */
 val Context.appComponent: AppComponent
     get() = when (this) {
         is App -> appComponent

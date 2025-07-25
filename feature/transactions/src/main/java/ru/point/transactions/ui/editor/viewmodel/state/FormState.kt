@@ -1,7 +1,9 @@
 package ru.point.transactions.ui.editor.viewmodel.state
 
+import androidx.compose.runtime.Immutable
 import ru.point.utils.model.AppError
 
+@Immutable
 internal data class FormState(
     val isInitialLoading: Boolean = false,
     val error: AppError? = null,

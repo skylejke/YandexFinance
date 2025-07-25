@@ -11,7 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ru.point.transactions.R
+import ru.point.core.resources.R
+import ru.point.navigation.NavigationRoute
 import ru.point.transactions.di.component.DaggerExpensesComponent
 import ru.point.transactions.di.deps.TransactionDepsStore
 import ru.point.transactions.ui.expenses.content.ExpensesScreenContent
@@ -26,20 +27,13 @@ import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран с расходами пользователя за текущий период.
- *
- * Подключает [ExpensesViewModel], отслеживает состояние загрузки, ошибок и соединения,
- * отображает соответствующий UI (список расходов, лоадер, ошибку или баннер отсутствия интернета).
- */
 @NonRestartableComposable
 @Composable
 fun ExpensesScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
-    onNavigateToHistory: () -> Unit,
-    onNavigateToEditor: (Int?) -> Unit,
+    onNavigate: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -48,7 +42,9 @@ fun ExpensesScreen(
         actions = listOf(
             TopAppBarAction(
                 iconResId = R.drawable.history_icon,
-                action = onNavigateToHistory
+                action = {
+                    onNavigate(NavigationRoute.TransactionsFeature.TransactionHistory(isIncome = false))
+                }
             )
         )
     )
@@ -56,17 +52,24 @@ fun ExpensesScreen(
     fabState.value = FabState.Showed(
         icon = Icons.Default.Add,
         action = {
-            onNavigateToEditor(null)
+            onNavigate(
+                NavigationRoute.TransactionsFeature.TransactionEditor(
+                    transactionId = null,
+                    isIncome = false
+                )
+            )
         }
     )
 
     bottomBarState.value = BottomBarState.Showed
 
     val expensesComponent = remember {
-        DaggerExpensesComponent.builder().deps(transactionDeps = TransactionDepsStore.transactionDeps).build()
+        DaggerExpensesComponent.builder()
+            .deps(transactionDeps = TransactionDepsStore.transactionDeps).build()
     }
 
-    val viewModel = viewModel<ExpensesViewModel>(factory = expensesComponent.expensesViewModelFactory)
+    val viewModel =
+        viewModel<ExpensesViewModel>(factory = expensesComponent.expensesViewModelFactory)
 
     val state by viewModel.state.collectAsStateWithLifecycle()
 
@@ -93,7 +96,7 @@ fun ExpensesScreen(
                     ExpensesScreenContent(
                         state = state,
                         modifier = modifier,
-                        onNavigateToEditor = onNavigateToEditor
+                        onNavigateToEditor = onNavigate
                     )
                 }
             }

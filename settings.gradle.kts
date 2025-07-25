@@ -24,35 +24,37 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(
     ":app",
+
     ":feature",
-    ":feature:transactions",
-    ":feature:settings",
     ":feature:account",
     ":feature:categories",
-    ":core",
-    ":core:ui",
-    ":core:utils",
-    ":core:res",
-    ":core:res:common",
-    ":core:res:account",
-    ":core:res:categories",
-    ":core:res:transactions",
-    ":core:res:settings"
-)
+    ":feature:settings",
+    ":feature:transactions",
 
-include(":data")
-include(":data:account")
-include(":data:account:api")
-include(":data:account:impl")
-include(":data:categories")
-include(":data:categories:api")
-include(":data:categories:impl")
-include(":data:transactions")
-include(":data:transactions:api")
-include(":data:transactions:impl")
-include(":core:network")
-include(":core:models")
-include(":core:models:serializable")
-include(":core:models:dto")
-include(":core:models:vo")
-include(":data:database")
+    ":core",
+    ":core:models",
+    ":core:models:dto",
+    ":core:models:serializable",
+    ":core:models:vo",
+    ":core:navigation",
+    ":core:network",
+    ":core:resources",
+    ":core:ui",
+    "core:ui:charts",
+    ":core:utils",
+
+    ":data",
+    ":data:account",
+    ":data:account:api",
+    ":data:account:impl",
+    ":data:categories",
+    ":data:categories:api",
+    ":data:categories:impl",
+    ":data:transactions",
+    ":data:transactions:api",
+    ":data:transactions:impl",
+    ":data:database"
+)
+include(":data:settings")
+include(":data:settings:api")
+include(":data:settings:impl")

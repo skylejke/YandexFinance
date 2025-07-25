@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import ru.point.ui.di.LocalInternetTracker
 import ru.point.ui.scaffold.bottombar.BottomBarState
@@ -25,25 +26,17 @@ import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.fab.YandexFinanceFab
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.ui.scaffold.topappbar.YandexFinanceTopAppBar
+import ru.point.ui.theme.YandexFinanceTheme
 import ru.point.utils.network.InternetHolder.tracker
 import ru.point.yandexfinance.R
 import ru.point.yandexfinance.app.appComponent
-import ru.point.yandexfinance.navigation.Route
+import ru.point.yandexfinance.navigation.ComposeNavigationRoute
 import ru.point.yandexfinance.navigation.YandexFinanceNavHost
 import ru.point.yandexfinance.navigation.bottombar.BottomBarItem
 import ru.point.yandexfinance.navigation.bottombar.YandexFinanceNavBar
-import ru.point.yandexfinance.ui.theme.YandexFinanceTheme
 import javax.inject.Inject
 
-/**
- * Главная активити приложения YandexFinance.
- *
- * Отвечает за инициализацию темизации, DI-контекстов,
- * отображение основной Scaffold-структуры (TopAppBar, BottomNavigation, FAB) и навигации через [YandexFinanceNavHost].
- *
- * Также управляет splash-экраном и поддерживает edge-to-edge режим.
- *
- */
+
 class MainActivity : ComponentActivity() {
 
     @Inject
@@ -56,7 +49,10 @@ class MainActivity : ComponentActivity() {
 
         appComponent.inject(this)
 
-        installSplashScreen()
+        installSplashScreen().setKeepOnScreenCondition {
+            !mainActivityViewModel.initialDataCollected.value
+        }
+
         enableEdgeToEdge()
         mainActivityViewModel
         setContent {
@@ -66,10 +62,18 @@ class MainActivity : ComponentActivity() {
             val fabState = remember { mutableStateOf<FabState>(FabState.Hidden) }
             val bottomBarState = remember { mutableStateOf<BottomBarState>(BottomBarState.Hidden) }
 
+            val isDarkThemeEnabled =
+                mainActivityViewModel.isDarkThemeEnabled.collectAsStateWithLifecycle().value
+            val primaryColor =
+                mainActivityViewModel.primaryColor.collectAsStateWithLifecycle().value
+
             CompositionLocalProvider(
                 LocalInternetTracker provides tracker
             ) {
-                YandexFinanceTheme {
+                YandexFinanceTheme(
+                    primaryColor = primaryColor,
+                    darkTheme = isDarkThemeEnabled
+                ) {
                     Scaffold(
                         modifier = Modifier.fillMaxSize(),
                         topBar = {
@@ -88,7 +92,7 @@ class MainActivity : ComponentActivity() {
                                         onItemSelected = { index ->
                                             if (selectedItemIndex.intValue != index) {
                                                 selectedItemIndex.intValue = index
-                                                navController.navigate(BottomBarItem.entryPoints[index].route)
+                                                navController.navigate(BottomBarItem.entryPoints[index].composeNavigationRoute)
                                             }
                                         },
                                         modifier = Modifier
@@ -112,7 +116,7 @@ class MainActivity : ComponentActivity() {
                     ) { innerPadding ->
                         YandexFinanceNavHost(
                             navHostController = navController,
-                            startDestination = Route.Expenses,
+                            startDestination = ComposeNavigationRoute.TransactionsFeature.Expenses,
                             topAppBarState = topAppBarState,
                             fabState = fabState,
                             bottomBarState = bottomBarState,

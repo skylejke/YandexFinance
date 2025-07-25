@@ -5,12 +5,7 @@ import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
 import javax.inject.Inject
 
-/**
- * ViewModel, отвечающая за загрузку и управление состоянием экрана с доходами пользователя.
- *
- * Выполняет вызов [GetIncomesUseCase], обрабатывает результат и преобразует его в UI-состояние
- * в рамках паттерна MVI.
- */
+
 internal class IncomesViewModel @Inject constructor(private val getIncomesUseCase: GetIncomesUseCase) :
     MviViewModel<IncomesState, IncomesAction, Any>(initialState = IncomesState()) {
 

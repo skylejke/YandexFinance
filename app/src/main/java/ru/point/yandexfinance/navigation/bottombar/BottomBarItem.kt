@@ -1,41 +1,43 @@
 package ru.point.yandexfinance.navigation.bottombar
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import ru.point.yandexfinance.R
-import ru.point.yandexfinance.navigation.Route
+import ru.point.yandexfinance.navigation.ComposeNavigationRoute
 
 sealed class BottomBarItem(
-    val titleResId: Int,
-    val iconResId: Int,
-    val route: Route
+    @param:StringRes val titleResId: Int,
+    @param:DrawableRes val iconResId: Int,
+    val composeNavigationRoute: ComposeNavigationRoute
 ) {
     data object Expenses : BottomBarItem(
         titleResId = R.string.expenses,
         iconResId = R.drawable.expenses_icon,
-        route = Route.Expenses
+        composeNavigationRoute = ComposeNavigationRoute.TransactionsFeature.Expenses
     )
 
     data object Income : BottomBarItem(
         titleResId = R.string.income,
         iconResId = R.drawable.income_icon,
-        route = Route.Incomes
+        composeNavigationRoute = ComposeNavigationRoute.TransactionsFeature.Incomes
     )
 
     data object Account : BottomBarItem(
         titleResId = R.string.account,
         iconResId = R.drawable.account_icon,
-        route = Route.Account
+        composeNavigationRoute = ComposeNavigationRoute.AccountFeature.Account
     )
 
     data object Categories : BottomBarItem(
         titleResId = R.string.categories,
         iconResId = R.drawable.categories_icon,
-        route = Route.Categories
+        composeNavigationRoute = ComposeNavigationRoute.CategoriesFeature.Categories
     )
 
     data object Settings : BottomBarItem(
         titleResId = R.string.settings,
         iconResId = R.drawable.settings_icon,
-        route = Route.Settings
+        composeNavigationRoute = ComposeNavigationRoute.SettingsFeature.Settings
     )
 
     companion object {

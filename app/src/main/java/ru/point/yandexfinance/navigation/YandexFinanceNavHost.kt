@@ -13,18 +13,10 @@ import ru.point.yandexfinance.navigation.featurenav.categoriesFeature
 import ru.point.yandexfinance.navigation.featurenav.settingsFeature
 import ru.point.yandexfinance.navigation.featurenav.transactionsFeature
 
-/**
- * Главный NavHost приложения.
- *
- * Отвечает за инициализацию и конфигурацию графа навигации, включая экраны транзакций, аккаунта,
- * категорий и настроек. Делегирует управление [TopAppBarState] и [FabState] в зависимости от активного экрана.
- *
- * Использует переданный [NavHostController] и стартовый маршрут [startDestination] для навигации.
- */
 @Composable
 fun YandexFinanceNavHost(
     navHostController: NavHostController,
-    startDestination: Route,
+    startDestination: ComposeNavigationRoute,
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
@@ -56,6 +48,7 @@ fun YandexFinanceNavHost(
         )
 
         settingsFeature(
+            navController = navHostController,
             topAppBarState = topAppBarState,
             fabState = fabState,
             bottomBarState = bottomBarState,

@@ -1,6 +1,8 @@
 package ru.point.settings.domain.model
 
+import androidx.annotation.StringRes
+
 @JvmInline
 internal value class Setting(
-    val settingTitleResId: Int
+    @param:StringRes val settingTitleResId: Int
 )

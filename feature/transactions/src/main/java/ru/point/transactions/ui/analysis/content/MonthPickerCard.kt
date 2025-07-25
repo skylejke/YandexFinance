@@ -15,8 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.point.transactions.R
-import ru.point.ui.colors.MintGreen
+import ru.point.core.resources.R
 import ru.point.ui.composables.BaseListItem
 
 @Composable
@@ -38,7 +37,7 @@ internal fun MonthPickerCard(
                 modifier = Modifier
                     .height(36.dp)
                     .background(
-                        color = MintGreen,
+                        color = MaterialTheme.colorScheme.primary,
                         shape = RoundedCornerShape(100.dp)
                     )
                     .padding(horizontal = 20.dp, vertical = 6.dp),

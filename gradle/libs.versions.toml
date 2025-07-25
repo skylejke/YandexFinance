@@ -1,27 +1,29 @@
 [versions]
-agp = "8.11.0"
-kotlin = "2.1.21"
+agp = "8.11.1"
+kotlin = "2.2.0"
 coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-lifecycleRuntimeKtx = "2.9.1"
+lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
-composeBom = "2025.06.01"
-kotlinxSerialization = "1.8.1"
-navigationCompose = "2.9.0"
+composeBom = "2025.07.00"
+kotlinxSerialization = "1.9.0"
+navigationCompose = "2.9.2"
 splashScreenVersion = "1.0.1"
-retrofitVersion = "2.11.0"
+retrofitVersion = "3.0.0"
 retrofitAdaptersResult = "1.0.13"
-retrofit2KotlinxSerializationConverter = "0.8.0"
-lifecycleViewmodelComposeAndroid = "2.9.1"
+retrofit2KotlinxSerializationConverter = "1.0.0"
+lifecycleViewmodelComposeAndroid = "2.9.2"
 appcompat = "1.7.1"
 material = "1.12.0"
-kspVersion = "2.1.21-2.0.1"
-daggerVersion = "2.56.2"
+kspVersion = "2.2.0-2.0.2"
+daggerVersion = "2.57"
 composeMaterialDialogs = "0.9.0"
 roomVersion = "2.7.2"
 workRuntimeKtx = "2.10.2"
+composeRuntimeVersion = "1.8.3"
+dataStoreVersion = "1.1.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -57,6 +59,8 @@ dagger-android-processor = { module = "com.google.dagger:dagger-android-processo
 compose-material-dialogs = { module = "io.github.vanpra.compose-material-dialogs:datetime", version.ref = "composeMaterialDialogs" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomVersion" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomVersion" }
+compose_runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeRuntimeVersion" }
+datastore_preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "dataStoreVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

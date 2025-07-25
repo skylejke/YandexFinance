@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="my_categories">Мои статьи</string>
-    <string name="categories">Статьи</string>
-    <string name="search_category">Найти статью</string>
-    <string name="nothing_found">Ничего не найдено</string>
-</resources>

@@ -9,8 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import ru.point.ui.colors.Graphite
-import ru.point.ui.colors.Mint
 import ru.point.ui.composables.BaseListItem
 import ru.point.ui.composables.CategoryIcon
 
@@ -25,7 +23,6 @@ internal fun CategoryCard(
             Text(
                 text = contentText,
                 style = MaterialTheme.typography.bodyLarge,
-                color = Graphite
             )
         },
         lead = {
@@ -34,7 +31,7 @@ internal fun CategoryCard(
                 modifier = Modifier
                     .size(24.dp)
                     .clip(CircleShape)
-                    .background(Mint),
+                    .background(MaterialTheme.colorScheme.secondaryContainer),
             )
         },
         modifier = modifier

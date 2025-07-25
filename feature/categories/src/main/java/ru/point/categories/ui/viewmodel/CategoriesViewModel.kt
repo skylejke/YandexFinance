@@ -9,12 +9,7 @@ import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
 import javax.inject.Inject
 
-/**
- * ViewModel, управляющая состоянием списка категорий и поискового запроса.
- *
- * Отвечает за загрузку данных через [GetCategoriesUseCase], обработку ошибок
- * и обновление состояния экрана в соответствии с действиями пользователя в рамках MVI-паттерна.
- */
+
 internal class CategoriesViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase,
 ) : MviViewModel<CategoriesState, CategoriesAction, Any>(initialState = CategoriesState()) {

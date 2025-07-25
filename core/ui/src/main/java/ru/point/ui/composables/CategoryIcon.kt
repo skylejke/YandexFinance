@@ -14,8 +14,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ru.point.ui.colors.Graphite
-import ru.point.ui.colors.Mint
 import ru.point.utils.extensions.startsWithEmoji
 
 @Composable
@@ -27,7 +25,7 @@ fun CategoryIcon(
         modifier = modifier
             .size(24.dp)
             .clip(CircleShape)
-            .background(Mint),
+            .background(MaterialTheme.colorScheme.secondaryContainer),
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -40,7 +38,6 @@ fun CategoryIcon(
                     fontSize = 10.sp,
                     lineHeight = 22.sp,
                     letterSpacing = 0.sp,
-                    color = Graphite
                 )
             },
         )

@@ -97,7 +97,7 @@ fun String.formatAsTime(): String {
 }
 
 fun String.toIsoDate(): String {
-    val inputFormatter = dateFormatter
+    val inputFormatter = fullDateFormatter
     val outputFormatter = DateTimeFormatter.ISO_LOCAL_DATE
     return LocalDate.parse(this, inputFormatter).format(outputFormatter)
 }
@@ -116,9 +116,20 @@ fun String.endOfDayIso() = "${this}T23:59:59.999Z"
 fun String.toReadableDateTimeWithSeconds(): String {
     return try {
         val parsed = ZonedDateTime.parse(this)
-        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm:ss", Locale("ru"))
+        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm:ss", Locale.forLanguageTag("ru"))
         parsed.format(formatter)
     } catch (_: Exception) {
         this
     }
+}
+
+fun String.toBigDecimalPercent(): BigDecimal {
+    val cleaned = this.replace("[%\\s]".toRegex(), "")
+    return cleaned.toBigDecimalOrNull() ?: BigDecimal.ZERO
+}
+
+fun String.toBigDecimalAmount(): BigDecimal {
+    val cleaned = this.replace("[^\\d.,]".toRegex(), "")
+        .replace(',', '.')
+    return cleaned.toBigDecimalOrNull() ?: BigDecimal.ZERO
 }

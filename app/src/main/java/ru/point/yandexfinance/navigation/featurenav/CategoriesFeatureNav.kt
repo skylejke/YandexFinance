@@ -9,14 +9,14 @@ import ru.point.categories.ui.screen.CategoriesScreen
 import ru.point.ui.scaffold.bottombar.BottomBarState
 import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
-import ru.point.yandexfinance.navigation.Route
+import ru.point.yandexfinance.navigation.ComposeNavigationRoute
 
 fun NavGraphBuilder.categoriesFeature(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
 ) {
-    composable<Route.Categories> {
+    composable<ComposeNavigationRoute.CategoriesFeature.Categories> {
         CategoriesScreen(
             topAppBarState = topAppBarState,
             fabState = fabState,

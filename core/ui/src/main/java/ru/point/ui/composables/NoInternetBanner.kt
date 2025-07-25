@@ -20,8 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import ru.point.core.res.common.R
-import ru.point.ui.colors.Mint
+import ru.point.core.resources.R
 
 @Composable
 fun NoInternetBanner(modifier: Modifier = Modifier) {
@@ -55,7 +54,7 @@ fun NoInternetBannerPreview() {
         modifier = Modifier
             .fillMaxWidth()
             .height(100.dp)
-            .background(Mint)
+            .background(MaterialTheme.colorScheme.secondaryContainer)
             .padding(16.dp)
     )
 }

@@ -12,7 +12,7 @@ import ru.point.categories.di.component.DaggerCategoriesComponent
 import ru.point.categories.di.deps.CategoriesDepsProvider
 import ru.point.categories.ui.content.CategoriesScreenContent
 import ru.point.categories.ui.viewmodel.CategoriesViewModel
-import ru.point.core.res.categories.R
+import ru.point.core.resources.R
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.RequiredInternetContent
@@ -21,12 +21,6 @@ import ru.point.ui.scaffold.fab.FabState
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран выбора категорий транзакций.
- *
- * Подключает [CategoriesViewModel], отслеживает состояние подключения, загрузки и ошибок,
- * и отображает соответствующий UI: список категорий, лоадер, ошибку или баннер об отсутствии интернета.
- */
 @NonRestartableComposable
 @Composable
 fun CategoriesScreen(

@@ -2,15 +2,8 @@ package ru.point.network.utils
 
 import okhttp3.Interceptor
 import okhttp3.Response
-import ru.point.network.utils.RetryInterceptor.Companion.DELAY_MS
-import ru.point.network.utils.RetryInterceptor.Companion.MAX_RETRIES
 
-/**
- * Interceptor, повторяющий HTTP-запрос при получении ответа с кодом 500 (Internal Server Error).
- *
- * Выполняет до [MAX_RETRIES] попыток с задержкой [DELAY_MS] между ними.
- * Используется для повышения устойчивости сетевых запросов.
- */
+
 class RetryInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {

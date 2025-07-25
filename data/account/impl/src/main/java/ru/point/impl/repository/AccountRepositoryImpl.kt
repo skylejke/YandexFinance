@@ -18,10 +18,7 @@ import ru.point.impl.service.AccountService
 import ru.point.utils.network.InternetTracker
 import javax.inject.Inject
 
-/**
- * Репозиторий, отвечающий за получение аккаунтов пользователя из сетевого источника.
- * Инкапсулирует работу с [AccountService] и переключение контекста на IO-поток.
- */
+
 internal class AccountRepositoryImpl @Inject constructor(
     private val accountService: AccountService,
     private val accountDao: AccountDao,

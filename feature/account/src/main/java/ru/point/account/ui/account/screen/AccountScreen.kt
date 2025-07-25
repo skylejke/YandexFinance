@@ -14,7 +14,8 @@ import ru.point.account.di.deps.AccountDepsProvider
 import ru.point.account.ui.account.content.AccountScreenContent
 import ru.point.account.ui.account.viewmodel.AccountAction
 import ru.point.account.ui.account.viewmodel.AccountViewModel
-import ru.point.core.res.account.R
+import ru.point.core.resources.R
+import ru.point.navigation.NavigationRoute
 import ru.point.ui.composables.ErrorContent
 import ru.point.ui.composables.LoadingIndicator
 import ru.point.ui.composables.RequiredInternetContent
@@ -24,19 +25,13 @@ import ru.point.ui.scaffold.topappbar.TopAppBarAction
 import ru.point.ui.scaffold.topappbar.TopAppBarState
 import ru.point.utils.model.toUserMessage
 
-/**
- * Экран отображения информации об аккаунте пользователя.
- *
- * Подключает [AccountViewModel], отслеживает состояние загрузки, ошибок и подключения к интернету,
- * и отображает соответствующий UI: данные аккаунта, индикатор загрузки, сообщение об ошибке или баннер отсутствия интернета.
- */
 @NonRestartableComposable
 @Composable
 fun AccountScreen(
     topAppBarState: MutableState<TopAppBarState>,
     fabState: MutableState<FabState>,
     bottomBarState: MutableState<BottomBarState>,
-    onNavigate: () -> Unit,
+    onNavigate: (NavigationRoute) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -45,7 +40,9 @@ fun AccountScreen(
         actions = listOf(
             TopAppBarAction(
                 iconResId = R.drawable.edit_icon,
-                action = onNavigate
+                action = {
+                    onNavigate(NavigationRoute.AccountFeature.EditAccount)
+                }
             )
         )
     )

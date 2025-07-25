@@ -37,10 +37,6 @@ import javax.inject.Inject
 
 private const val TRANSACTIONS_SYNC_TYPE = "transactions"
 
-/**
- * Репозиторий, отвечающий за получение транзакций за указанный период из сетевого источника.
- * Делегирует обращение к [ru.point.impl.service.TransactionsService] и выполняет запрос в IO-контексте.
- */
 internal class TransactionsRepositoryImpl @Inject constructor(
     private val transactionsService: TransactionsService,
     private val transactionsDao: TransactionsDao,

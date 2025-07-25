@@ -5,13 +5,7 @@ import ru.point.ui.MviViewModel
 import ru.point.utils.model.toAppError
 import javax.inject.Inject
 
-/**
- * ViewModel, управляющая состоянием истории транзакций за выбранный тип операции (доходы или расходы).
- *
- * Выполняет вызов [GetTransactionsHistoryUseCase] с учётом флага `isIncome` и обновляет UI-состояние
- * с использованием паттерна MVI.
- *
- */
+
 internal class TransactionHistoryViewModel @Inject constructor(
     private val getTransactionsHistoryUseCase: GetTransactionsHistoryUseCase,
     private val isIncome: Boolean

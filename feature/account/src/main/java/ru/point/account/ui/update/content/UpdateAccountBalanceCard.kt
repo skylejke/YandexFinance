@@ -7,8 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import ru.point.core.res.account.R
-import ru.point.ui.colors.Graphite
+import ru.point.core.resources.R
 import ru.point.ui.composables.BaseListItem
 
 @Composable
@@ -29,7 +28,6 @@ internal fun UpdateAccountBalanceCard(
                 Text(
                     text = "💰",
                     style = MaterialTheme.typography.bodyLarge,
-                    color = Graphite
                 )
             }
         },
